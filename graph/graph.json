@@ -10,7 +10,148 @@
       "build": "features/adaptive-parsing/build/adaptive-element-relocation--from-scrapling.md",
       "source": "https://github.com/D4Vinci/Scrapling",
       "notebooklm": ""
+    },
+    {
+      "id": "document-conversion/converter-pipeline--from-markitdown",
+      "label": "Converter Pipeline",
+      "domain": "document-conversion",
+      "repo": "markitdown",
+      "summary": "Priority-sorted pluggable converter registry. Source-type dispatch → layered file detection → sorted converter chain. First accepts+succeeds wins. Output normalized to clean Markdown.",
+      "study": "features/document-conversion/study/converter-pipeline--from-markitdown.md",
+      "build": "features/document-conversion/build/converter-pipeline--from-markitdown.md",
+      "source": "https://github.com/microsoft/markitdown",
+      "notebooklm": ""
+    },
+    {
+      "id": "document-conversion/pdf-conversion--from-markitdown",
+      "label": "PDF Conversion",
+      "domain": "document-conversion",
+      "repo": "markitdown",
+      "summary": "Dual-library PDF extraction: pdfplumber primary (table/form column detection, page.close() memory management) → pdfminer fallback. Markdown tables from column-clustered word positions.",
+      "study": "features/document-conversion/study/pdf-conversion--from-markitdown.md",
+      "build": "features/document-conversion/build/pdf-conversion--from-markitdown.md",
+      "source": "https://github.com/microsoft/markitdown",
+      "notebooklm": ""
+    },
+    {
+      "id": "document-conversion/office-doc-conversion--from-markitdown",
+      "label": "Office Doc Conversion",
+      "domain": "document-conversion",
+      "repo": "markitdown",
+      "summary": "DOCX/PPTX/XLSX → Markdown via python-docx, python-pptx, pandas. Tables go HTML→Markdown via HtmlConverter.convert_string(). PPTX handles charts, speaker notes, and optional LLM image captions.",
+      "study": "features/document-conversion/study/office-doc-conversion--from-markitdown.md",
+      "build": "features/document-conversion/build/office-doc-conversion--from-markitdown.md",
+      "source": "https://github.com/microsoft/markitdown",
+      "notebooklm": ""
+    },
+    {
+      "id": "document-conversion/zip-archive-traversal--from-markitdown",
+      "label": "ZIP Archive Traversal",
+      "domain": "document-conversion",
+      "repo": "markitdown",
+      "summary": "Recursive ZIP extraction: iterate entries → BytesIO streams → call parent pipeline on each file. Silent skip on conversion failure. Nested ZIPs handled automatically.",
+      "study": "features/document-conversion/study/zip-archive-traversal--from-markitdown.md",
+      "build": "features/document-conversion/build/zip-archive-traversal--from-markitdown.md",
+      "source": "https://github.com/microsoft/markitdown",
+      "notebooklm": ""
+    },
+    {
+      "id": "plugin-architecture/plugin-system--from-markitdown",
+      "label": "Plugin System",
+      "domain": "plugin-architecture",
+      "repo": "markitdown",
+      "summary": "importlib.metadata entry_points discovery under group 'markitdown.plugin'. Lazy load with fault isolation. register_converters(host, **kwargs) callback pattern. __plugin_interface_version__ for forward compat.",
+      "study": "features/plugin-architecture/study/plugin-system--from-markitdown.md",
+      "build": "features/plugin-architecture/build/plugin-system--from-markitdown.md",
+      "source": "https://github.com/microsoft/markitdown",
+      "notebooklm": ""
+    },
+    {
+      "id": "file-detection/magika-file-detection--from-markitdown",
+      "label": "Magika File Detection",
+      "domain": "file-detection",
+      "repo": "markitdown",
+      "summary": "Layered type detection: extension+MIME hints → mimetypes bidirectional enrichment → Magika ML content scan → charset_normalizer for text files. Returns ranked StreamInfo list.",
+      "study": "features/file-detection/study/magika-file-detection--from-markitdown.md",
+      "build": "features/file-detection/build/magika-file-detection--from-markitdown.md",
+      "source": "https://github.com/microsoft/markitdown",
+      "notebooklm": ""
+    },
+    {
+      "id": "media-processing/image-llm-captioning--from-markitdown",
+      "label": "Image + LLM Captioning",
+      "domain": "media-processing",
+      "repo": "markitdown",
+      "summary": "JPEG/PNG converter with two optional layers: exiftool subprocess for EXIF metadata, OpenAI-compatible vision API for image description. Both independently optional. Output: key-values + ## Description.",
+      "study": "features/media-processing/study/image-llm-captioning--from-markitdown.md",
+      "build": "features/media-processing/build/image-llm-captioning--from-markitdown.md",
+      "source": "https://github.com/microsoft/markitdown",
+      "notebooklm": ""
+    },
+    {
+      "id": "media-processing/audio-transcription--from-markitdown",
+      "label": "Audio Transcription",
+      "domain": "media-processing",
+      "repo": "markitdown",
+      "summary": "WAV/MP3/M4A/MP4 → Markdown via speech_recognition (Google Web Speech API) + exiftool metadata. Duration excluded (wrong from memory stream). Temp file needed for non-WAV formats.",
+      "study": "features/media-processing/study/audio-transcription--from-markitdown.md",
+      "build": "features/media-processing/build/audio-transcription--from-markitdown.md",
+      "source": "https://github.com/microsoft/markitdown",
+      "notebooklm": ""
+    },
+    {
+      "id": "web-extraction/youtube-extraction--from-markitdown",
+      "label": "YouTube Extraction",
+      "domain": "web-extraction",
+      "repo": "markitdown",
+      "summary": "YouTube watch URL → Markdown. Meta tag scrape for views/keywords/duration. Recursive ytInitialData JSON search for description. youtube_transcript_api with 3-retry logic for transcript.",
+      "study": "features/web-extraction/study/youtube-extraction--from-markitdown.md",
+      "build": "features/web-extraction/build/youtube-extraction--from-markitdown.md",
+      "source": "https://github.com/microsoft/markitdown",
+      "notebooklm": ""
+    },
+    {
+      "id": "web-extraction/html-web-conversion--from-markitdown",
+      "label": "HTML Web Conversion",
+      "domain": "web-extraction",
+      "repo": "markitdown",
+      "summary": "BeautifulSoup + custom markdownify subclass. Strips scripts/styles, extracts body, RecursionError fallback to plaintext. convert_string() helper used by DOCX/PPTX/XLSX for table rendering. Wikipedia/RSS/Bing specializations.",
+      "study": "features/web-extraction/study/html-web-conversion--from-markitdown.md",
+      "build": "features/web-extraction/build/html-web-conversion--from-markitdown.md",
+      "source": "https://github.com/microsoft/markitdown",
+      "notebooklm": ""
+    },
+    {
+      "id": "ai-integration/azure-doc-intelligence--from-markitdown",
+      "label": "Azure Doc Intelligence",
+      "domain": "ai-integration",
+      "repo": "markitdown",
+      "summary": "Azure prebuilt-layout model for OCR-grade extraction of PDFs, images, Office files. Submits bytes, gets native Markdown back, strips HTML comments. OCR features (high-res, formulas, fonts) enabled only for PDF/image types.",
+      "study": "features/ai-integration/study/azure-doc-intelligence--from-markitdown.md",
+      "build": "features/ai-integration/build/azure-doc-intelligence--from-markitdown.md",
+      "source": "https://github.com/microsoft/markitdown",
+      "notebooklm": ""
     }
   ],
-  "edges": []
+  "edges": [
+    { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "file-detection/magika-file-detection--from-markitdown", "type": "depends-on" },
+    { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "plugin-architecture/plugin-system--from-markitdown", "type": "depends-on" },
+    { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "document-conversion/pdf-conversion--from-markitdown", "type": "same-repo" },
+    { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "document-conversion/office-doc-conversion--from-markitdown", "type": "same-repo" },
+    { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "document-conversion/zip-archive-traversal--from-markitdown", "type": "same-repo" },
+    { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "media-processing/image-llm-captioning--from-markitdown", "type": "same-repo" },
+    { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "media-processing/audio-transcription--from-markitdown", "type": "same-repo" },
+    { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "web-extraction/html-web-conversion--from-markitdown", "type": "same-repo" },
+    { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "web-extraction/youtube-extraction--from-markitdown", "type": "same-repo" },
+    { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "ai-integration/azure-doc-intelligence--from-markitdown", "type": "same-repo" },
+    { "from": "document-conversion/zip-archive-traversal--from-markitdown", "to": "document-conversion/converter-pipeline--from-markitdown", "type": "depends-on" },
+    { "from": "document-conversion/office-doc-conversion--from-markitdown", "to": "web-extraction/html-web-conversion--from-markitdown", "type": "depends-on" },
+    { "from": "document-conversion/office-doc-conversion--from-markitdown", "to": "media-processing/image-llm-captioning--from-markitdown", "type": "depends-on" },
+    { "from": "web-extraction/youtube-extraction--from-markitdown", "to": "web-extraction/html-web-conversion--from-markitdown", "type": "depends-on" },
+    { "from": "document-conversion/pdf-conversion--from-markitdown", "to": "ai-integration/azure-doc-intelligence--from-markitdown", "type": "alternative-to" },
+    { "from": "media-processing/image-llm-captioning--from-markitdown", "to": "ai-integration/azure-doc-intelligence--from-markitdown", "type": "alternative-to" },
+    { "from": "media-processing/image-llm-captioning--from-markitdown", "to": "media-processing/audio-transcription--from-markitdown", "type": "same-domain" },
+    { "from": "document-conversion/pdf-conversion--from-markitdown", "to": "document-conversion/office-doc-conversion--from-markitdown", "type": "same-domain" },
+    { "from": "web-extraction/html-web-conversion--from-markitdown", "to": "web-extraction/youtube-extraction--from-markitdown", "type": "same-domain" }
+  ]
 }
