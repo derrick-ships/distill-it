@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>repo-brain — knowledge graph</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<style>
+  :root {
+    --bg: #0d1117; --panel: #161b22; --border: #30363d;
+    --text: #e6edf3; --muted: #8b949e; --accent: #58a6ff; --link: #7ee787;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; overflow: hidden; }
+  #app { display: flex; height: 100vh; }
+  #graph { flex: 1; height: 100%; }
+  #panel { width: 360px; background: var(--panel); border-left: 1px solid var(--border);
+    padding: 24px; overflow-y: auto; }
+  #panel h1 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--muted); margin-bottom: 16px; font-weight: 600; }
+  #panel .empty { color: var(--muted); font-size: 14px; line-height: 1.6; }
+  #node-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+  #node-meta { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+  #node-meta .dom { color: var(--accent); }
+  #node-summary { font-size: 14px; line-height: 1.65; margin-bottom: 20px; }
+  .btn { display: block; width: 100%; text-align: left; padding: 10px 14px; margin-bottom: 8px;
+    background: #21262d; border: 1px solid var(--border); border-radius: 8px; color: var(--link);
+    text-decoration: none; font-size: 13px; cursor: pointer; transition: background 0.15s; }
+  .btn:hover { background: #30363d; }
+  .btn.disabled { color: var(--muted); opacity: 0.4; pointer-events: none; }
+  #search { position: absolute; top: 16px; left: 16px; z-index: 10; padding: 8px 12px;
+    background: var(--panel); border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text); font-size: 13px; width: 220px; outline: none; }
+  #search:focus { border-color: var(--accent); }
+  #legend { position: absolute; bottom: 16px; left: 16px; z-index: 10; background: var(--panel);
+    border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; font-size: 11px; color: var(--muted); }
+  #legend div { display: flex; align-items: center; margin: 3px 0; }
+  #legend span.dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; display: inline-block; }
+  .node circle { cursor: pointer; stroke: var(--bg); stroke-width: 2px; }
+  .node text { fill: var(--text); font-size: 11px; pointer-events: none; }
+  .link { stroke: var(--border); stroke-width: 1.5px; }
+  .empty-state { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    color: var(--muted); font-size: 14px; text-align: center; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="graph">
+    <input id="search" placeholder="Search features…" />
+    <div id="legend"></div>
+  </div>
+  <div id="panel">
+    <h1>repo-brain</h1>
+    <div id="panel-body"><p class="empty">Click any node to see what it is, study it, or pull it into a build.<br><br>Drag nodes to rearrange. Scroll to zoom.</p></div>
+  </div>
+</div>
+<script>
+const PALETTE = ["#58a6ff","#7ee787","#ff7b72","#d2a8ff","#f0883e","#39c5cf","#db61a2","#e3b341"];
+const domainColor = {};
+let colorIdx = 0;
+function colorFor(domain){ if(!(domain in domainColor)){ domainColor[domain]=PALETTE[colorIdx++ % PALETTE.length]; } return domainColor[domain]; }
+
+fetch('graph.json').then(r=>r.json()).then(data=>{
+  const nodes = data.nodes.map(d=>({...d}));
+  const links = (data.edges||[]).map(e=>({source:e.from,target:e.to,type:e.type}));
+  const width = window.innerWidth - 360, height = window.innerHeight;
+
+  if(nodes.length===0){
+    document.getElementById('graph').insertAdjacentHTML('beforeend',
+      '<div class="empty-state">No features yet.<br>Distill a repo to populate the graph.</div>');
+    return;
+  }
+
+  const svg = d3.select('#graph').append('svg').attr('width',width).attr('height',height);
+  const g = svg.append('g');
+  svg.call(d3.zoom().scaleExtent([0.2,4]).on('zoom',ev=>g.attr('transform',ev.transform)));
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id(d=>d.id).distance(120))
+    .force('charge', d3.forceManyBody().strength(-400))
+    .force('center', d3.forceCenter(width/2, height/2))
+    .force('collide', d3.forceCollide(40));
+
+  const link = g.append('g').selectAll('line').data(links).join('line').attr('class','link');
+
+  const deg = {}; links.forEach(l=>{deg[l.source.id||l.source]=(deg[l.source.id||l.source]||0)+1; deg[l.target.id||l.target]=(deg[l.target.id||l.target]||0)+1;});
+
+  const node = g.append('g').selectAll('g').data(nodes).join('g').attr('class','node')
+    .call(d3.drag()
+      .on('start',(ev,d)=>{if(!ev.active)sim.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;})
+      .on('drag',(ev,d)=>{d.fx=ev.x;d.fy=ev.y;})
+      .on('end',(ev,d)=>{if(!ev.active)sim.alphaTarget(0);d.fx=null;d.fy=null;}));
+
+  node.append('circle').attr('r',d=>8+(deg[d.id]||0)*3).attr('fill',d=>colorFor(d.domain));
+  node.append('text').text(d=>d.label).attr('x',14).attr('y',4);
+  node.on('click',(ev,d)=>showPanel(d));
+
+  sim.on('tick',()=>{
+    link.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    node.attr('transform',d=>`translate(${d.x},${d.y})`);
+  });
+
+  // legend
+  const domains=[...new Set(nodes.map(n=>n.domain))];
+  document.getElementById('legend').innerHTML = domains.map(dm=>`<div><span class="dot" style="background:${colorFor(dm)}"></span>${dm}</div>`).join('');
+
+  // search
+  document.getElementById('search').addEventListener('input',e=>{
+    const q=e.target.value.toLowerCase();
+    node.style('opacity',d=>(!q||d.label.toLowerCase().includes(q)||d.domain.toLowerCase().includes(q)||(d.repo||'').toLowerCase().includes(q))?1:0.15);
+  });
+
+  function btn(label,url){ return url ? `<a class="btn" href="${url}" target="_blank">${label} →</a>` : `<span class="btn disabled">${label} (none)</span>`; }
+  function showPanel(d){
+    document.getElementById('panel-body').innerHTML =
+      `<div id="node-title">${d.label}</div>
+       <div id="node-meta"><span class="dom">${d.domain}</span> · from ${d.repo||'?'}</div>
+       <div id="node-summary">${d.summary||''}</div>
+       ${btn('📖 Study doc', d.study)}
+       ${btn('🔧 Build spec', d.build)}
+       ${btn('🐙 Origin repo', d.source)}
+       ${btn('🧠 NotebookLM', d.notebooklm)}`;
+  }
+});
+</script>
+</body>
+</html>
