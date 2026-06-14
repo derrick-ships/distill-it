@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    {
+      "id": "adaptive-parsing/adaptive-element-relocation--from-scrapling",
+      "label": "Adaptive Element Relocation",
+      "domain": "adaptive-parsing",
+      "repo": "scrapling",
+      "summary": "Fingerprints an element (tag/text/attrs/siblings/path/parent) on first scrape, then re-finds it by fuzzy similarity scoring when the selector later breaks. Default 40% threshold. SQLite-backed, pluggable storage.",
+      "study": "features/adaptive-parsing/study/adaptive-element-relocation--from-scrapling.md",
+      "build": "features/adaptive-parsing/build/adaptive-element-relocation--from-scrapling.md",
+      "source": "https://github.com/D4Vinci/Scrapling",
+      "notebooklm": ""
+    }
+  ],
+  "edges": []
+}
