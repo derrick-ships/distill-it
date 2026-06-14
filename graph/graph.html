@@ -2,186 +2,236 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>repo-brain — feature graph</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>repo-brain knowledge graph</title>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0f1117; color: #e2e8f0; display: flex; height: 100vh; overflow: hidden; }
-
+  body { background: #0d1117; color: #e6edf3; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; display: flex; height: 100vh; overflow: hidden; }
   #graph-container { flex: 1; position: relative; }
   svg { width: 100%; height: 100%; }
-
-  #sidebar { width: 320px; min-width: 320px; background: #1a1f2e; border-left: 1px solid #2d3748; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-  #sidebar.hidden { display: none; }
-
-  #search-bar { padding: 8px 12px; background: #2d3748; border: 1px solid #4a5568; border-radius: 6px; color: #e2e8f0; font-size: 14px; width: 100%; }
-  #search-bar:focus { outline: none; border-color: #667eea; }
-
-  .panel-title { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #718096; }
-  .node-label { font-size: 18px; font-weight: 600; color: #e2e8f0; line-height: 1.3; }
-  .node-domain { font-size: 12px; color: #667eea; margin-top: 2px; }
-  .node-summary { font-size: 13px; color: #a0aec0; line-height: 1.5; }
-
-  .btn { display: block; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-decoration: none; color: #e2e8f0; background: #2d3748; border: 1px solid #4a5568; cursor: pointer; text-align: center; transition: background 0.15s; }
-  .btn:hover { background: #4a5568; }
-  .btn-primary { background: #667eea; border-color: #667eea; }
-  .btn-primary:hover { background: #5a67d8; }
-
-  .links-section { display: flex; flex-direction: column; gap: 6px; }
-  .placeholder { color: #4a5568; font-size: 14px; text-align: center; margin-top: 40px; }
-
-  /* Domain colors */
-  .domain-document-conversion { fill: #4299e1; }
-  .domain-plugin-architecture  { fill: #9f7aea; }
-  .domain-file-detection       { fill: #f6ad55; }
-  .domain-media-processing     { fill: #68d391; }
-  .domain-web-extraction       { fill: #fc8181; }
-  .domain-ai-integration       { fill: #f687b3; }
-  .domain-adaptive-parsing     { fill: #76e4f7; }
-  .domain-default              { fill: #718096; }
-
-  .node circle { stroke: #1a1f2e; stroke-width: 2px; cursor: pointer; transition: opacity 0.15s; }
-  .node circle:hover { opacity: 0.85; }
-  .node.dimmed circle { opacity: 0.2; }
-  .node text { font-size: 11px; fill: #e2e8f0; pointer-events: none; }
-
-  .link { stroke: #4a5568; stroke-opacity: 0.5; }
-  .link.type-depends-on    { stroke: #667eea; }
-  .link.type-same-repo     { stroke: #4a5568; }
-  .link.type-same-domain   { stroke: #68d391; stroke-dasharray: 4 2; }
-  .link.type-alternative-to { stroke: #f6ad55; stroke-dasharray: 6 3; }
-
-  #legend { position: absolute; bottom: 16px; left: 16px; background: rgba(26,31,46,0.9); border: 1px solid #2d3748; border-radius: 8px; padding: 12px 16px; font-size: 12px; }
-  .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; color: #a0aec0; }
-  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
-  .legend-line { width: 24px; height: 2px; flex-shrink: 0; }
+  #panel { width: 340px; background: #161b22; border-left: 1px solid #30363d; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+  #panel.hidden { display: none; }
+  #search-box { position: absolute; top: 16px; left: 16px; z-index: 10; }
+  #search-box input { background: #161b22; border: 1px solid #30363d; color: #e6edf3; padding: 8px 12px; border-radius: 6px; width: 220px; font-size: 14px; outline: none; }
+  #search-box input:focus { border-color: #58a6ff; }
+  .node circle { cursor: pointer; stroke-width: 2; transition: stroke 0.15s; }
+  .node circle:hover { stroke: #fff; stroke-width: 2.5; }
+  .node text { font-size: 11px; fill: #e6edf3; pointer-events: none; text-anchor: middle; }
+  .link { stroke: #30363d; stroke-opacity: 0.7; }
+  .link.depends-on { stroke: #58a6ff; stroke-opacity: 0.5; }
+  .link.same-repo { stroke: #3fb950; stroke-opacity: 0.4; }
+  .link.alternative-to { stroke: #f78166; stroke-opacity: 0.4; stroke-dasharray: 4; }
+  .link.same-domain { stroke: #d2a8ff; stroke-opacity: 0.4; stroke-dasharray: 2; }
+  .node.dimmed circle { opacity: 0.15; }
+  .node.dimmed text { opacity: 0.15; }
+  .link.dimmed { opacity: 0.05; }
+  h2 { font-size: 16px; font-weight: 600; color: #e6edf3; line-height: 1.4; }
+  .domain-badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 500; }
+  .repo-label { font-size: 12px; color: #8b949e; }
+  .summary-text { font-size: 13px; color: #c9d1d9; line-height: 1.6; }
+  .btn { display: block; padding: 8px 12px; border-radius: 6px; font-size: 13px; text-decoration: none; text-align: center; margin-top: 4px; border: 1px solid #30363d; color: #e6edf3; background: #21262d; cursor: pointer; transition: background 0.15s; }
+  .btn:hover { background: #30363d; }
+  .btn.primary { background: #1f6feb; border-color: #1f6feb; }
+  .btn.primary:hover { background: #388bfd; }
+  #close-panel { background: none; border: none; color: #8b949e; cursor: pointer; font-size: 18px; align-self: flex-end; }
+  #legend { position: absolute; bottom: 16px; left: 16px; background: #161b22cc; border: 1px solid #30363d; border-radius: 8px; padding: 12px 16px; font-size: 12px; }
+  #legend h4 { color: #8b949e; margin-bottom: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .legend-line { width: 20px; height: 2px; flex-shrink: 0; }
+  #stats { position: absolute; top: 16px; right: 16px; background: #161b22cc; border: 1px solid #30363d; border-radius: 6px; padding: 6px 12px; font-size: 12px; color: #8b949e; }
 </style>
 </head>
 <body>
-
 <div id="graph-container">
-  <svg id="svg"></svg>
+  <div id="search-box"><input type="text" id="search" placeholder="Search nodes…"></div>
+  <div id="stats"></div>
   <div id="legend">
-    <div class="legend-item"><div class="legend-dot" style="background:#4299e1"></div> document-conversion</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#9f7aea"></div> plugin-architecture</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#f6ad55"></div> file-detection</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#68d391"></div> media-processing</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#fc8181"></div> web-extraction</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#f687b3"></div> ai-integration</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#76e4f7"></div> adaptive-parsing</div>
-    <hr style="border-color:#2d3748;margin:8px 0">
-    <div class="legend-item"><div class="legend-line" style="background:#667eea"></div> depends-on</div>
-    <div class="legend-item"><div class="legend-line" style="background:#68d391;background:repeating-linear-gradient(90deg,#68d391 0,#68d391 4px,transparent 4px,transparent 6px)"></div> same-domain</div>
-    <div class="legend-item"><div class="legend-line" style="background:#f6ad55;background:repeating-linear-gradient(90deg,#f6ad55 0,#f6ad55 6px,transparent 6px,transparent 9px)"></div> alternative-to</div>
+    <h4>Domains</h4>
+    <div id="domain-legend"></div>
+    <h4 style="margin-top:10px">Edge types</h4>
+    <div class="legend-item"><div class="legend-line" style="background:#58a6ff"></div><span>depends-on</span></div>
+    <div class="legend-item"><div class="legend-line" style="background:#3fb950"></div><span>same-repo</span></div>
+    <div class="legend-item"><div class="legend-line" style="background:#f78166;border-top:2px dashed #f78166;height:0"></div><span>alternative-to</span></div>
+    <div class="legend-item"><div class="legend-line" style="background:#d2a8ff;border-top:2px dashed #d2a8ff;height:0"></div><span>same-domain</span></div>
   </div>
+  <svg id="svg"></svg>
 </div>
-
-<div id="sidebar">
-  <input id="search-bar" type="text" placeholder="Search nodes…">
-  <div id="panel-content">
-    <p class="placeholder">Click a node to explore</p>
-  </div>
+<div id="panel" class="hidden">
+  <button id="close-panel">✕</button>
+  <div id="panel-content"></div>
 </div>
-
 <script>
 const DOMAIN_COLORS = {
+  "adaptive-parsing":    "#76e4f7",
   "document-conversion": "#4299e1",
-  "plugin-architecture":  "#9f7aea",
-  "file-detection":       "#f6ad55",
-  "media-processing":     "#68d391",
-  "web-extraction":       "#fc8181",
-  "ai-integration":       "#f687b3",
-  "adaptive-parsing":     "#76e4f7",
+  "plugin-architecture": "#9f7aea",
+  "file-detection":      "#f6ad55",
+  "media-processing":    "#68d391",
+  "web-extraction":      "#fc8181",
+  "ai-integration":      "#f687b3",
+  "agent-architecture":  "#f6e05e",
+  "research-automation": "#63b3ed",
+  "content-synthesis":   "#b794f4",
+  "credential-management":"#fbb6ce",
 };
-function domainColor(d) { return DOMAIN_COLORS[d] || "#718096"; }
 
-fetch("graph.json")
+fetch('graph.json')
   .then(r => r.json())
-  .then(data => init(data))
-  .catch(() => { document.body.innerHTML = '<p style="color:#fc8181;padding:20px">Could not load graph.json — open this file from the repo-brain directory.</p>'; });
+  .then(data => init(data));
 
 function init(data) {
-  const nodes = data.nodes.map(n => ({...n}));
-  const nodeById = Object.fromEntries(nodes.map(n => [n.id, n]));
-  const links = data.edges
-    .filter(e => nodeById[e.from] && nodeById[e.to])
-    .map(e => ({ source: e.from, target: e.to, type: e.type }));
+  const { nodes, edges } = data;
 
-  // Node radius based on edge count
-  const edgeCount = {};
-  links.forEach(l => {
-    edgeCount[l.source] = (edgeCount[l.source] || 0) + 1;
-    edgeCount[l.target] = (edgeCount[l.target] || 0) + 1;
+  // Build domain legend
+  const domainLegend = document.getElementById('domain-legend');
+  const domainsPresent = [...new Set(nodes.map(n => n.domain))].sort();
+  domainsPresent.forEach(d => {
+    const item = document.createElement('div');
+    item.className = 'legend-item';
+    item.innerHTML = `<div class="legend-dot" style="background:${DOMAIN_COLORS[d] || '#aaa'}"></div><span>${d}</span>`;
+    domainLegend.appendChild(item);
   });
-  nodes.forEach(n => { n._r = 8 + Math.sqrt(edgeCount[n.id] || 0) * 4; });
 
-  const svg = d3.select("#svg");
-  const container = svg.append("g");
+  // Stats
+  document.getElementById('stats').textContent = `${nodes.length} nodes · ${edges.length} edges`;
 
-  svg.call(d3.zoom().scaleExtent([0.2, 4]).on("zoom", e => container.attr("transform", e.transform)));
+  // Compute edge count for node sizing
+  const edgeCounts = {};
+  nodes.forEach(n => { edgeCounts[n.id] = 0; });
+  edges.forEach(e => {
+    edgeCounts[e.from] = (edgeCounts[e.from] || 0) + 1;
+    edgeCounts[e.to]   = (edgeCounts[e.to]   || 0) + 1;
+  });
 
-  const sim = d3.forceSimulation(nodes)
-    .force("link", d3.forceLink(links).id(d => d.id).distance(120))
-    .force("charge", d3.forceManyBody().strength(-300))
-    .force("center", d3.forceCenter(window.innerWidth / 2, window.innerHeight / 2))
-    .force("collide", d3.forceCollide(d => d._r + 10));
+  const svg = d3.select('#svg');
+  const container = document.getElementById('graph-container');
+  let width = container.clientWidth;
+  let height = container.clientHeight;
 
-  const link = container.append("g").selectAll("line")
-    .data(links).join("line")
-    .attr("class", d => `link type-${d.type}`)
-    .attr("stroke-width", 1.5);
+  const g = svg.append('g');
 
-  const node = container.append("g").selectAll("g")
-    .data(nodes).join("g")
-    .attr("class", "node")
+  svg.call(d3.zoom().scaleExtent([0.2, 4]).on('zoom', e => {
+    g.attr('transform', e.transform);
+  }));
+
+  // Links
+  const link = g.append('g').selectAll('line')
+    .data(edges)
+    .join('line')
+    .attr('class', d => `link ${d.type}`);
+
+  // Nodes
+  const nodeIds = new Set(nodes.map(n => n.id));
+  const validEdges = edges.filter(e => nodeIds.has(e.from) && nodeIds.has(e.to));
+
+  const simulation = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(validEdges).id(d => d.id).distance(120).strength(0.4))
+    .force('charge', d3.forceManyBody().strength(-320))
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('collision', d3.forceCollide().radius(d => nodeRadius(d) + 20));
+
+  const node = g.append('g').selectAll('g')
+    .data(nodes)
+    .join('g')
+    .attr('class', 'node')
     .call(d3.drag()
-      .on("start", (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
-      .on("drag",  (e, d) => { d.fx = e.x; d.fy = e.y; })
-      .on("end",   (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }))
-    .on("click", (e, d) => showPanel(d));
+      .on('start', (e, d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag',  (e, d) => { d.fx = e.x; d.fy = e.y; })
+      .on('end',   (e, d) => { if (!e.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; })
+    )
+    .on('click', (e, d) => { e.stopPropagation(); showPanel(d); highlight(d, nodes, validEdges, node, link); });
 
-  node.append("circle")
-    .attr("r", d => d._r)
-    .attr("fill", d => domainColor(d.domain));
+  svg.on('click', () => { clearHighlight(node, link); hidePanel(); });
 
-  node.append("text")
-    .attr("dy", d => d._r + 12)
-    .attr("text-anchor", "middle")
+  node.append('circle')
+    .attr('r', d => nodeRadius(d))
+    .attr('fill', d => DOMAIN_COLORS[d.domain] || '#aaa')
+    .attr('stroke', '#0d1117')
+    .attr('stroke-width', 2);
+
+  node.append('text')
+    .attr('dy', d => nodeRadius(d) + 13)
     .text(d => d.label);
 
-  sim.on("tick", () => {
-    link.attr("x1", d => d.source.x).attr("y1", d => d.source.y)
-        .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
-    node.attr("transform", d => `translate(${d.x},${d.y})`);
+  simulation.on('tick', () => {
+    link
+      .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    node.attr('transform', d => `translate(${d.x},${d.y})`);
   });
+
+  function nodeRadius(d) {
+    return 8 + Math.sqrt(edgeCounts[d.id] || 0) * 3;
+  }
 
   // Search
-  document.getElementById("search-bar").addEventListener("input", function() {
+  document.getElementById('search').addEventListener('input', function() {
     const q = this.value.toLowerCase().trim();
-    node.classed("dimmed", d => q && !d.label.toLowerCase().includes(q) && !d.domain.toLowerCase().includes(q) && !d.repo.toLowerCase().includes(q));
+    if (!q) { clearHighlight(node, link); return; }
+    node.classed('dimmed', d =>
+      !d.label.toLowerCase().includes(q) &&
+      !d.domain.toLowerCase().includes(q) &&
+      !d.repo.toLowerCase().includes(q)
+    );
+    link.classed('dimmed', true);
   });
 
-  function showPanel(d) {
-    const panel = document.getElementById("panel-content");
-    const baseDir = "../";
-    const studyHref = d.study ? baseDir + d.study : null;
-    const buildHref = d.build ? baseDir + d.build : null;
-    const sourceHref = d.source || null;
-    const notebookHref = d.notebooklm || null;
+  // Panel
+  document.getElementById('close-panel').addEventListener('click', () => {
+    clearHighlight(node, link); hidePanel();
+  });
+}
 
-    panel.innerHTML = `
-      <div class="panel-title">Feature</div>
-      <div class="node-label">${d.label}</div>
-      <div class="node-domain">${d.domain} · ${d.repo}</div>
-      <div class="node-summary">${d.summary}</div>
-      <div class="links-section">
-        ${studyHref ? `<a class="btn btn-primary" href="${studyHref}" target="_blank">📖 Study doc</a>` : ''}
-        ${buildHref ? `<a class="btn" href="${buildHref}" target="_blank">🔧 Build spec</a>` : ''}
-        ${sourceHref ? `<a class="btn" href="${sourceHref}" target="_blank">↗ Origin repo</a>` : ''}
-        ${notebookHref ? `<a class="btn" href="${notebookHref}" target="_blank">📓 NotebookLM</a>` : ''}
-      </div>
-    `;
-  }
+function nodeRadius(d) { return 8; }
+
+function highlight(selected, nodes, edges, node, link) {
+  const neighborIds = new Set([selected.id]);
+  edges.forEach(e => {
+    const src = e.source.id || e.source;
+    const tgt = e.target.id || e.target;
+    if (src === selected.id || tgt === selected.id) {
+      neighborIds.add(src); neighborIds.add(tgt);
+    }
+  });
+  node.classed('dimmed', d => !neighborIds.has(d.id));
+  link.classed('dimmed', d => {
+    const src = d.source.id || d.source;
+    const tgt = d.target.id || d.target;
+    return src !== selected.id && tgt !== selected.id;
+  });
+}
+
+function clearHighlight(node, link) {
+  node.classed('dimmed', false);
+  link.classed('dimmed', false);
+}
+
+function showPanel(d) {
+  const panel = document.getElementById('panel');
+  const content = document.getElementById('panel-content');
+  const color = DOMAIN_COLORS[d.domain] || '#aaa';
+  let buttons = '';
+  if (d.study) buttons += `<a class="btn" href="../${d.study}" target="_blank">📖 Study doc</a>`;
+  if (d.build) buttons += `<a class="btn primary" href="../${d.build}" target="_blank">🔧 Build spec</a>`;
+  if (d.source) buttons += `<a class="btn" href="${d.source}" target="_blank">🔗 Origin repo</a>`;
+  if (d.notebooklm) buttons += `<a class="btn" href="${d.notebooklm}" target="_blank">🎧 NotebookLM</a>`;
+
+  content.innerHTML = `
+    <h2>${d.label}</h2>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
+      <span class="domain-badge" style="background:${color}22;color:${color};border:1px solid ${color}44">${d.domain}</span>
+      <span class="repo-label">from ${d.repo}</span>
+    </div>
+    <p class="summary-text" style="margin-top:12px">${d.summary}</p>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:6px">${buttons}</div>
+  `;
+  panel.classList.remove('hidden');
+}
+
+function hidePanel() {
+  document.getElementById('panel').classList.add('hidden');
 }
 </script>
 </body>

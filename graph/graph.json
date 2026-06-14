@@ -131,6 +131,72 @@
       "build": "features/ai-integration/build/azure-doc-intelligence--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
       "notebooklm": ""
+    },
+    {
+      "id": "agent-architecture/agent-output-contract--from-last30days-skill",
+      "label": "Agent Output Contract",
+      "domain": "agent-architecture",
+      "repo": "last30days-skill",
+      "summary": "5-law output contract enforced via SKILL.md prompt text: no Sources block, no invented headers, space-dash-space separators, no ## inside body sections, verbatim footer passthrough. Zero runtime validation.",
+      "study": "features/agent-architecture/study/agent-output-contract--from-last30days-skill.md",
+      "build": "features/agent-architecture/build/agent-output-contract--from-last30days-skill.md",
+      "source": "https://github.com/mvanhorn/last30days-skill",
+      "notebooklm": ""
+    },
+    {
+      "id": "research-automation/multi-source-research-engine--from-last30days-skill",
+      "label": "Multi-Source Research Engine",
+      "domain": "research-automation",
+      "repo": "last30days-skill",
+      "summary": "ThreadPoolExecutor fan-out to 6–20 sources. Depth tiers (quick/default/deep) cap source count. 2-phase retrieval with 5xx retry. Unified Report schema. Five emit formats (compact/json/context/md/html).",
+      "study": "features/research-automation/study/multi-source-research-engine--from-last30days-skill.md",
+      "build": "features/research-automation/build/multi-source-research-engine--from-last30days-skill.md",
+      "source": "https://github.com/mvanhorn/last30days-skill",
+      "notebooklm": ""
+    },
+    {
+      "id": "research-automation/entity-resolution--from-last30days-skill",
+      "label": "Entity Resolution",
+      "domain": "research-automation",
+      "repo": "last30days-skill",
+      "summary": "4 parallel searches resolve topic → {subreddits, handles, repos, context}. X handles get 3× URL weight. GitHub -action canonicalization. News context capped at 300 chars for LLM injection.",
+      "study": "features/research-automation/study/entity-resolution--from-last30days-skill.md",
+      "build": "features/research-automation/build/entity-resolution--from-last30days-skill.md",
+      "source": "https://github.com/mvanhorn/last30days-skill",
+      "notebooklm": ""
+    },
+    {
+      "id": "research-automation/engagement-signal-ranking--from-last30days-skill",
+      "label": "Engagement Signal Ranking",
+      "domain": "research-automation",
+      "repo": "last30days-skill",
+      "summary": "Two-stage: RRF (k=60, topic-sensitive source_weights) then LLM rerank of top-N. Quality nudge detects degraded sources via domain diversity + snippet density. All inputs from pipeline Report.",
+      "study": "features/research-automation/study/engagement-signal-ranking--from-last30days-skill.md",
+      "build": "features/research-automation/build/engagement-signal-ranking--from-last30days-skill.md",
+      "source": "https://github.com/mvanhorn/last30days-skill",
+      "notebooklm": ""
+    },
+    {
+      "id": "content-synthesis/cross-source-clustering--from-last30days-skill",
+      "label": "Cross-Source Clustering",
+      "domain": "content-synthesis",
+      "repo": "last30days-skill",
+      "summary": "Two-pass clustering: Pass 1 greedy text similarity (0.42/0.48 thresholds), Pass 2 entity overlap on small clusters. MMR picks up to 3 reps per cluster. Polymarket isolation, same-source enforcement.",
+      "study": "features/content-synthesis/study/cross-source-clustering--from-last30days-skill.md",
+      "build": "features/content-synthesis/build/cross-source-clustering--from-last30days-skill.md",
+      "source": "https://github.com/mvanhorn/last30days-skill",
+      "notebooklm": ""
+    },
+    {
+      "id": "credential-management/multi-tier-credentials--from-last30days-skill",
+      "label": "Multi-Tier Credentials",
+      "domain": "credential-management",
+      "repo": "last30days-skill",
+      "summary": "Tier 1 keyless (Reddit/HN/Polymarket/GitHub), Tier 2 browser cookies (X via Bird/Chrome/Safari/xurl, YouTube via yt-dlp/SSH), Tier 3 API keys (.env dual hierarchy, perms 600). Preflight startup checks.",
+      "study": "features/credential-management/study/multi-tier-credentials--from-last30days-skill.md",
+      "build": "features/credential-management/build/multi-tier-credentials--from-last30days-skill.md",
+      "source": "https://github.com/mvanhorn/last30days-skill",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -152,6 +218,17 @@
     { "from": "media-processing/image-llm-captioning--from-markitdown", "to": "ai-integration/azure-doc-intelligence--from-markitdown", "type": "alternative-to" },
     { "from": "media-processing/image-llm-captioning--from-markitdown", "to": "media-processing/audio-transcription--from-markitdown", "type": "same-domain" },
     { "from": "document-conversion/pdf-conversion--from-markitdown", "to": "document-conversion/office-doc-conversion--from-markitdown", "type": "same-domain" },
-    { "from": "web-extraction/html-web-conversion--from-markitdown", "to": "web-extraction/youtube-extraction--from-markitdown", "type": "same-domain" }
+    { "from": "web-extraction/html-web-conversion--from-markitdown", "to": "web-extraction/youtube-extraction--from-markitdown", "type": "same-domain" },
+    { "from": "research-automation/multi-source-research-engine--from-last30days-skill", "to": "research-automation/entity-resolution--from-last30days-skill", "type": "depends-on" },
+    { "from": "research-automation/multi-source-research-engine--from-last30days-skill", "to": "research-automation/engagement-signal-ranking--from-last30days-skill", "type": "depends-on" },
+    { "from": "research-automation/multi-source-research-engine--from-last30days-skill", "to": "credential-management/multi-tier-credentials--from-last30days-skill", "type": "depends-on" },
+    { "from": "content-synthesis/cross-source-clustering--from-last30days-skill", "to": "research-automation/multi-source-research-engine--from-last30days-skill", "type": "depends-on" },
+    { "from": "content-synthesis/cross-source-clustering--from-last30days-skill", "to": "research-automation/entity-resolution--from-last30days-skill", "type": "depends-on" },
+    { "from": "agent-architecture/agent-output-contract--from-last30days-skill", "to": "research-automation/multi-source-research-engine--from-last30days-skill", "type": "depends-on" },
+    { "from": "research-automation/multi-source-research-engine--from-last30days-skill", "to": "research-automation/entity-resolution--from-last30days-skill", "type": "same-repo" },
+    { "from": "research-automation/multi-source-research-engine--from-last30days-skill", "to": "research-automation/engagement-signal-ranking--from-last30days-skill", "type": "same-repo" },
+    { "from": "research-automation/multi-source-research-engine--from-last30days-skill", "to": "content-synthesis/cross-source-clustering--from-last30days-skill", "type": "same-repo" },
+    { "from": "research-automation/multi-source-research-engine--from-last30days-skill", "to": "credential-management/multi-tier-credentials--from-last30days-skill", "type": "same-repo" },
+    { "from": "agent-architecture/agent-output-contract--from-last30days-skill", "to": "research-automation/multi-source-research-engine--from-last30days-skill", "type": "same-repo" }
   ]
 }
