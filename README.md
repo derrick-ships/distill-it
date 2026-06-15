@@ -1,4 +1,4 @@
-# repo-brain 🧠
+# Distill-it
 
 One organized home for every repository I reverse-engineer, feature by feature.
 
@@ -12,7 +12,7 @@ Built and maintained with the `repository-intelligence` skill.
 ## How it's organized
 
 ```
-repo-brain/
+distill-it/
 ├── graph/
 │   ├── graph.json   ← single source of truth (all nodes + edges)
 │   └── graph.html   ← open this in a browser for the clickable map
