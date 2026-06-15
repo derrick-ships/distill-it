@@ -44,12 +44,24 @@ each tagged with the repo it came from via the `--from-<repo>` suffix.
 
 Run the `repository-intelligence` skill in DISTILL mode on any GitHub repo (just give the plain
 repo URL — no cloning). It writes the study + build docs, updates `graph.json`, and regenerates
-`graph.html`.
+`graph.html`. Changes are committed and pushed automatically.
 
 ## What's inside so far
 
-| Domain | Features | Repos |
-|--------|----------|-------|
-| adaptive-parsing | 1 | Scrapling |
+| Domain | Features | Source repo |
+|--------|----------|-------------|
+| adaptive-parsing | 1 | [Scrapling](https://github.com/D4Vinci/Scrapling) |
+| document-conversion | 4 | [markitdown](https://github.com/microsoft/markitdown) |
+| plugin-architecture | 1 | [markitdown](https://github.com/microsoft/markitdown) |
+| file-detection | 1 | [markitdown](https://github.com/microsoft/markitdown) |
+| media-processing | 2 | [markitdown](https://github.com/microsoft/markitdown) |
+| web-extraction | 2 | [markitdown](https://github.com/microsoft/markitdown) |
+| ai-integration | 1 | [markitdown](https://github.com/microsoft/markitdown) |
+| agent-architecture | 1 | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| research-automation | 3 | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| content-synthesis | 1 | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| credential-management | 1 | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
 
-_Last updated: 2026-06-13_
+**18 nodes · 30 edges** — open [`graph/graph.html`](graph/graph.html) to explore the map.
+
+_Last updated: 2026-06-15_
