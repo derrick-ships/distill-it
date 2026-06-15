@@ -1,67 +1,98 @@
-# Distill-it
+```
+  ██████╗ ██╗███████╗████████╗██╗██╗      ██╗      ██╗████████╗
+  ██╔══██╗██║██╔════╝╚══██╔══╝██║██║      ██║      ██║╚══██╔══╝
+  ██║  ██║██║███████╗   ██║   ██║██║      ██║█████╗██║   ██║
+  ██║  ██║██║╚════██║   ██║   ██║██║      ██║╚════╝██║   ██║
+  ██████╔╝██║███████║   ██║   ██║███████╗ ███████╗ ██║   ██║
+  ╚═════╝ ╚═╝╚══════╝   ╚═╝   ╚═╝╚══════╝ ╚══════╝ ╚═╝   ╚═╝
+```
 
-One organized home for every repository I reverse-engineer, feature by feature.
+> **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-This isn't a code repo — it's a **knowledge repo**. Each entry distills one feature from some
-open-source product into two layers: a plain-language **study** doc (for understanding, and for
-uploading to NotebookLM) and a transplant-grade **build** doc (for an AI agent to reimplement
-that feature in a new project, even without the original repo).
+![18 nodes](https://img.shields.io/badge/nodes-18-4299e1?style=flat-square)
+![11 domains](https://img.shields.io/badge/domains-11-9f7aea?style=flat-square)
+![3 repos](https://img.shields.io/badge/repos-3-68d391?style=flat-square)
+![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
-Built and maintained with the `repository-intelligence` skill.
+---
+
+## What this is
+
+A knowledge base where **Claude does the reading, I just pick the repos**.
+
+Give Claude a GitHub URL and it reads the codebase over the web, traces each feature
+end-to-end, and writes two documents per feature:
+
+| Layer | Audience | Purpose |
+|-------|----------|---------|
+| **Study doc** | You | Plain-language deep-dive, ready to upload to NotebookLM |
+| **Build spec** | Claude (future sessions) | Self-contained technical guide for reimplementing the feature in any new project |
+
+Everything feeds into an interactive knowledge graph you can browse and search.
+
+---
+
+## Browse the graph
+
+Open [`graph/graph.html`](graph/graph.html) in a browser.
+
+Click any node → see the summary, links to the study doc, build spec, and origin repo.
+
+---
+
+## What's inside
+
+| Domain | Feature | From |
+|--------|---------|------|
+| adaptive-parsing | Adaptive Element Relocation | [Scrapling](https://github.com/D4Vinci/Scrapling) |
+| document-conversion | Converter Pipeline | [markitdown](https://github.com/microsoft/markitdown) |
+| document-conversion | PDF Conversion | [markitdown](https://github.com/microsoft/markitdown) |
+| document-conversion | Office Doc Conversion | [markitdown](https://github.com/microsoft/markitdown) |
+| document-conversion | ZIP Archive Traversal | [markitdown](https://github.com/microsoft/markitdown) |
+| plugin-architecture | Plugin System | [markitdown](https://github.com/microsoft/markitdown) |
+| file-detection | Magika File Detection | [markitdown](https://github.com/microsoft/markitdown) |
+| media-processing | Image + LLM Captioning | [markitdown](https://github.com/microsoft/markitdown) |
+| media-processing | Audio Transcription | [markitdown](https://github.com/microsoft/markitdown) |
+| web-extraction | HTML Web Conversion | [markitdown](https://github.com/microsoft/markitdown) |
+| web-extraction | YouTube Extraction | [markitdown](https://github.com/microsoft/markitdown) |
+| ai-integration | Azure Doc Intelligence | [markitdown](https://github.com/microsoft/markitdown) |
+| agent-architecture | Agent Output Contract | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| research-automation | Multi-Source Research Engine | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| research-automation | Entity Resolution | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| research-automation | Engagement Signal Ranking | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| content-synthesis | Cross-Source Clustering | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| credential-management | Multi-Tier Credentials | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+
+---
 
 ## How it's organized
 
 ```
 distill-it/
 ├── graph/
-│   ├── graph.json   ← single source of truth (all nodes + edges)
-│   └── graph.html   ← open this in a browser for the clickable map
-├── features/        ← organized BY FEATURE, not by repo
-│   └── <domain>/    ← e.g. adaptive-parsing, auth, billing, crawling
-│       ├── _domain.md           what this domain means across all repos
-│       ├── study/<feature>--from-<repo>.md   plain-language explainer
-│       └── build/<feature>--from-<repo>.md   technical rebuild spec
+│   ├── graph.json        ← single source of truth (all nodes + edges)
+│   └── graph.html        ← open in browser for the interactive map
+├── features/             ← organized by WHAT it does, not which repo
+│   └── <domain>/
+│       ├── _domain.md
+│       ├── study/        ← human-readable, NotebookLM-ready
+│       └── build/        ← agent-ready transplant spec
 └── repos/
-    └── <repo>.md    ← index of everything distilled from one source repo
+    └── <repo>.md         ← index of everything extracted from one repo
 ```
 
-Features are filed by **what they do**, so "every auth approach I've ever studied" sit together,
-each tagged with the repo it came from via the `--from-<repo>` suffix.
+Features are filed by **what they do** — so all "file detection" approaches sit together
+regardless of which repo they came from.
 
-## How to use it
+---
 
-- **Browse the map:** open `graph/graph.html` in a browser. Click any node → summary + links to
-  the study doc, the build spec, the origin repo, and (once added) its NotebookLM notebook.
-- **Study a feature:** read the `study/` doc. To go deep, upload a `study/` folder (or the whole
-  `features/` tree) to NotebookLM and let it build its own graph + answer questions. Paste the
-  notebook link back into the feature's `graph.json` node so the map links to it.
-- **Reuse a feature in a build:** in Claude Code, point the `repository-intelligence` skill at
-  the relevant `build/` doc and ask it to implement the feature in your current project.
-- **Open as an Obsidian vault** (optional): the `study/` docs use `[[wikilinks]]`, so Obsidian
-  draws the graph natively too — same source of truth, second renderer.
+## Add a new repo
 
-## Adding to it
+Run `/distill https://github.com/owner/repo` in Claude Code.
 
-Run the `repository-intelligence` skill in DISTILL mode on any GitHub repo (just give the plain
-repo URL — no cloning). It writes the study + build docs, updates `graph.json`, and regenerates
-`graph.html`. Changes are committed and pushed automatically.
+Claude reads the repo over the web (no cloning), shows you the feature list,
+writes the study + build docs for whichever you pick, updates the graph, commits, and pushes.
 
-## What's inside so far
+---
 
-| Domain | Features | Source repo |
-|--------|----------|-------------|
-| adaptive-parsing | 1 | [Scrapling](https://github.com/D4Vinci/Scrapling) |
-| document-conversion | 4 | [markitdown](https://github.com/microsoft/markitdown) |
-| plugin-architecture | 1 | [markitdown](https://github.com/microsoft/markitdown) |
-| file-detection | 1 | [markitdown](https://github.com/microsoft/markitdown) |
-| media-processing | 2 | [markitdown](https://github.com/microsoft/markitdown) |
-| web-extraction | 2 | [markitdown](https://github.com/microsoft/markitdown) |
-| ai-integration | 1 | [markitdown](https://github.com/microsoft/markitdown) |
-| agent-architecture | 1 | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
-| research-automation | 3 | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
-| content-synthesis | 1 | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
-| credential-management | 1 | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
-
-**18 nodes · 30 edges** — open [`graph/graph.html`](graph/graph.html) to explore the map.
-
-_Last updated: 2026-06-15_
+*Built with [Claude Code](https://claude.ai/code) using the `repository-intelligence` skill.*
