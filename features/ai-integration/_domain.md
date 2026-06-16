@@ -1,6 +1,6 @@
 # Domain: ai-integration
 
-Using AI services (cloud OCR, LLM vision, speech recognition) as enhancement layers inside a document conversion pipeline.
+Wiring external AI services (cloud OCR, LLM vision, speech recognition, provider-agnostic LLM SDKs) into a product — as enhancement layers in a pipeline, or as the swappable engine a whole tool is built on.
 
 ## What this domain is about
 
@@ -13,3 +13,4 @@ AI integration is always additive, never blocking. Converters in this domain eit
 ## Features in this domain
 
 - [[azure-doc-intelligence--from-markitdown]] — Azure prebuilt-layout OCR for PDFs, images, and Office files
+- [[provider-agnostic-llm--from-llm-scraper]] — multi-provider LLM support (OpenAI/Anthropic/Google/Groq/Ollama) for free by depending on the Vercel AI SDK abstraction instead of any vendor client. A contrasting choice to the Azure node: abstract *above* the vendor rather than bind *to* one.

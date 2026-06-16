@@ -197,6 +197,72 @@
       "build": "features/credential-management/build/multi-tier-credentials--from-last30days-skill.md",
       "source": "https://github.com/mvanhorn/last30days-skill",
       "notebooklm": ""
+    },
+    {
+      "id": "structured-extraction/schema-driven-extraction--from-llm-scraper",
+      "label": "Schema-Driven Extraction",
+      "domain": "structured-extraction",
+      "repo": "llm-scraper",
+      "summary": "Playwright page + Zod/JSON schema → typed object. Preprocess page, then AI SDK generateText with schema as `output` constraint, read result.output. Schema is both TS type and runtime constraint. One method: run(). No retry loop.",
+      "study": "features/structured-extraction/study/schema-driven-extraction--from-llm-scraper.md",
+      "build": "features/structured-extraction/build/schema-driven-extraction--from-llm-scraper.md",
+      "source": "https://github.com/mishushakov/llm-scraper",
+      "notebooklm": ""
+    },
+    {
+      "id": "structured-extraction/streaming-partial-objects--from-llm-scraper",
+      "label": "Streaming Partial Objects",
+      "domain": "structured-extraction",
+      "repo": "llm-scraper",
+      "summary": "stream() variant: AI SDK streamText with schema output → partialOutputStream async iterable. Each emission is a schema-conformant partial; last is complete. Mirror of run() but returns {stream,url}. For responsive UIs.",
+      "study": "features/structured-extraction/study/streaming-partial-objects--from-llm-scraper.md",
+      "build": "features/structured-extraction/build/streaming-partial-objects--from-llm-scraper.md",
+      "source": "https://github.com/mishushakov/llm-scraper",
+      "notebooklm": ""
+    },
+    {
+      "id": "content-preprocessing/page-format-pipeline--from-llm-scraper",
+      "label": "Page Format Pipeline",
+      "domain": "content-preprocessing",
+      "repo": "llm-scraper",
+      "summary": "preprocess(page,options) → {url,content,format}. Six formats: raw_html, markdown (Turndown), text (Mozilla Readability via CDN in-page), html (cleanup scrub, default), image (base64 screenshot), custom. Cost/fidelity dial.",
+      "study": "features/content-preprocessing/study/page-format-pipeline--from-llm-scraper.md",
+      "build": "features/content-preprocessing/build/page-format-pipeline--from-llm-scraper.md",
+      "source": "https://github.com/mishushakov/llm-scraper",
+      "notebooklm": ""
+    },
+    {
+      "id": "content-preprocessing/html-cleanup--from-llm-scraper",
+      "label": "HTML Cleanup",
+      "domain": "content-preprocessing",
+      "repo": "llm-scraper",
+      "summary": "In-browser DOM scrub via page.evaluate. Removes ~30 tag types (script/style/media/form/nav/head) and prefix-strips noise attributes (style/src/on*/aria-/data-). Mutates live DOM. href kept. Token-diet for the default html format.",
+      "study": "features/content-preprocessing/study/html-cleanup--from-llm-scraper.md",
+      "build": "features/content-preprocessing/build/html-cleanup--from-llm-scraper.md",
+      "source": "https://github.com/mishushakov/llm-scraper",
+      "notebooklm": ""
+    },
+    {
+      "id": "code-generation/scraper-code-generation--from-llm-scraper",
+      "label": "Scraper Code Generation",
+      "domain": "code-generation",
+      "repo": "llm-scraper",
+      "summary": "generate() asks LLM to write a self-contained IIFE JS scraper for page+schema instead of extracting. Plain generateText (schema as context, not constraint). stripMarkdownBackticks cleans fences. Amortizes AI cost across runs.",
+      "study": "features/code-generation/study/scraper-code-generation--from-llm-scraper.md",
+      "build": "features/code-generation/build/scraper-code-generation--from-llm-scraper.md",
+      "source": "https://github.com/mishushakov/llm-scraper",
+      "notebooklm": ""
+    },
+    {
+      "id": "ai-integration/provider-agnostic-llm--from-llm-scraper",
+      "label": "Provider-Agnostic LLM Layer",
+      "domain": "ai-integration",
+      "repo": "llm-scraper",
+      "summary": "Multi-provider (OpenAI/Anthropic/Google/Groq/Ollama) with zero per-provider code by depending on the Vercel AI SDK LanguageModel abstraction. Constructor takes one model handle; provider chosen by caller. Lesson: abstract one level above the vendor.",
+      "study": "features/ai-integration/study/provider-agnostic-llm--from-llm-scraper.md",
+      "build": "features/ai-integration/build/provider-agnostic-llm--from-llm-scraper.md",
+      "source": "https://github.com/mishushakov/llm-scraper",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -229,6 +295,29 @@
     { "from": "research-automation/multi-source-research-engine--from-last30days-skill", "to": "research-automation/engagement-signal-ranking--from-last30days-skill", "type": "same-repo" },
     { "from": "research-automation/multi-source-research-engine--from-last30days-skill", "to": "content-synthesis/cross-source-clustering--from-last30days-skill", "type": "same-repo" },
     { "from": "research-automation/multi-source-research-engine--from-last30days-skill", "to": "credential-management/multi-tier-credentials--from-last30days-skill", "type": "same-repo" },
-    { "from": "agent-architecture/agent-output-contract--from-last30days-skill", "to": "research-automation/multi-source-research-engine--from-last30days-skill", "type": "same-repo" }
+    { "from": "agent-architecture/agent-output-contract--from-last30days-skill", "to": "research-automation/multi-source-research-engine--from-last30days-skill", "type": "same-repo" },
+
+    { "from": "structured-extraction/schema-driven-extraction--from-llm-scraper", "to": "content-preprocessing/page-format-pipeline--from-llm-scraper", "type": "depends-on" },
+    { "from": "structured-extraction/streaming-partial-objects--from-llm-scraper", "to": "content-preprocessing/page-format-pipeline--from-llm-scraper", "type": "depends-on" },
+    { "from": "code-generation/scraper-code-generation--from-llm-scraper", "to": "content-preprocessing/page-format-pipeline--from-llm-scraper", "type": "depends-on" },
+    { "from": "content-preprocessing/page-format-pipeline--from-llm-scraper", "to": "content-preprocessing/html-cleanup--from-llm-scraper", "type": "depends-on" },
+    { "from": "structured-extraction/schema-driven-extraction--from-llm-scraper", "to": "ai-integration/provider-agnostic-llm--from-llm-scraper", "type": "depends-on" },
+    { "from": "structured-extraction/streaming-partial-objects--from-llm-scraper", "to": "ai-integration/provider-agnostic-llm--from-llm-scraper", "type": "depends-on" },
+    { "from": "code-generation/scraper-code-generation--from-llm-scraper", "to": "ai-integration/provider-agnostic-llm--from-llm-scraper", "type": "depends-on" },
+
+    { "from": "structured-extraction/schema-driven-extraction--from-llm-scraper", "to": "structured-extraction/streaming-partial-objects--from-llm-scraper", "type": "same-domain" },
+    { "from": "content-preprocessing/page-format-pipeline--from-llm-scraper", "to": "content-preprocessing/html-cleanup--from-llm-scraper", "type": "same-domain" },
+
+    { "from": "code-generation/scraper-code-generation--from-llm-scraper", "to": "structured-extraction/schema-driven-extraction--from-llm-scraper", "type": "alternative-to" },
+
+    { "from": "structured-extraction/schema-driven-extraction--from-llm-scraper", "to": "structured-extraction/streaming-partial-objects--from-llm-scraper", "type": "same-repo" },
+    { "from": "structured-extraction/schema-driven-extraction--from-llm-scraper", "to": "content-preprocessing/page-format-pipeline--from-llm-scraper", "type": "same-repo" },
+    { "from": "content-preprocessing/page-format-pipeline--from-llm-scraper", "to": "content-preprocessing/html-cleanup--from-llm-scraper", "type": "same-repo" },
+    { "from": "structured-extraction/schema-driven-extraction--from-llm-scraper", "to": "code-generation/scraper-code-generation--from-llm-scraper", "type": "same-repo" },
+    { "from": "structured-extraction/schema-driven-extraction--from-llm-scraper", "to": "ai-integration/provider-agnostic-llm--from-llm-scraper", "type": "same-repo" },
+
+    { "from": "structured-extraction/schema-driven-extraction--from-llm-scraper", "to": "adaptive-parsing/adaptive-element-relocation--from-scrapling", "type": "similar-pattern" },
+    { "from": "content-preprocessing/html-cleanup--from-llm-scraper", "to": "web-extraction/html-web-conversion--from-markitdown", "type": "similar-pattern" },
+    { "from": "ai-integration/provider-agnostic-llm--from-llm-scraper", "to": "ai-integration/azure-doc-intelligence--from-markitdown", "type": "alternative-to" }
   ]
 }
