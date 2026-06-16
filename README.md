@@ -71,6 +71,9 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | diagnostics | Channel Health Diagnostics | [Agent-Reach](https://github.com/Panniantong/Agent-Reach) |
 | credential-management | Cookie Credential Extraction | [Agent-Reach](https://github.com/Panniantong/Agent-Reach) |
 | agent-distribution | Agent-Driven Install | [Agent-Reach](https://github.com/Panniantong/Agent-Reach) |
+| tts | ONNX TTS Pipeline | [supertonic](https://github.com/supertone-inc/supertonic) |
+| tts | Flow-Matching Sampler | [supertonic](https://github.com/supertone-inc/supertonic) |
+| tts | Expression Tags | [supertonic](https://github.com/supertone-inc/supertonic) |
 
 ---
 

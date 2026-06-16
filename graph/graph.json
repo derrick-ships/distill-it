@@ -362,9 +362,47 @@
       "build": "features/agent-distribution/build/agent-driven-install--from-agent-reach.md",
       "source": "https://github.com/Panniantong/Agent-Reach",
       "notebooklm": ""
+    },
+    {
+      "id": "tts/onnx-tts-pipeline--from-supertonic",
+      "label": "ONNX TTS Pipeline",
+      "domain": "tts",
+      "repo": "supertonic",
+      "summary": "On-device TTS as four chained ONNX models: duration_predictor -> text_encoder -> vector_estimator (flow-matching, looped) -> vocoder. Unicode-code-point tokenizer covers 31 languages; voice is a small style JSON; outputs 44.1kHz WAV, no GPU.",
+      "study": "features/tts/study/onnx-tts-pipeline--from-supertonic.md",
+      "build": "features/tts/build/onnx-tts-pipeline--from-supertonic.md",
+      "source": "https://github.com/supertone-inc/supertonic",
+      "notebooklm": ""
+    },
+    {
+      "id": "tts/flow-matching-sampler--from-supertonic",
+      "label": "Flow-Matching Sampler",
+      "domain": "tts",
+      "repo": "supertonic",
+      "summary": "Generative core: iteratively denoise a gaussian latent into a speech latent via vector_estimator.onnx, called total_steps times (5-12, default 8). current_step/total_step are tensor inputs, giving a runtime quality/latency dial without retraining. Length-Aware RoPE keeps text<->speech aligned.",
+      "study": "features/tts/study/flow-matching-sampler--from-supertonic.md",
+      "build": "features/tts/build/flow-matching-sampler--from-supertonic.md",
+      "source": "https://github.com/supertone-inc/supertonic",
+      "notebooklm": ""
+    },
+    {
+      "id": "tts/expression-tags--from-supertonic",
+      "label": "Expression Tags",
+      "domain": "tts",
+      "repo": "supertonic",
+      "summary": "Inline prosody control via ~10 closed-vocabulary text tags (<laugh>, <breath>, <sigh>). Recognized in the text front-end and mapped to reserved token ids, so they flow through every stage as ordinary tokens and the trained models render them as acoustic events. No DSP, no reference audio.",
+      "study": "features/tts/study/expression-tags--from-supertonic.md",
+      "build": "features/tts/build/expression-tags--from-supertonic.md",
+      "source": "https://github.com/supertone-inc/supertonic",
+      "notebooklm": ""
     }
   ],
   "edges": [
+    { "from": "tts/flow-matching-sampler--from-supertonic", "to": "tts/onnx-tts-pipeline--from-supertonic", "type": "depends-on" },
+    { "from": "tts/expression-tags--from-supertonic", "to": "tts/onnx-tts-pipeline--from-supertonic", "type": "depends-on" },
+    { "from": "tts/onnx-tts-pipeline--from-supertonic", "to": "tts/flow-matching-sampler--from-supertonic", "type": "same-domain" },
+    { "from": "tts/onnx-tts-pipeline--from-supertonic", "to": "tts/expression-tags--from-supertonic", "type": "same-domain" },
+    { "from": "tts/flow-matching-sampler--from-supertonic", "to": "tts/expression-tags--from-supertonic", "type": "same-repo" },
     { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "file-detection/magika-file-detection--from-markitdown", "type": "depends-on" },
     { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "plugin-architecture/plugin-system--from-markitdown", "type": "depends-on" },
     { "from": "document-conversion/converter-pipeline--from-markitdown", "to": "document-conversion/pdf-conversion--from-markitdown", "type": "same-repo" },
