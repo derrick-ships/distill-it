@@ -12,7 +12,10 @@ Tools that aggregate from multiple platforms face a credential zoo: some sources
 - **Dual env file locations**: project-scoped (`.claude/last30days.env`) takes priority over user-level (`~/.config/`)
 - **Preflight source checking**: determine which sources are available before the main pipeline runs
 - **Silent degradation**: missing credential = source skipped, not crash
+- **Browser-cookie harvesting**: reuse the user's existing browser session instead of asking for tokens; validate the *logged-in marker*, not mere presence
+- **Atomic secret writes**: create credential files owner-only (`O_CREAT` + `0o600`) so they're never briefly world-readable — no write-then-chmod race
 
 ## Features in this domain
 
 - [[multi-tier-credentials--from-last30days-skill]] — three-tier auth pattern with preflight availability checking
+- [[cookie-credential-extraction--from-agent-reach]] — multi-browser cookie harvest (rookiepy→browser_cookie3) driven by declarative per-platform specs, validate-before-save, atomic 0o600 store, and shell-safe best-effort mirrors into upstream tools' credential files

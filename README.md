@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![18 nodes](https://img.shields.io/badge/nodes-18-4299e1?style=flat-square)
-![11 domains](https://img.shields.io/badge/domains-11-9f7aea?style=flat-square)
-![3 repos](https://img.shields.io/badge/repos-3-68d391?style=flat-square)
+![33 nodes](https://img.shields.io/badge/nodes-33-4299e1?style=flat-square)
+![19 domains](https://img.shields.io/badge/domains-19-9f7aea?style=flat-square)
+![6 repos](https://img.shields.io/badge/repos-6-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -67,6 +67,10 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | inbox-cleanup | Bulk Unsubscriber | [inbox-zero](https://github.com/elie222/inbox-zero) |
 | inbox-cleanup | Bulk Archiver | [inbox-zero](https://github.com/elie222/inbox-zero) |
 | email-platform | Email Provider Abstraction | [inbox-zero](https://github.com/elie222/inbox-zero) |
+| agent-architecture | Ordered Backend Routing | [Agent-Reach](https://github.com/Panniantong/Agent-Reach) |
+| diagnostics | Channel Health Diagnostics | [Agent-Reach](https://github.com/Panniantong/Agent-Reach) |
+| credential-management | Cookie Credential Extraction | [Agent-Reach](https://github.com/Panniantong/Agent-Reach) |
+| agent-distribution | Agent-Driven Install | [Agent-Reach](https://github.com/Panniantong/Agent-Reach) |
 
 ---
 

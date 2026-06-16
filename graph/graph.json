@@ -318,6 +318,50 @@
       "build": "features/email-platform/build/email-provider-abstraction--from-inbox-zero.md",
       "source": "https://github.com/elie222/inbox-zero",
       "notebooklm": ""
+    },
+    {
+      "id": "agent-architecture/ordered-backend-routing--from-agent-reach",
+      "label": "Ordered Backend Routing",
+      "domain": "agent-architecture",
+      "repo": "agent-reach",
+      "summary": "Each capability is a Channel with an ORDERED backends list (preferred→fallbacks). Two-phase check: collect all candidates, first `ok` wins, then first `warn` — so an installed-but-logged-out backend can't mask a working fallback. active_backend records the live one. User pin via <name>_backend (unknown value ignored). Switching backend = reorder a list, not code.",
+      "study": "features/agent-architecture/study/ordered-backend-routing--from-agent-reach.md",
+      "build": "features/agent-architecture/build/ordered-backend-routing--from-agent-reach.md",
+      "source": "https://github.com/Panniantong/Agent-Reach",
+      "notebooklm": ""
+    },
+    {
+      "id": "diagnostics/channel-health-diagnostics--from-agent-reach",
+      "label": "Channel Health Diagnostics",
+      "domain": "diagnostics",
+      "repo": "agent-reach",
+      "summary": "probe_command EXECUTES a side-effect-free command to classify missing/broken(stale venv shebang, exit 126/127)/timeout/ok — which() existence is not health. doctor aggregates per-channel (exceptions degrade to error, stale active_backend cleared), groups by tier, annotates the active backend only when >1 exists, and audits config.yaml permissions (chmod 600). Retries only transient failures.",
+      "study": "features/diagnostics/study/channel-health-diagnostics--from-agent-reach.md",
+      "build": "features/diagnostics/build/channel-health-diagnostics--from-agent-reach.md",
+      "source": "https://github.com/Panniantong/Agent-Reach",
+      "notebooklm": ""
+    },
+    {
+      "id": "credential-management/cookie-credential-extraction--from-agent-reach",
+      "label": "Cookie Credential Extraction",
+      "domain": "credential-management",
+      "repo": "agent-reach",
+      "summary": "Multi-browser cookie harvest (rookiepy→browser_cookie3) driven by declarative per-platform specs (named cookies vs whole Cookie-header). Validate-before-save: require a logged-in marker (auth_token+ct0, xq_a_token) — presence≠valid. Atomic 0o600 write (O_CREAT+mode, no write-then-chmod race). shlex-quoted best-effort mirrors into upstream tools' credential files.",
+      "study": "features/credential-management/study/cookie-credential-extraction--from-agent-reach.md",
+      "build": "features/credential-management/build/cookie-credential-extraction--from-agent-reach.md",
+      "source": "https://github.com/Panniantong/Agent-Reach",
+      "notebooklm": ""
+    },
+    {
+      "id": "agent-distribution/agent-driven-install--from-agent-reach",
+      "label": "Agent-Driven Install",
+      "domain": "agent-distribution",
+      "repo": "agent-reach",
+      "summary": "The installer is a markdown runbook an LLM agent executes: thin 'For Humans' one-line trigger over an imperative 'For AI Agents' program. Hard boundaries (no sudo, confined to ~/.agent-reach/, never pollute the workspace), env-branched steps (PEP 668 / Homebrew / Windows Store-alias), explicit user checkpoints, 'selector/router, never a wrapper'. install.md / update.md / daily watch = one lifecycle mechanism.",
+      "study": "features/agent-distribution/study/agent-driven-install--from-agent-reach.md",
+      "build": "features/agent-distribution/build/agent-driven-install--from-agent-reach.md",
+      "source": "https://github.com/Panniantong/Agent-Reach",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -393,6 +437,26 @@
 
     { "from": "email-platform/email-provider-abstraction--from-inbox-zero", "to": "ai-integration/provider-agnostic-llm--from-llm-scraper", "type": "similar-pattern" },
     { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "structured-extraction/schema-driven-extraction--from-llm-scraper", "type": "similar-pattern" },
-    { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "research-automation/engagement-signal-ranking--from-last30days-skill", "type": "similar-pattern" }
+    { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "research-automation/engagement-signal-ranking--from-last30days-skill", "type": "similar-pattern" },
+
+    { "from": "agent-architecture/ordered-backend-routing--from-agent-reach", "to": "diagnostics/channel-health-diagnostics--from-agent-reach", "type": "depends-on" },
+    { "from": "agent-architecture/ordered-backend-routing--from-agent-reach", "to": "credential-management/cookie-credential-extraction--from-agent-reach", "type": "depends-on" },
+    { "from": "diagnostics/channel-health-diagnostics--from-agent-reach", "to": "agent-architecture/ordered-backend-routing--from-agent-reach", "type": "depends-on" },
+    { "from": "diagnostics/channel-health-diagnostics--from-agent-reach", "to": "credential-management/cookie-credential-extraction--from-agent-reach", "type": "depends-on" },
+    { "from": "agent-distribution/agent-driven-install--from-agent-reach", "to": "agent-architecture/ordered-backend-routing--from-agent-reach", "type": "depends-on" },
+    { "from": "agent-distribution/agent-driven-install--from-agent-reach", "to": "diagnostics/channel-health-diagnostics--from-agent-reach", "type": "depends-on" },
+    { "from": "agent-distribution/agent-driven-install--from-agent-reach", "to": "credential-management/cookie-credential-extraction--from-agent-reach", "type": "depends-on" },
+
+    { "from": "agent-architecture/ordered-backend-routing--from-agent-reach", "to": "diagnostics/channel-health-diagnostics--from-agent-reach", "type": "same-repo" },
+    { "from": "agent-architecture/ordered-backend-routing--from-agent-reach", "to": "credential-management/cookie-credential-extraction--from-agent-reach", "type": "same-repo" },
+    { "from": "agent-architecture/ordered-backend-routing--from-agent-reach", "to": "agent-distribution/agent-driven-install--from-agent-reach", "type": "same-repo" },
+
+    { "from": "agent-architecture/ordered-backend-routing--from-agent-reach", "to": "agent-architecture/agent-output-contract--from-last30days-skill", "type": "same-domain" },
+    { "from": "credential-management/cookie-credential-extraction--from-agent-reach", "to": "credential-management/multi-tier-credentials--from-last30days-skill", "type": "same-domain" },
+
+    { "from": "agent-architecture/ordered-backend-routing--from-agent-reach", "to": "plugin-architecture/plugin-system--from-markitdown", "type": "similar-pattern" },
+    { "from": "agent-architecture/ordered-backend-routing--from-agent-reach", "to": "email-platform/email-provider-abstraction--from-inbox-zero", "type": "similar-pattern" },
+    { "from": "diagnostics/channel-health-diagnostics--from-agent-reach", "to": "credential-management/multi-tier-credentials--from-last30days-skill", "type": "similar-pattern" },
+    { "from": "agent-distribution/agent-driven-install--from-agent-reach", "to": "agent-architecture/agent-output-contract--from-last30days-skill", "type": "similar-pattern" }
   ]
 }
