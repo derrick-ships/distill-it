@@ -62,6 +62,11 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | research-automation | Engagement Signal Ranking | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
 | content-synthesis | Cross-Source Clustering | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
 | credential-management | Multi-Tier Credentials | [last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| ai-automation | AI Rules Engine | [inbox-zero](https://github.com/elie222/inbox-zero) |
+| ai-automation | AI Reply Drafting | [inbox-zero](https://github.com/elie222/inbox-zero) |
+| inbox-cleanup | Bulk Unsubscriber | [inbox-zero](https://github.com/elie222/inbox-zero) |
+| inbox-cleanup | Bulk Archiver | [inbox-zero](https://github.com/elie222/inbox-zero) |
+| email-platform | Email Provider Abstraction | [inbox-zero](https://github.com/elie222/inbox-zero) |
 
 ---
 

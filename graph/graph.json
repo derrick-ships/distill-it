@@ -263,6 +263,61 @@
       "build": "features/ai-integration/build/provider-agnostic-llm--from-llm-scraper.md",
       "source": "https://github.com/mishushakov/llm-scraper",
       "notebooklm": ""
+    },
+    {
+      "id": "ai-automation/ai-rules-engine--from-inbox-zero",
+      "label": "AI Rules Engine",
+      "domain": "ai-automation",
+      "repo": "inbox-zero",
+      "summary": "Plain-English inbox automation. Cost funnel: static/pattern matching first (address-anchored, AND/OR), LLM rule-selection only for the ambiguous remainder (Zod schema + 'no match' flag), second LLM call fills {{template}} action args, deterministic executor runs actions + writes ExecutedRule/ExecutedAction audit trail. Dry-run mode skips all writes.",
+      "study": "features/ai-automation/study/ai-rules-engine--from-inbox-zero.md",
+      "build": "features/ai-automation/build/ai-rules-engine--from-inbox-zero.md",
+      "source": "https://github.com/elie222/inbox-zero",
+      "notebooklm": ""
+    },
+    {
+      "id": "ai-automation/ai-reply-drafting--from-inbox-zero",
+      "label": "AI Reply Drafting",
+      "domain": "ai-automation",
+      "repo": "inbox-zero",
+      "summary": "Tone-matched reply drafts + confidence (LOW/MED/HIGH). Assembles thread (per-msg ~3000 char cap), profile, knowledge, calendar slots, past drafts. Writing-style priority: explicit > learned > default. Learned style is a distilled PII-free summary (<=1500 chars) of the user's edits. Output normalizer + repetition guard.",
+      "study": "features/ai-automation/study/ai-reply-drafting--from-inbox-zero.md",
+      "build": "features/ai-automation/build/ai-reply-drafting--from-inbox-zero.md",
+      "source": "https://github.com/elie222/inbox-zero",
+      "notebooklm": ""
+    },
+    {
+      "id": "inbox-cleanup/bulk-unsubscriber--from-inbox-zero",
+      "label": "Bulk Unsubscriber",
+      "domain": "inbox-cleanup",
+      "repo": "inbox-zero",
+      "summary": "Real server-side one-click unsubscribe. Parses RFC 2369 List-Unsubscribe (extracts https URL), RFC 8058 one-click POST (body 'List-Unsubscribe=One-Click') with GET fallback, SSRF-guarded fetch, <=5 redirects with 301/302/303->GET downgrade. Persists per-sender Newsletter status (APPROVED/UNSUBSCRIBED/AUTO_ARCHIVED).",
+      "study": "features/inbox-cleanup/study/bulk-unsubscriber--from-inbox-zero.md",
+      "build": "features/inbox-cleanup/build/bulk-unsubscriber--from-inbox-zero.md",
+      "source": "https://github.com/elie222/inbox-zero",
+      "notebooklm": ""
+    },
+    {
+      "id": "inbox-cleanup/bulk-archiver--from-inbox-zero",
+      "label": "Bulk Archiver",
+      "domain": "inbox-cleanup",
+      "repo": "inbox-zero",
+      "summary": "Risk-tiered archive triage. Pure function scoring senders by category-name substring: HIGH (marketing/promotion/newsletter/sale), MEDIUM (notification/alert/receipt/update), LOW (other). Returns {confidence, reason} candidates. Only HIGH is one-click — tiering is the safety mechanism. Scoring decoupled from execution.",
+      "study": "features/inbox-cleanup/study/bulk-archiver--from-inbox-zero.md",
+      "build": "features/inbox-cleanup/build/bulk-archiver--from-inbox-zero.md",
+      "source": "https://github.com/elie222/inbox-zero",
+      "notebooklm": ""
+    },
+    {
+      "id": "email-platform/email-provider-abstraction--from-inbox-zero",
+      "label": "Email Provider Abstraction",
+      "domain": "email-platform",
+      "repo": "inbox-zero",
+      "summary": "Adapter+factory seam over Gmail + Outlook/Graph. One EmailProvider interface, GmailProvider/OutlookProvider adapters normalize to a shared ParsedMessage. createEmailProvider validates provider, fails fast on rate-limit, gets OAuth client (token refresh hidden in client getters). Label vs folder absorbed by adapters.",
+      "study": "features/email-platform/study/email-provider-abstraction--from-inbox-zero.md",
+      "build": "features/email-platform/build/email-provider-abstraction--from-inbox-zero.md",
+      "source": "https://github.com/elie222/inbox-zero",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -318,6 +373,26 @@
 
     { "from": "structured-extraction/schema-driven-extraction--from-llm-scraper", "to": "adaptive-parsing/adaptive-element-relocation--from-scrapling", "type": "similar-pattern" },
     { "from": "content-preprocessing/html-cleanup--from-llm-scraper", "to": "web-extraction/html-web-conversion--from-markitdown", "type": "similar-pattern" },
-    { "from": "ai-integration/provider-agnostic-llm--from-llm-scraper", "to": "ai-integration/azure-doc-intelligence--from-markitdown", "type": "alternative-to" }
+    { "from": "ai-integration/provider-agnostic-llm--from-llm-scraper", "to": "ai-integration/azure-doc-intelligence--from-markitdown", "type": "alternative-to" },
+
+    { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "email-platform/email-provider-abstraction--from-inbox-zero", "type": "depends-on" },
+    { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "ai-automation/ai-reply-drafting--from-inbox-zero", "type": "depends-on" },
+    { "from": "ai-automation/ai-reply-drafting--from-inbox-zero", "to": "email-platform/email-provider-abstraction--from-inbox-zero", "type": "depends-on" },
+    { "from": "inbox-cleanup/bulk-unsubscriber--from-inbox-zero", "to": "email-platform/email-provider-abstraction--from-inbox-zero", "type": "depends-on" },
+    { "from": "inbox-cleanup/bulk-archiver--from-inbox-zero", "to": "email-platform/email-provider-abstraction--from-inbox-zero", "type": "depends-on" },
+
+    { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "ai-automation/ai-reply-drafting--from-inbox-zero", "type": "same-domain" },
+    { "from": "inbox-cleanup/bulk-unsubscriber--from-inbox-zero", "to": "inbox-cleanup/bulk-archiver--from-inbox-zero", "type": "same-domain" },
+
+    { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "ai-automation/ai-reply-drafting--from-inbox-zero", "type": "same-repo" },
+    { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "inbox-cleanup/bulk-unsubscriber--from-inbox-zero", "type": "same-repo" },
+    { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "inbox-cleanup/bulk-archiver--from-inbox-zero", "type": "same-repo" },
+    { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "email-platform/email-provider-abstraction--from-inbox-zero", "type": "same-repo" },
+
+    { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "inbox-cleanup/bulk-archiver--from-inbox-zero", "type": "depends-on" },
+
+    { "from": "email-platform/email-provider-abstraction--from-inbox-zero", "to": "ai-integration/provider-agnostic-llm--from-llm-scraper", "type": "similar-pattern" },
+    { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "structured-extraction/schema-driven-extraction--from-llm-scraper", "type": "similar-pattern" },
+    { "from": "ai-automation/ai-rules-engine--from-inbox-zero", "to": "research-automation/engagement-signal-ranking--from-last30days-skill", "type": "similar-pattern" }
   ]
 }
