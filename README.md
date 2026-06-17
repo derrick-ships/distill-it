@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![59 nodes](https://img.shields.io/badge/nodes-59-4299e1?style=flat-square)
-![31 domains](https://img.shields.io/badge/domains-31-9f7aea?style=flat-square)
-![11 repos](https://img.shields.io/badge/repos-11-68d391?style=flat-square)
+![63 nodes](https://img.shields.io/badge/nodes-63-4299e1?style=flat-square)
+![34 domains](https://img.shields.io/badge/domains-34-9f7aea?style=flat-square)
+![12 repos](https://img.shields.io/badge/repos-12-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -97,6 +97,10 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | graph-editing | Node Resizer | [xyflow](https://github.com/xyflow/xyflow) |
 | graph-rendering | Edge Path Algorithms | [xyflow](https://github.com/xyflow/xyflow) |
 | state-management | Reactive Store Architecture | [xyflow](https://github.com/xyflow/xyflow) |
+| rendering | Hand-Drawn Rendering | [excalidraw](https://github.com/excalidraw/excalidraw) |
+| realtime-collab | E2E-Encrypted Collaboration | [excalidraw](https://github.com/excalidraw/excalidraw) |
+| realtime-collab | Scene Reconciliation | [excalidraw](https://github.com/excalidraw/excalidraw) |
+| data-structures | Fractional Indexing (z-order) | [excalidraw](https://github.com/excalidraw/excalidraw) |
 
 ---
 
