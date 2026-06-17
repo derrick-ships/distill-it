@@ -483,6 +483,50 @@
       "build": "features/infrastructure/build/local-first-architecture--from-open-design.md",
       "source": "https://github.com/nexu-io/open-design",
       "notebooklm": ""
+    },
+    {
+      "id": "reactivity/signals-reactivity-engine--from-tldraw",
+      "label": "Signals Reactivity Engine",
+      "domain": "reactivity",
+      "repo": "tldraw",
+      "summary": "Fine-grained reactivity (atom/computed/react) coordinated by a single global epoch counter. Dependencies auto-discovered by observing reads; staleness decided by epoch comparison, not value diffing. Signals carry diff-history so consumers can ask 'what changed since epoch N?'. Zero deps.",
+      "study": "features/reactivity/study/signals-reactivity-engine--from-tldraw.md",
+      "build": "features/reactivity/build/signals-reactivity-engine--from-tldraw.md",
+      "source": "https://github.com/tldraw/tldraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "state-management/reactive-record-store--from-tldraw",
+      "label": "Reactive Record Store",
+      "domain": "state-management",
+      "repo": "tldraw",
+      "summary": "In-memory normalized record DB on signals. Flat 'type:id' records with scope (document/session/presence); reactive queries with incrementally-maintained indexes; every write emits a RecordsDiff {added,updated,removed} tagged source user|remote. Snapshots + migration on load.",
+      "study": "features/state-management/study/reactive-record-store--from-tldraw.md",
+      "build": "features/state-management/build/reactive-record-store--from-tldraw.md",
+      "source": "https://github.com/tldraw/tldraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "schema-migrations/schema-migrations--from-tldraw",
+      "label": "Schema & Migrations",
+      "domain": "schema-migrations",
+      "repo": "tldraw",
+      "summary": "Versioned bidirectional migrations. Namespaced ids (sequenceId/version) grouped into sequences with record/store/storage scope; cross-sequence dependsOn resolved by topological sort. Compact SerializedSchema travels with snapshots + connect handshake; up to upgrade, down to serve older peers.",
+      "study": "features/schema-migrations/study/schema-migrations--from-tldraw.md",
+      "build": "features/schema-migrations/build/schema-migrations--from-tldraw.md",
+      "source": "https://github.com/tldraw/tldraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "realtime/multiplayer-sync--from-tldraw",
+      "label": "Multiplayer Sync",
+      "domain": "realtime",
+      "repo": "tldraw",
+      "summary": "Server-authoritative optimistic-rebase sync over WebSockets. Clients edit locally, stash speculative changes, push NetworkDiffs with a clientClock; server applies, assigns serverClock, returns commit/discard/rebase and broadcasts patches. Clients rebase (rewind→apply→replay). Presence synced-not-persisted; tombstone catch-up; per-session schema migration. Reference server = Cloudflare Durable Object.",
+      "study": "features/realtime/study/multiplayer-sync--from-tldraw.md",
+      "build": "features/realtime/build/multiplayer-sync--from-tldraw.md",
+      "source": "https://github.com/tldraw/tldraw",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -999,6 +1043,56 @@
     {
       "from": "ai-workflow/agentic-loop--from-open-design",
       "to": "infrastructure/local-first-architecture--from-open-design",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-record-store--from-tldraw",
+      "to": "reactivity/signals-reactivity-engine--from-tldraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "schema-migrations/schema-migrations--from-tldraw",
+      "to": "state-management/reactive-record-store--from-tldraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "realtime/multiplayer-sync--from-tldraw",
+      "to": "state-management/reactive-record-store--from-tldraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "realtime/multiplayer-sync--from-tldraw",
+      "to": "schema-migrations/schema-migrations--from-tldraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "state-management/reactive-record-store--from-tldraw",
+      "to": "schema-migrations/schema-migrations--from-tldraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "reactivity/signals-reactivity-engine--from-tldraw",
+      "to": "state-management/reactive-record-store--from-tldraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "reactivity/signals-reactivity-engine--from-tldraw",
+      "to": "schema-migrations/schema-migrations--from-tldraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "reactivity/signals-reactivity-engine--from-tldraw",
+      "to": "realtime/multiplayer-sync--from-tldraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-record-store--from-tldraw",
+      "to": "realtime/multiplayer-sync--from-tldraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "schema-migrations/schema-migrations--from-tldraw",
+      "to": "realtime/multiplayer-sync--from-tldraw",
       "type": "same-repo"
     }
   ]
