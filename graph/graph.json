@@ -16,7 +16,7 @@
       "label": "Converter Pipeline",
       "domain": "document-conversion",
       "repo": "markitdown",
-      "summary": "Priority-sorted pluggable converter registry. Source-type dispatch \u2192 layered file detection \u2192 sorted converter chain. First accepts+succeeds wins. Output normalized to clean Markdown.",
+      "summary": "Priority-sorted pluggable converter registry. Source-type dispatch → layered file detection → sorted converter chain. First accepts+succeeds wins. Output normalized to clean Markdown.",
       "study": "features/document-conversion/study/converter-pipeline--from-markitdown.md",
       "build": "features/document-conversion/build/converter-pipeline--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -27,7 +27,7 @@
       "label": "PDF Conversion",
       "domain": "document-conversion",
       "repo": "markitdown",
-      "summary": "Dual-library PDF extraction: pdfplumber primary (table/form column detection, page.close() memory management) \u2192 pdfminer fallback. Markdown tables from column-clustered word positions.",
+      "summary": "Dual-library PDF extraction: pdfplumber primary (table/form column detection, page.close() memory management) → pdfminer fallback. Markdown tables from column-clustered word positions.",
       "study": "features/document-conversion/study/pdf-conversion--from-markitdown.md",
       "build": "features/document-conversion/build/pdf-conversion--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -38,7 +38,7 @@
       "label": "Office Doc Conversion",
       "domain": "document-conversion",
       "repo": "markitdown",
-      "summary": "DOCX/PPTX/XLSX \u2192 Markdown via python-docx, python-pptx, pandas. Tables go HTML\u2192Markdown via HtmlConverter.convert_string(). PPTX handles charts, speaker notes, and optional LLM image captions.",
+      "summary": "DOCX/PPTX/XLSX → Markdown via python-docx, python-pptx, pandas. Tables go HTML→Markdown via HtmlConverter.convert_string(). PPTX handles charts, speaker notes, and optional LLM image captions.",
       "study": "features/document-conversion/study/office-doc-conversion--from-markitdown.md",
       "build": "features/document-conversion/build/office-doc-conversion--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -49,7 +49,7 @@
       "label": "ZIP Archive Traversal",
       "domain": "document-conversion",
       "repo": "markitdown",
-      "summary": "Recursive ZIP extraction: iterate entries \u2192 BytesIO streams \u2192 call parent pipeline on each file. Silent skip on conversion failure. Nested ZIPs handled automatically.",
+      "summary": "Recursive ZIP extraction: iterate entries → BytesIO streams → call parent pipeline on each file. Silent skip on conversion failure. Nested ZIPs handled automatically.",
       "study": "features/document-conversion/study/zip-archive-traversal--from-markitdown.md",
       "build": "features/document-conversion/build/zip-archive-traversal--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -71,7 +71,7 @@
       "label": "Magika File Detection",
       "domain": "file-detection",
       "repo": "markitdown",
-      "summary": "Layered type detection: extension+MIME hints \u2192 mimetypes bidirectional enrichment \u2192 Magika ML content scan \u2192 charset_normalizer for text files. Returns ranked StreamInfo list.",
+      "summary": "Layered type detection: extension+MIME hints → mimetypes bidirectional enrichment → Magika ML content scan → charset_normalizer for text files. Returns ranked StreamInfo list.",
       "study": "features/file-detection/study/magika-file-detection--from-markitdown.md",
       "build": "features/file-detection/build/magika-file-detection--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -93,7 +93,7 @@
       "label": "Audio Transcription",
       "domain": "media-processing",
       "repo": "markitdown",
-      "summary": "WAV/MP3/M4A/MP4 \u2192 Markdown via speech_recognition (Google Web Speech API) + exiftool metadata. Duration excluded (wrong from memory stream). Temp file needed for non-WAV formats.",
+      "summary": "WAV/MP3/M4A/MP4 → Markdown via speech_recognition (Google Web Speech API) + exiftool metadata. Duration excluded (wrong from memory stream). Temp file needed for non-WAV formats.",
       "study": "features/media-processing/study/audio-transcription--from-markitdown.md",
       "build": "features/media-processing/build/audio-transcription--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -104,7 +104,7 @@
       "label": "YouTube Extraction",
       "domain": "web-extraction",
       "repo": "markitdown",
-      "summary": "YouTube watch URL \u2192 Markdown. Meta tag scrape for views/keywords/duration. Recursive ytInitialData JSON search for description. youtube_transcript_api with 3-retry logic for transcript.",
+      "summary": "YouTube watch URL → Markdown. Meta tag scrape for views/keywords/duration. Recursive ytInitialData JSON search for description. youtube_transcript_api with 3-retry logic for transcript.",
       "study": "features/web-extraction/study/youtube-extraction--from-markitdown.md",
       "build": "features/web-extraction/build/youtube-extraction--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -148,7 +148,7 @@
       "label": "Multi-Source Research Engine",
       "domain": "research-automation",
       "repo": "last30days-skill",
-      "summary": "ThreadPoolExecutor fan-out to 6\u201320 sources. Depth tiers (quick/default/deep) cap source count. 2-phase retrieval with 5xx retry. Unified Report schema. Five emit formats (compact/json/context/md/html).",
+      "summary": "ThreadPoolExecutor fan-out to 6–20 sources. Depth tiers (quick/default/deep) cap source count. 2-phase retrieval with 5xx retry. Unified Report schema. Five emit formats (compact/json/context/md/html).",
       "study": "features/research-automation/study/multi-source-research-engine--from-last30days-skill.md",
       "build": "features/research-automation/build/multi-source-research-engine--from-last30days-skill.md",
       "source": "https://github.com/mvanhorn/last30days-skill",
@@ -159,7 +159,7 @@
       "label": "Entity Resolution",
       "domain": "research-automation",
       "repo": "last30days-skill",
-      "summary": "4 parallel searches resolve topic \u2192 {subreddits, handles, repos, context}. X handles get 3\u00d7 URL weight. GitHub -action canonicalization. News context capped at 300 chars for LLM injection.",
+      "summary": "4 parallel searches resolve topic → {subreddits, handles, repos, context}. X handles get 3× URL weight. GitHub -action canonicalization. News context capped at 300 chars for LLM injection.",
       "study": "features/research-automation/study/entity-resolution--from-last30days-skill.md",
       "build": "features/research-automation/build/entity-resolution--from-last30days-skill.md",
       "source": "https://github.com/mvanhorn/last30days-skill",
@@ -203,7 +203,7 @@
       "label": "Schema-Driven Extraction",
       "domain": "structured-extraction",
       "repo": "llm-scraper",
-      "summary": "Playwright page + Zod/JSON schema \u2192 typed object. Preprocess page, then AI SDK generateText with schema as `output` constraint, read result.output. Schema is both TS type and runtime constraint. One method: run(). No retry loop.",
+      "summary": "Playwright page + Zod/JSON schema → typed object. Preprocess page, then AI SDK generateText with schema as `output` constraint, read result.output. Schema is both TS type and runtime constraint. One method: run(). No retry loop.",
       "study": "features/structured-extraction/study/schema-driven-extraction--from-llm-scraper.md",
       "build": "features/structured-extraction/build/schema-driven-extraction--from-llm-scraper.md",
       "source": "https://github.com/mishushakov/llm-scraper",
@@ -214,7 +214,7 @@
       "label": "Streaming Partial Objects",
       "domain": "structured-extraction",
       "repo": "llm-scraper",
-      "summary": "stream() variant: AI SDK streamText with schema output \u2192 partialOutputStream async iterable. Each emission is a schema-conformant partial; last is complete. Mirror of run() but returns {stream,url}. For responsive UIs.",
+      "summary": "stream() variant: AI SDK streamText with schema output → partialOutputStream async iterable. Each emission is a schema-conformant partial; last is complete. Mirror of run() but returns {stream,url}. For responsive UIs.",
       "study": "features/structured-extraction/study/streaming-partial-objects--from-llm-scraper.md",
       "build": "features/structured-extraction/build/streaming-partial-objects--from-llm-scraper.md",
       "source": "https://github.com/mishushakov/llm-scraper",
@@ -225,7 +225,7 @@
       "label": "Page Format Pipeline",
       "domain": "content-preprocessing",
       "repo": "llm-scraper",
-      "summary": "preprocess(page,options) \u2192 {url,content,format}. Six formats: raw_html, markdown (Turndown), text (Mozilla Readability via CDN in-page), html (cleanup scrub, default), image (base64 screenshot), custom. Cost/fidelity dial.",
+      "summary": "preprocess(page,options) → {url,content,format}. Six formats: raw_html, markdown (Turndown), text (Mozilla Readability via CDN in-page), html (cleanup scrub, default), image (base64 screenshot), custom. Cost/fidelity dial.",
       "study": "features/content-preprocessing/study/page-format-pipeline--from-llm-scraper.md",
       "build": "features/content-preprocessing/build/page-format-pipeline--from-llm-scraper.md",
       "source": "https://github.com/mishushakov/llm-scraper",
@@ -302,7 +302,7 @@
       "label": "Bulk Archiver",
       "domain": "inbox-cleanup",
       "repo": "inbox-zero",
-      "summary": "Risk-tiered archive triage. Pure function scoring senders by category-name substring: HIGH (marketing/promotion/newsletter/sale), MEDIUM (notification/alert/receipt/update), LOW (other). Returns {confidence, reason} candidates. Only HIGH is one-click \u2014 tiering is the safety mechanism. Scoring decoupled from execution.",
+      "summary": "Risk-tiered archive triage. Pure function scoring senders by category-name substring: HIGH (marketing/promotion/newsletter/sale), MEDIUM (notification/alert/receipt/update), LOW (other). Returns {confidence, reason} candidates. Only HIGH is one-click — tiering is the safety mechanism. Scoring decoupled from execution.",
       "study": "features/inbox-cleanup/study/bulk-archiver--from-inbox-zero.md",
       "build": "features/inbox-cleanup/build/bulk-archiver--from-inbox-zero.md",
       "source": "https://github.com/elie222/inbox-zero",
@@ -324,7 +324,7 @@
       "label": "Ordered Backend Routing",
       "domain": "agent-architecture",
       "repo": "agent-reach",
-      "summary": "Each capability is a Channel with an ORDERED backends list (preferred\u2192fallbacks). Two-phase check: collect all candidates, first `ok` wins, then first `warn` \u2014 so an installed-but-logged-out backend can't mask a working fallback. active_backend records the live one. User pin via <name>_backend (unknown value ignored). Switching backend = reorder a list, not code.",
+      "summary": "Each capability is a Channel with an ORDERED backends list (preferred→fallbacks). Two-phase check: collect all candidates, first `ok` wins, then first `warn` — so an installed-but-logged-out backend can't mask a working fallback. active_backend records the live one. User pin via <name>_backend (unknown value ignored). Switching backend = reorder a list, not code.",
       "study": "features/agent-architecture/study/ordered-backend-routing--from-agent-reach.md",
       "build": "features/agent-architecture/build/ordered-backend-routing--from-agent-reach.md",
       "source": "https://github.com/Panniantong/Agent-Reach",
@@ -335,7 +335,7 @@
       "label": "Channel Health Diagnostics",
       "domain": "diagnostics",
       "repo": "agent-reach",
-      "summary": "probe_command EXECUTES a side-effect-free command to classify missing/broken(stale venv shebang, exit 126/127)/timeout/ok \u2014 which() existence is not health. doctor aggregates per-channel (exceptions degrade to error, stale active_backend cleared), groups by tier, annotates the active backend only when >1 exists, and audits config.yaml permissions (chmod 600). Retries only transient failures.",
+      "summary": "probe_command EXECUTES a side-effect-free command to classify missing/broken(stale venv shebang, exit 126/127)/timeout/ok — which() existence is not health. doctor aggregates per-channel (exceptions degrade to error, stale active_backend cleared), groups by tier, annotates the active backend only when >1 exists, and audits config.yaml permissions (chmod 600). Retries only transient failures.",
       "study": "features/diagnostics/study/channel-health-diagnostics--from-agent-reach.md",
       "build": "features/diagnostics/build/channel-health-diagnostics--from-agent-reach.md",
       "source": "https://github.com/Panniantong/Agent-Reach",
@@ -346,7 +346,7 @@
       "label": "Cookie Credential Extraction",
       "domain": "credential-management",
       "repo": "agent-reach",
-      "summary": "Multi-browser cookie harvest (rookiepy\u2192browser_cookie3) driven by declarative per-platform specs (named cookies vs whole Cookie-header). Validate-before-save: require a logged-in marker (auth_token+ct0, xq_a_token) \u2014 presence\u2260valid. Atomic 0o600 write (O_CREAT+mode, no write-then-chmod race). shlex-quoted best-effort mirrors into upstream tools' credential files.",
+      "summary": "Multi-browser cookie harvest (rookiepy→browser_cookie3) driven by declarative per-platform specs (named cookies vs whole Cookie-header). Validate-before-save: require a logged-in marker (auth_token+ct0, xq_a_token) — presence≠valid. Atomic 0o600 write (O_CREAT+mode, no write-then-chmod race). shlex-quoted best-effort mirrors into upstream tools' credential files.",
       "study": "features/credential-management/study/cookie-credential-extraction--from-agent-reach.md",
       "build": "features/credential-management/build/cookie-credential-extraction--from-agent-reach.md",
       "source": "https://github.com/Panniantong/Agent-Reach",
@@ -401,7 +401,7 @@
       "label": "Agentic Loop",
       "domain": "ai-workflow",
       "repo": "open-design",
-      "summary": "3-stage linear pipeline (plan\u2192generate\u2192critique) in a single agent conversation thread. Critique Theater: 5-panelist jury (Designer/Critic/Brand/A11Y/Copy) with convergence enforcement. Iteration ceiling via OD_MAX_DEVLOOP_ITERATIONS.",
+      "summary": "3-stage linear pipeline (plan→generate→critique) in a single agent conversation thread. Critique Theater: 5-panelist jury (Designer/Critic/Brand/A11Y/Copy) with convergence enforcement. Iteration ceiling via OD_MAX_DEVLOOP_ITERATIONS.",
       "study": "features/ai-workflow/study/agentic-loop--from-open-design.md",
       "build": "features/ai-workflow/build/agentic-loop--from-open-design.md",
       "source": "https://github.com/nexu-io/open-design",
@@ -489,7 +489,7 @@
       "label": "Token Pipeline Orchestration",
       "domain": "design-systems",
       "repo": "style-dictionary",
-      "summary": "End-to-end build engine: load+deep-merge tokens, keep 3 synced representations, then per-platform transform\u2194resolve convergence loop \u2192 filter \u2192 format \u2192 write. structuredClone-isolated platforms run concurrently; abstracted FS runs in browser or Node.",
+      "summary": "End-to-end build engine: load+deep-merge tokens, keep 3 synced representations, then per-platform transform↔resolve convergence loop → filter → format → write. structuredClone-isolated platforms run concurrently; abstracted FS runs in browser or Node.",
       "study": "features/design-systems/study/token-pipeline-orchestration--from-style-dictionary.md",
       "build": "features/design-systems/build/token-pipeline-orchestration--from-style-dictionary.md",
       "source": "https://github.com/style-dictionary/style-dictionary",
@@ -526,6 +526,50 @@
       "study": "features/plugin-architecture/study/register-extensibility-api--from-style-dictionary.md",
       "build": "features/plugin-architecture/build/register-extensibility-api--from-style-dictionary.md",
       "source": "https://github.com/style-dictionary/style-dictionary",
+      "notebooklm": ""
+    },
+    {
+      "id": "ai-integration/submit-and-poll-generation-client--from-open-generative-ai",
+      "label": "Submit-and-Poll Generation Client",
+      "domain": "ai-integration",
+      "repo": "open-generative-ai",
+      "summary": "Universal async-job primitive: POST to /api/v1/{endpoint} → get request_id → poll /predictions/{id}/result every 2s (sleep-first, retry-5xx, fail-4xx) until completed/succeeded/success, then normalize output to one .url. One function backs image/video/i2v/lipsync/audio; per-task maxAttempts budgets.",
+      "study": "features/ai-integration/study/submit-and-poll-generation-client--from-open-generative-ai.md",
+      "build": "features/ai-integration/build/submit-and-poll-generation-client--from-open-generative-ai.md",
+      "source": "https://github.com/Anil-matcha/Open-Generative-AI",
+      "notebooklm": ""
+    },
+    {
+      "id": "ai-integration/centralized-model-registry--from-open-generative-ai",
+      "label": "Centralized Model Registry",
+      "domain": "ai-integration",
+      "repo": "open-generative-ai",
+      "summary": "One declarative file describes 200+ models (id, endpoint, inputs schema with type/default/enum/min-max). Drives BOTH API routing (endpoint lookup) and self-building UI forms. Capability arrays (t2iModels/i2iModels/t2vModels). id != endpoint by design. Adding a model = adding an object.",
+      "study": "features/ai-integration/study/centralized-model-registry--from-open-generative-ai.md",
+      "build": "features/ai-integration/build/centralized-model-registry--from-open-generative-ai.md",
+      "source": "https://github.com/Anil-matcha/Open-Generative-AI",
+      "notebooklm": ""
+    },
+    {
+      "id": "credential-management/browser-host-api-proxy--from-open-generative-ai",
+      "label": "Browser→Host API Proxy + Auth Bridge",
+      "domain": "credential-management",
+      "repo": "open-generative-ai",
+      "summary": "Same-origin Next.js catch-all proxy forwards browser calls to api.muapi.ai injecting x-api-key, stripping hop-by-hop headers, returning raw bytes (media-safe). Env switch lets Electron/SSR bypass the proxy. Global 'muapi:auth-required' DOM event on 401/403 drives re-auth. Key in localStorage + cookie. BYOK threat model.",
+      "study": "features/credential-management/study/browser-host-api-proxy--from-open-generative-ai.md",
+      "build": "features/credential-management/build/browser-host-api-proxy--from-open-generative-ai.md",
+      "source": "https://github.com/Anil-matcha/Open-Generative-AI",
+      "notebooklm": ""
+    },
+    {
+      "id": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
+      "label": "Multi-Studio Shell Architecture",
+      "domain": "ui-architecture",
+      "repo": "open-generative-ai",
+      "summary": "Thin shell hosts ~12 interchangeable 'studios' behind tabs; one shared packages/studio barrel re-exports all studios + the API layer, consumed unchanged by web (Next.js) and desktop (Electron). Shell owns auth/key/balance/drag-drop, gates app on a key, mounts the active studio with uniform props. Add a feature = export a studio + add a tab.",
+      "study": "features/ui-architecture/study/multi-studio-shell-architecture--from-open-generative-ai.md",
+      "build": "features/ui-architecture/build/multi-studio-shell-architecture--from-open-generative-ai.md",
+      "source": "https://github.com/Anil-matcha/Open-Generative-AI",
       "notebooklm": ""
     }
   ],
@@ -1123,6 +1167,61 @@
     {
       "from": "plugin-architecture/register-extensibility-api--from-style-dictionary",
       "to": "plugin-architecture/plugin-ecosystem--from-open-design",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "ai-integration/submit-and-poll-generation-client--from-open-generative-ai",
+      "to": "ai-integration/centralized-model-registry--from-open-generative-ai",
+      "type": "depends-on"
+    },
+    {
+      "from": "ai-integration/submit-and-poll-generation-client--from-open-generative-ai",
+      "to": "credential-management/browser-host-api-proxy--from-open-generative-ai",
+      "type": "depends-on"
+    },
+    {
+      "from": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
+      "to": "ai-integration/submit-and-poll-generation-client--from-open-generative-ai",
+      "type": "depends-on"
+    },
+    {
+      "from": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
+      "to": "ai-integration/centralized-model-registry--from-open-generative-ai",
+      "type": "depends-on"
+    },
+    {
+      "from": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
+      "to": "credential-management/browser-host-api-proxy--from-open-generative-ai",
+      "type": "depends-on"
+    },
+    {
+      "from": "ai-integration/centralized-model-registry--from-open-generative-ai",
+      "to": "credential-management/browser-host-api-proxy--from-open-generative-ai",
+      "type": "same-repo"
+    },
+    {
+      "from": "ai-integration/submit-and-poll-generation-client--from-open-generative-ai",
+      "to": "ai-integration/provider-agnostic-llm--from-llm-scraper",
+      "type": "alternative-to"
+    },
+    {
+      "from": "ai-integration/centralized-model-registry--from-open-generative-ai",
+      "to": "plugin-architecture/register-extensibility-api--from-style-dictionary",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "credential-management/browser-host-api-proxy--from-open-generative-ai",
+      "to": "infrastructure/byok-proxy--from-open-design",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "credential-management/browser-host-api-proxy--from-open-generative-ai",
+      "to": "credential-management/multi-tier-credentials--from-last30days-skill",
+      "type": "same-domain"
+    },
+    {
+      "from": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
+      "to": "infrastructure/local-first-architecture--from-open-design",
       "type": "similar-pattern"
     }
   ]

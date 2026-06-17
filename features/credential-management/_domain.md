@@ -19,3 +19,4 @@ Tools that aggregate from multiple platforms face a credential zoo: some sources
 
 - [[multi-tier-credentials--from-last30days-skill]] — three-tier auth pattern with preflight availability checking
 - [[cookie-credential-extraction--from-agent-reach]] — multi-browser cookie harvest (rookiepy→browser_cookie3) driven by declarative per-platform specs, validate-before-save, atomic 0o600 store, and shell-safe best-effort mirrors into upstream tools' credential files
+- [[browser-host-api-proxy--from-open-generative-ai]] — bring-your-own-key proxy: same-origin Next.js route forwards browser calls to a gateway (injecting `x-api-key`, dodging CORS), an env switch lets Electron/SSR bypass the proxy, and a global `muapi:auth-required` DOM event drives re-auth on 401/403. Key kept in both localStorage (client) and a cookie (server). Convenience-proxy threat model, *not* a shared-secret boundary.

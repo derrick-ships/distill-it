@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![48 nodes](https://img.shields.io/badge/nodes-48-4299e1?style=flat-square)
-![24 domains](https://img.shields.io/badge/domains-24-9f7aea?style=flat-square)
-![9 repos](https://img.shields.io/badge/repos-9-68d391?style=flat-square)
+![52 nodes](https://img.shields.io/badge/nodes-52-4299e1?style=flat-square)
+![25 domains](https://img.shields.io/badge/domains-25-9f7aea?style=flat-square)
+![10 repos](https://img.shields.io/badge/repos-10-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -86,6 +86,10 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | design-systems | Reference Resolution Engine | [style-dictionary](https://github.com/style-dictionary/style-dictionary) |
 | design-systems | Transforms & Transform Groups | [style-dictionary](https://github.com/style-dictionary/style-dictionary) |
 | plugin-architecture | Register / Extensibility API | [style-dictionary](https://github.com/style-dictionary/style-dictionary) |
+| ai-integration | Submit-and-Poll Generation Client | [open-generative-ai](https://github.com/Anil-matcha/Open-Generative-AI) |
+| ai-integration | Centralized Model Registry | [open-generative-ai](https://github.com/Anil-matcha/Open-Generative-AI) |
+| credential-management | Browser→Host API Proxy + Auth Bridge | [open-generative-ai](https://github.com/Anil-matcha/Open-Generative-AI) |
+| ui-architecture | Multi-Studio Shell Architecture | [open-generative-ai](https://github.com/Anil-matcha/Open-Generative-AI) |
 
 ---
 

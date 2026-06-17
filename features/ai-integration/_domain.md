@@ -14,3 +14,5 @@ AI integration is always additive, never blocking. Converters in this domain eit
 
 - [[azure-doc-intelligence--from-markitdown]] — Azure prebuilt-layout OCR for PDFs, images, and Office files
 - [[provider-agnostic-llm--from-llm-scraper]] — multi-provider LLM support (OpenAI/Anthropic/Google/Groq/Ollama) for free by depending on the Vercel AI SDK abstraction instead of any vendor client. A contrasting choice to the Azure node: abstract *above* the vendor rather than bind *to* one.
+- [[submit-and-poll-generation-client--from-open-generative-ai]] — the universal async-job primitive for wrapping a generation gateway: POST → `request_id` → poll `/predictions/{id}/result` every 2s until a terminal status, then normalize output to one `url`. One function backs image/video/i2v/lipsync/audio.
+- [[centralized-model-registry--from-open-generative-ai]] — config-over-code for 200+ models: one declarative record per model (id, endpoint, parameter schema) drives both API routing and self-building UI forms. Adding a model is a data edit.
