@@ -108,3 +108,11 @@ writes the study + build docs for whichever you pick, updates the graph, commits
 ---
 
 *Built with [Claude Code](https://claude.ai/code) using the `repository-intelligence` skill.*
+| ai-workflow | Agentic Loop | [open-design](https://github.com/nexu-io/open-design) |
+| codegen | Design Artifact Generation | [open-design](https://github.com/nexu-io/open-design) |
+| design-systems | Design Systems Library | [open-design](https://github.com/nexu-io/open-design) |
+| plugin-architecture | Skills System | [open-design](https://github.com/nexu-io/open-design) |
+| plugin-architecture | Plugin Ecosystem | [open-design](https://github.com/nexu-io/open-design) |
+| ai-workflow | Agent CLI Integration | [open-design](https://github.com/nexu-io/open-design) |
+| infrastructure | BYOK Proxy | [open-design](https://github.com/nexu-io/open-design) |
+| infrastructure | Local-First Architecture | [open-design](https://github.com/nexu-io/open-design) |
