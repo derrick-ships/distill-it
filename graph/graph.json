@@ -604,6 +604,50 @@
       "build": "features/plugin-architecture/build/register-extensibility-api--from-style-dictionary.md",
       "source": "https://github.com/style-dictionary/style-dictionary",
       "notebooklm": ""
+    },
+    {
+      "id": "rendering/hand-drawn-rendering--from-excalidraw",
+      "label": "Hand-Drawn Rendering",
+      "domain": "rendering",
+      "repo": "excalidraw",
+      "summary": "Rough.js sketchy shapes with a FROZEN per-element seed fed into Rough every render so the wobble is deterministic (no shimmer on move/zoom/reload). Size-aware roughness, hand-built SVG-path rounded corners, disableMultiStroke for dashed, WeakMap shape cache keyed on versionNonce. Freedraw via perfect-freehand.",
+      "study": "features/rendering/study/hand-drawn-rendering--from-excalidraw.md",
+      "build": "features/rendering/build/hand-drawn-rendering--from-excalidraw.md",
+      "source": "https://github.com/excalidraw/excalidraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "label": "E2E-Encrypted Collaboration",
+      "domain": "realtime-collab",
+      "repo": "excalidraw",
+      "summary": "Zero-knowledge collab: AES-GCM 128 room key lives in the URL fragment (#room=ID,KEY) so the server never sees it; fresh 12-byte IV per message. socket.io relay only routes ciphertext. Delta broadcast via version Map + periodic full resync; reliable edits vs volatile presence. Encrypted Firebase persistence {sceneVersion,iv,ciphertext}, debounced, transactional reconcile on save.",
+      "study": "features/realtime-collab/study/e2e-encrypted-collaboration--from-excalidraw.md",
+      "build": "features/realtime-collab/build/e2e-encrypted-collaboration--from-excalidraw.md",
+      "source": "https://github.com/excalidraw/excalidraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "label": "Scene Reconciliation",
+      "domain": "realtime-collab",
+      "repo": "excalidraw",
+      "summary": "CRDT-free deterministic merge of local+remote element lists. Per-element last-write-wins: version is the logical clock, versionNonce the tiebreaker (lowest wins on equal version, using <= for a total relation). Active-editing (editing/resizing/new) guards override version math. Sorts + repairs fractional z-index last. Same fn runs client-side and inside the Firebase save transaction.",
+      "study": "features/realtime-collab/study/scene-reconciliation--from-excalidraw.md",
+      "build": "features/realtime-collab/build/scene-reconciliation--from-excalidraw.md",
+      "source": "https://github.com/excalidraw/excalidraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "data-structures/fractional-indexing--from-excalidraw",
+      "label": "Fractional Indexing (z-order)",
+      "domain": "data-structures",
+      "repo": "excalidraw",
+      "summary": "String order keys (base-62) where any two have a key between them, so insert/move/reorder mutates ONLY the moved element. orderByFractionalIndex sorts by string compare (id tiebreak). Invariant predecessor<current<successor with detect (validateFractionalIndices) + repair of contiguous broken runs (syncInvalidIndices). JITTERED fork of generateNKeysBetween so concurrent same-gap inserts don't collide.",
+      "study": "features/data-structures/study/fractional-indexing--from-excalidraw.md",
+      "build": "features/data-structures/build/fractional-indexing--from-excalidraw.md",
+      "source": "https://github.com/excalidraw/excalidraw",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -1300,6 +1344,61 @@
     {
       "from": "plugin-architecture/register-extensibility-api--from-style-dictionary",
       "to": "plugin-architecture/plugin-ecosystem--from-open-design",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "to": "data-structures/fractional-indexing--from-excalidraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "to": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "rendering/hand-drawn-rendering--from-excalidraw",
+      "to": "data-structures/fractional-indexing--from-excalidraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "to": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "type": "same-domain"
+    },
+    {
+      "from": "rendering/hand-drawn-rendering--from-excalidraw",
+      "to": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "rendering/hand-drawn-rendering--from-excalidraw",
+      "to": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "rendering/hand-drawn-rendering--from-excalidraw",
+      "to": "data-structures/fractional-indexing--from-excalidraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "to": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "to": "data-structures/fractional-indexing--from-excalidraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "to": "data-structures/fractional-indexing--from-excalidraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "to": "infrastructure/local-first-architecture--from-open-design",
       "type": "similar-pattern"
     }
   ]
