@@ -82,6 +82,13 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | infrastructure | Local-First Architecture | [open-design](https://github.com/nexu-io/open-design) |
 | plugin-architecture | Skills System | [open-design](https://github.com/nexu-io/open-design) |
 | plugin-architecture | Plugin Ecosystem | [open-design](https://github.com/nexu-io/open-design) |
+| canvas-interaction | Pan & Zoom Canvas | [xyflow](https://github.com/xyflow/xyflow) |
+| canvas-interaction | Node Dragging | [xyflow](https://github.com/xyflow/xyflow) |
+| canvas-interaction | Minimap Navigation | [xyflow](https://github.com/xyflow/xyflow) |
+| graph-editing | Connection Handles | [xyflow](https://github.com/xyflow/xyflow) |
+| graph-editing | Node Resizer | [xyflow](https://github.com/xyflow/xyflow) |
+| graph-rendering | Edge Path Algorithms | [xyflow](https://github.com/xyflow/xyflow) |
+| state-management | Reactive Store Architecture | [xyflow](https://github.com/xyflow/xyflow) |
 
 ---
 
