@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![48 nodes](https://img.shields.io/badge/nodes-48-4299e1?style=flat-square)
+![52 nodes](https://img.shields.io/badge/nodes-52-4299e1?style=flat-square)
 ![28 domains](https://img.shields.io/badge/domains-28-9f7aea?style=flat-square)
-![9 repos](https://img.shields.io/badge/repos-9-68d391?style=flat-square)
+![10 repos](https://img.shields.io/badge/repos-10-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -86,6 +86,10 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | state-management | Reactive Record Store | [tldraw](https://github.com/tldraw/tldraw) |
 | schema-migrations | Schema & Migrations | [tldraw](https://github.com/tldraw/tldraw) |
 | realtime | Multiplayer Sync | [tldraw](https://github.com/tldraw/tldraw) |
+| design-systems | Token Pipeline Orchestration | [style-dictionary](https://github.com/style-dictionary/style-dictionary) |
+| design-systems | Reference Resolution Engine | [style-dictionary](https://github.com/style-dictionary/style-dictionary) |
+| design-systems | Transforms & Transform Groups | [style-dictionary](https://github.com/style-dictionary/style-dictionary) |
+| plugin-architecture | Register / Extensibility API | [style-dictionary](https://github.com/style-dictionary/style-dictionary) |
 
 ---
 
