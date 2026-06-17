@@ -485,6 +485,83 @@
       "notebooklm": ""
     },
     {
+      "id": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "label": "Pan & Zoom Canvas",
+      "domain": "canvas-interaction",
+      "repo": "xyflow",
+      "summary": "Infinite pannable/zoomable viewport wrapping d3-zoom. Single [x,y,zoom] transform; factory exposes setViewport/scaleTo/syncViewport; a per-render filter encodes all product rules (pan-on-drag, activation keys, no-pan zones, pan-on-scroll).",
+      "study": "features/canvas-interaction/study/pan-zoom-canvas--from-xyflow.md",
+      "build": "features/canvas-interaction/build/pan-zoom-canvas--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
+      "id": "canvas-interaction/node-dragging--from-xyflow",
+      "label": "Node Dragging",
+      "domain": "canvas-interaction",
+      "repo": "xyflow",
+      "summary": "d3-drag node movement: multi-select moves as rigid group, group-snaps as a unit, screen-space drag threshold, extent clamp, and rAF edge auto-pan that re-derives position from a stored last pointer.",
+      "study": "features/canvas-interaction/study/node-dragging--from-xyflow.md",
+      "build": "features/canvas-interaction/build/node-dragging--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
+      "id": "canvas-interaction/minimap-navigation--from-xyflow",
+      "label": "Minimap Navigation",
+      "domain": "canvas-interaction",
+      "repo": "xyflow",
+      "summary": "Overview panel that is a remote control for the main viewport (not a 2nd viewport). d3-zoom on the mini SVG as a gesture recognizer; deltas scaled by minimap-shrink x main-zoom feed setViewportConstrained/scaleTo.",
+      "study": "features/canvas-interaction/study/minimap-navigation--from-xyflow.md",
+      "build": "features/canvas-interaction/build/minimap-navigation--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
+      "id": "graph-editing/connection-handles--from-xyflow",
+      "label": "Connection Handles",
+      "domain": "graph-editing",
+      "repo": "xyflow",
+      "summary": "Drag-to-connect with no d3: raw pointer listeners on document/shadow-host. Closest-handle within radius BUT DOM elementFromPoint wins; strict/loose validity + self-loop block + custom predicate; onConnect on valid drop.",
+      "study": "features/graph-editing/study/connection-handles--from-xyflow.md",
+      "build": "features/graph-editing/build/connection-handles--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
+      "id": "graph-editing/node-resizer--from-xyflow",
+      "label": "Node Resizer",
+      "domain": "graph-editing",
+      "repo": "xyflow",
+      "summary": "d3-drag on 8 control points. Corner-anchoring (top/left handles move x/y to pin the opposite edge), aspect captured at start, min/max + parent/child extents, children shifted inverse to origin move, emits only on real change.",
+      "study": "features/graph-editing/study/node-resizer--from-xyflow.md",
+      "build": "features/graph-editing/build/node-resizer--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
+      "id": "graph-rendering/edge-path-algorithms--from-xyflow",
+      "label": "Edge Path Algorithms",
+      "domain": "graph-rendering",
+      "repo": "xyflow",
+      "summary": "Pure dependency-free SVG path fns: getBezierPath (curvature*25*sqrt(-d) loop trick, t=0.5 label weights), getSmoothStepPath (orthogonal route, corner radius clamped to half-segment), getStraightPath. Returns [path,labelX,labelY,offsetX,offsetY].",
+      "study": "features/graph-rendering/study/edge-path-algorithms--from-xyflow.md",
+      "build": "features/graph-rendering/build/edge-path-algorithms--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
+      "id": "state-management/reactive-store--from-xyflow",
+      "label": "Reactive Store Architecture",
+      "domain": "state-management",
+      "repo": "xyflow",
+      "summary": "Zustand store + selector/equality subscriptions for surgical re-renders; array<->Map duality (user nodes[] vs derived nodeLookup of enriched internal nodes); framework-free @xyflow/system core with thin React/Svelte adapters.",
+      "study": "features/state-management/study/reactive-store--from-xyflow.md",
+      "build": "features/state-management/build/reactive-store--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
       "id": "design-systems/token-pipeline-orchestration--from-style-dictionary",
       "label": "Token Pipeline Orchestration",
       "domain": "design-systems",
@@ -526,6 +603,94 @@
       "study": "features/plugin-architecture/study/register-extensibility-api--from-style-dictionary.md",
       "build": "features/plugin-architecture/build/register-extensibility-api--from-style-dictionary.md",
       "source": "https://github.com/style-dictionary/style-dictionary",
+      "notebooklm": ""
+    },
+    {
+      "id": "rendering/hand-drawn-rendering--from-excalidraw",
+      "label": "Hand-Drawn Rendering",
+      "domain": "rendering",
+      "repo": "excalidraw",
+      "summary": "Rough.js sketchy shapes with a FROZEN per-element seed fed into Rough every render so the wobble is deterministic (no shimmer on move/zoom/reload). Size-aware roughness, hand-built SVG-path rounded corners, disableMultiStroke for dashed, WeakMap shape cache keyed on versionNonce. Freedraw via perfect-freehand.",
+      "study": "features/rendering/study/hand-drawn-rendering--from-excalidraw.md",
+      "build": "features/rendering/build/hand-drawn-rendering--from-excalidraw.md",
+      "source": "https://github.com/excalidraw/excalidraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "label": "E2E-Encrypted Collaboration",
+      "domain": "realtime-collab",
+      "repo": "excalidraw",
+      "summary": "Zero-knowledge collab: AES-GCM 128 room key lives in the URL fragment (#room=ID,KEY) so the server never sees it; fresh 12-byte IV per message. socket.io relay only routes ciphertext. Delta broadcast via version Map + periodic full resync; reliable edits vs volatile presence. Encrypted Firebase persistence {sceneVersion,iv,ciphertext}, debounced, transactional reconcile on save.",
+      "study": "features/realtime-collab/study/e2e-encrypted-collaboration--from-excalidraw.md",
+      "build": "features/realtime-collab/build/e2e-encrypted-collaboration--from-excalidraw.md",
+      "source": "https://github.com/excalidraw/excalidraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "label": "Scene Reconciliation",
+      "domain": "realtime-collab",
+      "repo": "excalidraw",
+      "summary": "CRDT-free deterministic merge of local+remote element lists. Per-element last-write-wins: version is the logical clock, versionNonce the tiebreaker (lowest wins on equal version, using <= for a total relation). Active-editing (editing/resizing/new) guards override version math. Sorts + repairs fractional z-index last. Same fn runs client-side and inside the Firebase save transaction.",
+      "study": "features/realtime-collab/study/scene-reconciliation--from-excalidraw.md",
+      "build": "features/realtime-collab/build/scene-reconciliation--from-excalidraw.md",
+      "source": "https://github.com/excalidraw/excalidraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "data-structures/fractional-indexing--from-excalidraw",
+      "label": "Fractional Indexing (z-order)",
+      "domain": "data-structures",
+      "repo": "excalidraw",
+      "summary": "String order keys (base-62) where any two have a key between them, so insert/move/reorder mutates ONLY the moved element. orderByFractionalIndex sorts by string compare (id tiebreak). Invariant predecessor<current<successor with detect (validateFractionalIndices) + repair of contiguous broken runs (syncInvalidIndices). JITTERED fork of generateNKeysBetween so concurrent same-gap inserts don't collide.",
+      "study": "features/data-structures/study/fractional-indexing--from-excalidraw.md",
+      "build": "features/data-structures/build/fractional-indexing--from-excalidraw.md",
+      "source": "https://github.com/excalidraw/excalidraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "reactivity/signals-reactivity-engine--from-tldraw",
+      "label": "Signals Reactivity Engine",
+      "domain": "reactivity",
+      "repo": "tldraw",
+      "summary": "Fine-grained reactivity (atom/computed/react) coordinated by a single global epoch counter. Dependencies auto-discovered by observing reads; staleness decided by epoch comparison, not value diffing. Signals carry diff-history so consumers can ask 'what changed since epoch N?'. Zero deps.",
+      "study": "features/reactivity/study/signals-reactivity-engine--from-tldraw.md",
+      "build": "features/reactivity/build/signals-reactivity-engine--from-tldraw.md",
+      "source": "https://github.com/tldraw/tldraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "state-management/reactive-record-store--from-tldraw",
+      "label": "Reactive Record Store",
+      "domain": "state-management",
+      "repo": "tldraw",
+      "summary": "In-memory normalized record DB on signals. Flat 'type:id' records with scope (document/session/presence); reactive queries with incrementally-maintained indexes; every write emits a RecordsDiff {added,updated,removed} tagged source user|remote. Snapshots + migration on load.",
+      "study": "features/state-management/study/reactive-record-store--from-tldraw.md",
+      "build": "features/state-management/build/reactive-record-store--from-tldraw.md",
+      "source": "https://github.com/tldraw/tldraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "schema-migrations/schema-migrations--from-tldraw",
+      "label": "Schema & Migrations",
+      "domain": "schema-migrations",
+      "repo": "tldraw",
+      "summary": "Versioned bidirectional migrations. Namespaced ids (sequenceId/version) grouped into sequences with record/store/storage scope; cross-sequence dependsOn resolved by topological sort. Compact SerializedSchema travels with snapshots + connect handshake; up to upgrade, down to serve older peers.",
+      "study": "features/schema-migrations/study/schema-migrations--from-tldraw.md",
+      "build": "features/schema-migrations/build/schema-migrations--from-tldraw.md",
+      "source": "https://github.com/tldraw/tldraw",
+      "notebooklm": ""
+    },
+    {
+      "id": "realtime/multiplayer-sync--from-tldraw",
+      "label": "Multiplayer Sync",
+      "domain": "realtime",
+      "repo": "tldraw",
+      "summary": "Server-authoritative optimistic-rebase sync over WebSockets. Clients edit locally, stash speculative changes, push NetworkDiffs with a clientClock; server applies, assigns serverClock, returns commit/discard/rebase and broadcasts patches. Clients rebase (rewind→apply→replay). Presence synced-not-persisted; tombstone catch-up; per-session schema migration. Reference server = Cloudflare Durable Object.",
+      "study": "features/realtime/study/multiplayer-sync--from-tldraw.md",
+      "build": "features/realtime/build/multiplayer-sync--from-tldraw.md",
+      "source": "https://github.com/tldraw/tldraw",
       "notebooklm": ""
     },
     {
@@ -1090,6 +1255,106 @@
       "type": "same-repo"
     },
     {
+      "from": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "to": "canvas-interaction/node-dragging--from-xyflow",
+      "type": "same-domain"
+    },
+    {
+      "from": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "to": "canvas-interaction/minimap-navigation--from-xyflow",
+      "type": "same-domain"
+    },
+    {
+      "from": "canvas-interaction/node-dragging--from-xyflow",
+      "to": "canvas-interaction/minimap-navigation--from-xyflow",
+      "type": "same-domain"
+    },
+    {
+      "from": "graph-editing/connection-handles--from-xyflow",
+      "to": "graph-editing/node-resizer--from-xyflow",
+      "type": "same-domain"
+    },
+    {
+      "from": "canvas-interaction/node-dragging--from-xyflow",
+      "to": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "canvas-interaction/minimap-navigation--from-xyflow",
+      "to": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "graph-editing/connection-handles--from-xyflow",
+      "to": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "graph-editing/connection-handles--from-xyflow",
+      "to": "graph-rendering/edge-path-algorithms--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "graph-editing/node-resizer--from-xyflow",
+      "to": "canvas-interaction/node-dragging--from-xyflow",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "canvas-interaction/node-dragging--from-xyflow",
+      "to": "state-management/reactive-store--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "graph-editing/connection-handles--from-xyflow",
+      "to": "state-management/reactive-store--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "graph-editing/node-resizer--from-xyflow",
+      "to": "state-management/reactive-store--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "to": "state-management/reactive-store--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "canvas-interaction/minimap-navigation--from-xyflow",
+      "to": "state-management/reactive-store--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "state-management/reactive-store--from-xyflow",
+      "to": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-store--from-xyflow",
+      "to": "canvas-interaction/node-dragging--from-xyflow",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-store--from-xyflow",
+      "to": "canvas-interaction/minimap-navigation--from-xyflow",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-store--from-xyflow",
+      "to": "graph-editing/connection-handles--from-xyflow",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-store--from-xyflow",
+      "to": "graph-editing/node-resizer--from-xyflow",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-store--from-xyflow",
+      "to": "graph-rendering/edge-path-algorithms--from-xyflow",
+      "type": "same-repo"
+    },
+    {
       "from": "design-systems/token-pipeline-orchestration--from-style-dictionary",
       "to": "design-systems/reference-resolution-engine--from-style-dictionary",
       "type": "depends-on"
@@ -1168,6 +1433,111 @@
       "from": "plugin-architecture/register-extensibility-api--from-style-dictionary",
       "to": "plugin-architecture/plugin-ecosystem--from-open-design",
       "type": "similar-pattern"
+    },
+    {
+      "from": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "to": "data-structures/fractional-indexing--from-excalidraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "to": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "rendering/hand-drawn-rendering--from-excalidraw",
+      "to": "data-structures/fractional-indexing--from-excalidraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "to": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "type": "same-domain"
+    },
+    {
+      "from": "rendering/hand-drawn-rendering--from-excalidraw",
+      "to": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "rendering/hand-drawn-rendering--from-excalidraw",
+      "to": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "rendering/hand-drawn-rendering--from-excalidraw",
+      "to": "data-structures/fractional-indexing--from-excalidraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "to": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "to": "data-structures/fractional-indexing--from-excalidraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "to": "data-structures/fractional-indexing--from-excalidraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "realtime-collab/e2e-encrypted-collaboration--from-excalidraw",
+      "to": "infrastructure/local-first-architecture--from-open-design",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "state-management/reactive-record-store--from-tldraw",
+      "to": "reactivity/signals-reactivity-engine--from-tldraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "schema-migrations/schema-migrations--from-tldraw",
+      "to": "state-management/reactive-record-store--from-tldraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "realtime/multiplayer-sync--from-tldraw",
+      "to": "state-management/reactive-record-store--from-tldraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "realtime/multiplayer-sync--from-tldraw",
+      "to": "schema-migrations/schema-migrations--from-tldraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "state-management/reactive-record-store--from-tldraw",
+      "to": "schema-migrations/schema-migrations--from-tldraw",
+      "type": "depends-on"
+    },
+    {
+      "from": "reactivity/signals-reactivity-engine--from-tldraw",
+      "to": "state-management/reactive-record-store--from-tldraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "reactivity/signals-reactivity-engine--from-tldraw",
+      "to": "schema-migrations/schema-migrations--from-tldraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "reactivity/signals-reactivity-engine--from-tldraw",
+      "to": "realtime/multiplayer-sync--from-tldraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-record-store--from-tldraw",
+      "to": "realtime/multiplayer-sync--from-tldraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "schema-migrations/schema-migrations--from-tldraw",
+      "to": "realtime/multiplayer-sync--from-tldraw",
+      "type": "same-repo"
     },
     {
       "from": "ai-integration/submit-and-poll-generation-client--from-open-generative-ai",
