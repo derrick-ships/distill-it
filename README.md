@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![33 nodes](https://img.shields.io/badge/nodes-33-4299e1?style=flat-square)
-![19 domains](https://img.shields.io/badge/domains-19-9f7aea?style=flat-square)
-![6 repos](https://img.shields.io/badge/repos-6-68d391?style=flat-square)
+![44 nodes](https://img.shields.io/badge/nodes-44-4299e1?style=flat-square)
+![23 domains](https://img.shields.io/badge/domains-23-9f7aea?style=flat-square)
+![7 repos](https://img.shields.io/badge/repos-7-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -74,6 +74,14 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | tts | ONNX TTS Pipeline | [supertonic](https://github.com/supertone-inc/supertonic) |
 | tts | Flow-Matching Sampler | [supertonic](https://github.com/supertone-inc/supertonic) |
 | tts | Expression Tags | [supertonic](https://github.com/supertone-inc/supertonic) |
+| ai-workflow | Agentic Loop | [open-design](https://github.com/nexu-io/open-design) |
+| ai-workflow | Agent CLI Integration | [open-design](https://github.com/nexu-io/open-design) |
+| codegen | Design Artifact Generation | [open-design](https://github.com/nexu-io/open-design) |
+| design-systems | Design Systems Library | [open-design](https://github.com/nexu-io/open-design) |
+| infrastructure | BYOK Proxy | [open-design](https://github.com/nexu-io/open-design) |
+| infrastructure | Local-First Architecture | [open-design](https://github.com/nexu-io/open-design) |
+| plugin-architecture | Skills System | [open-design](https://github.com/nexu-io/open-design) |
+| plugin-architecture | Plugin Ecosystem | [open-design](https://github.com/nexu-io/open-design) |
 
 ---
 
@@ -108,11 +116,3 @@ writes the study + build docs for whichever you pick, updates the graph, commits
 ---
 
 *Built with [Claude Code](https://claude.ai/code) using the `repository-intelligence` skill.*
-| ai-workflow | Agentic Loop | [open-design](https://github.com/nexu-io/open-design) |
-| codegen | Design Artifact Generation | [open-design](https://github.com/nexu-io/open-design) |
-| design-systems | Design Systems Library | [open-design](https://github.com/nexu-io/open-design) |
-| plugin-architecture | Skills System | [open-design](https://github.com/nexu-io/open-design) |
-| plugin-architecture | Plugin Ecosystem | [open-design](https://github.com/nexu-io/open-design) |
-| ai-workflow | Agent CLI Integration | [open-design](https://github.com/nexu-io/open-design) |
-| infrastructure | BYOK Proxy | [open-design](https://github.com/nexu-io/open-design) |
-| infrastructure | Local-First Architecture | [open-design](https://github.com/nexu-io/open-design) |
