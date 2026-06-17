@@ -485,6 +485,83 @@
       "notebooklm": ""
     },
     {
+      "id": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "label": "Pan & Zoom Canvas",
+      "domain": "canvas-interaction",
+      "repo": "xyflow",
+      "summary": "Infinite pannable/zoomable viewport wrapping d3-zoom. Single [x,y,zoom] transform; factory exposes setViewport/scaleTo/syncViewport; a per-render filter encodes all product rules (pan-on-drag, activation keys, no-pan zones, pan-on-scroll).",
+      "study": "features/canvas-interaction/study/pan-zoom-canvas--from-xyflow.md",
+      "build": "features/canvas-interaction/build/pan-zoom-canvas--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
+      "id": "canvas-interaction/node-dragging--from-xyflow",
+      "label": "Node Dragging",
+      "domain": "canvas-interaction",
+      "repo": "xyflow",
+      "summary": "d3-drag node movement: multi-select moves as rigid group, group-snaps as a unit, screen-space drag threshold, extent clamp, and rAF edge auto-pan that re-derives position from a stored last pointer.",
+      "study": "features/canvas-interaction/study/node-dragging--from-xyflow.md",
+      "build": "features/canvas-interaction/build/node-dragging--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
+      "id": "canvas-interaction/minimap-navigation--from-xyflow",
+      "label": "Minimap Navigation",
+      "domain": "canvas-interaction",
+      "repo": "xyflow",
+      "summary": "Overview panel that is a remote control for the main viewport (not a 2nd viewport). d3-zoom on the mini SVG as a gesture recognizer; deltas scaled by minimap-shrink x main-zoom feed setViewportConstrained/scaleTo.",
+      "study": "features/canvas-interaction/study/minimap-navigation--from-xyflow.md",
+      "build": "features/canvas-interaction/build/minimap-navigation--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
+      "id": "graph-editing/connection-handles--from-xyflow",
+      "label": "Connection Handles",
+      "domain": "graph-editing",
+      "repo": "xyflow",
+      "summary": "Drag-to-connect with no d3: raw pointer listeners on document/shadow-host. Closest-handle within radius BUT DOM elementFromPoint wins; strict/loose validity + self-loop block + custom predicate; onConnect on valid drop.",
+      "study": "features/graph-editing/study/connection-handles--from-xyflow.md",
+      "build": "features/graph-editing/build/connection-handles--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
+      "id": "graph-editing/node-resizer--from-xyflow",
+      "label": "Node Resizer",
+      "domain": "graph-editing",
+      "repo": "xyflow",
+      "summary": "d3-drag on 8 control points. Corner-anchoring (top/left handles move x/y to pin the opposite edge), aspect captured at start, min/max + parent/child extents, children shifted inverse to origin move, emits only on real change.",
+      "study": "features/graph-editing/study/node-resizer--from-xyflow.md",
+      "build": "features/graph-editing/build/node-resizer--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
+      "id": "graph-rendering/edge-path-algorithms--from-xyflow",
+      "label": "Edge Path Algorithms",
+      "domain": "graph-rendering",
+      "repo": "xyflow",
+      "summary": "Pure dependency-free SVG path fns: getBezierPath (curvature*25*sqrt(-d) loop trick, t=0.5 label weights), getSmoothStepPath (orthogonal route, corner radius clamped to half-segment), getStraightPath. Returns [path,labelX,labelY,offsetX,offsetY].",
+      "study": "features/graph-rendering/study/edge-path-algorithms--from-xyflow.md",
+      "build": "features/graph-rendering/build/edge-path-algorithms--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
+      "id": "state-management/reactive-store--from-xyflow",
+      "label": "Reactive Store Architecture",
+      "domain": "state-management",
+      "repo": "xyflow",
+      "summary": "Zustand store + selector/equality subscriptions for surgical re-renders; array<->Map duality (user nodes[] vs derived nodeLookup of enriched internal nodes); framework-free @xyflow/system core with thin React/Svelte adapters.",
+      "study": "features/state-management/study/reactive-store--from-xyflow.md",
+      "build": "features/state-management/build/reactive-store--from-xyflow.md",
+      "source": "https://github.com/xyflow/xyflow",
+      "notebooklm": ""
+    },
+    {
       "id": "design-systems/token-pipeline-orchestration--from-style-dictionary",
       "label": "Token Pipeline Orchestration",
       "domain": "design-systems",
@@ -1043,6 +1120,106 @@
     {
       "from": "ai-workflow/agentic-loop--from-open-design",
       "to": "infrastructure/local-first-architecture--from-open-design",
+      "type": "same-repo"
+    },
+    {
+      "from": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "to": "canvas-interaction/node-dragging--from-xyflow",
+      "type": "same-domain"
+    },
+    {
+      "from": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "to": "canvas-interaction/minimap-navigation--from-xyflow",
+      "type": "same-domain"
+    },
+    {
+      "from": "canvas-interaction/node-dragging--from-xyflow",
+      "to": "canvas-interaction/minimap-navigation--from-xyflow",
+      "type": "same-domain"
+    },
+    {
+      "from": "graph-editing/connection-handles--from-xyflow",
+      "to": "graph-editing/node-resizer--from-xyflow",
+      "type": "same-domain"
+    },
+    {
+      "from": "canvas-interaction/node-dragging--from-xyflow",
+      "to": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "canvas-interaction/minimap-navigation--from-xyflow",
+      "to": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "graph-editing/connection-handles--from-xyflow",
+      "to": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "graph-editing/connection-handles--from-xyflow",
+      "to": "graph-rendering/edge-path-algorithms--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "graph-editing/node-resizer--from-xyflow",
+      "to": "canvas-interaction/node-dragging--from-xyflow",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "canvas-interaction/node-dragging--from-xyflow",
+      "to": "state-management/reactive-store--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "graph-editing/connection-handles--from-xyflow",
+      "to": "state-management/reactive-store--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "graph-editing/node-resizer--from-xyflow",
+      "to": "state-management/reactive-store--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "to": "state-management/reactive-store--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "canvas-interaction/minimap-navigation--from-xyflow",
+      "to": "state-management/reactive-store--from-xyflow",
+      "type": "depends-on"
+    },
+    {
+      "from": "state-management/reactive-store--from-xyflow",
+      "to": "canvas-interaction/pan-zoom-canvas--from-xyflow",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-store--from-xyflow",
+      "to": "canvas-interaction/node-dragging--from-xyflow",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-store--from-xyflow",
+      "to": "canvas-interaction/minimap-navigation--from-xyflow",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-store--from-xyflow",
+      "to": "graph-editing/connection-handles--from-xyflow",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-store--from-xyflow",
+      "to": "graph-editing/node-resizer--from-xyflow",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/reactive-store--from-xyflow",
+      "to": "graph-rendering/edge-path-algorithms--from-xyflow",
       "type": "same-repo"
     },
     {
