@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![52 nodes](https://img.shields.io/badge/nodes-52-4299e1?style=flat-square)
-![28 domains](https://img.shields.io/badge/domains-28-9f7aea?style=flat-square)
-![10 repos](https://img.shields.io/badge/repos-10-68d391?style=flat-square)
+![59 nodes](https://img.shields.io/badge/nodes-59-4299e1?style=flat-square)
+![31 domains](https://img.shields.io/badge/domains-31-9f7aea?style=flat-square)
+![11 repos](https://img.shields.io/badge/repos-11-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -90,6 +90,13 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | design-systems | Reference Resolution Engine | [style-dictionary](https://github.com/style-dictionary/style-dictionary) |
 | design-systems | Transforms & Transform Groups | [style-dictionary](https://github.com/style-dictionary/style-dictionary) |
 | plugin-architecture | Register / Extensibility API | [style-dictionary](https://github.com/style-dictionary/style-dictionary) |
+| canvas-interaction | Pan & Zoom Canvas | [xyflow](https://github.com/xyflow/xyflow) |
+| canvas-interaction | Node Dragging | [xyflow](https://github.com/xyflow/xyflow) |
+| canvas-interaction | Minimap Navigation | [xyflow](https://github.com/xyflow/xyflow) |
+| graph-editing | Connection Handles | [xyflow](https://github.com/xyflow/xyflow) |
+| graph-editing | Node Resizer | [xyflow](https://github.com/xyflow/xyflow) |
+| graph-rendering | Edge Path Algorithms | [xyflow](https://github.com/xyflow/xyflow) |
+| state-management | Reactive Store Architecture | [xyflow](https://github.com/xyflow/xyflow) |
 
 ---
 
