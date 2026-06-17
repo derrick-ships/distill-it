@@ -483,6 +483,50 @@
       "build": "features/infrastructure/build/local-first-architecture--from-open-design.md",
       "source": "https://github.com/nexu-io/open-design",
       "notebooklm": ""
+    },
+    {
+      "id": "design-systems/token-pipeline-orchestration--from-style-dictionary",
+      "label": "Token Pipeline Orchestration",
+      "domain": "design-systems",
+      "repo": "style-dictionary",
+      "summary": "End-to-end build engine: load+deep-merge tokens, keep 3 synced representations, then per-platform transform\u2194resolve convergence loop \u2192 filter \u2192 format \u2192 write. structuredClone-isolated platforms run concurrently; abstracted FS runs in browser or Node.",
+      "study": "features/design-systems/study/token-pipeline-orchestration--from-style-dictionary.md",
+      "build": "features/design-systems/build/token-pipeline-orchestration--from-style-dictionary.md",
+      "source": "https://github.com/style-dictionary/style-dictionary",
+      "notebooklm": ""
+    },
+    {
+      "id": "design-systems/reference-resolution-engine--from-style-dictionary",
+      "label": "Reference Resolution Engine",
+      "domain": "design-systems",
+      "repo": "style-dictionary",
+      "summary": "Resolves {token.path} aliases across the token graph: regex {([^}]+)}, dot-separated paths, transitive chains, multi-ref strings, object refs, number-type preservation, stack-based cycle detection, and conditional outputReferences (keep refs only when safe).",
+      "study": "features/design-systems/study/reference-resolution-engine--from-style-dictionary.md",
+      "build": "features/design-systems/build/reference-resolution-engine--from-style-dictionary.md",
+      "source": "https://github.com/style-dictionary/style-dictionary",
+      "notebooklm": ""
+    },
+    {
+      "id": "design-systems/transforms-and-transform-groups--from-style-dictionary",
+      "label": "Transforms & Transform Groups",
+      "domain": "design-systems",
+      "repo": "style-dictionary",
+      "summary": "Composable name/value/attribute transforms with optional filter; CTI (category/type/item) attribute convention; ordered per-platform groups (css/scss/js/ios/android/flutter/...); `transitive` flag runs value transforms after ref resolution; undefined return = defer.",
+      "study": "features/design-systems/study/transforms-and-transform-groups--from-style-dictionary.md",
+      "build": "features/design-systems/build/transforms-and-transform-groups--from-style-dictionary.md",
+      "source": "https://github.com/style-dictionary/style-dictionary",
+      "notebooklm": ""
+    },
+    {
+      "id": "plugin-architecture/register-extensibility-api--from-style-dictionary",
+      "label": "Register / Extensibility API",
+      "domain": "plugin-architecture",
+      "repo": "style-dictionary",
+      "summary": "Eight-bucket in-process hook registry (transforms, transformGroups, formats, filters, actions, parsers, preprocessors, fileHeaders). Static (class-level) vs instance (_hooks) scopes deepmerged on read; per-type validation; string-name indirection from config to plugin; silent overwrite on collision.",
+      "study": "features/plugin-architecture/study/register-extensibility-api--from-style-dictionary.md",
+      "build": "features/plugin-architecture/build/register-extensibility-api--from-style-dictionary.md",
+      "source": "https://github.com/style-dictionary/style-dictionary",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -1000,6 +1044,86 @@
       "from": "ai-workflow/agentic-loop--from-open-design",
       "to": "infrastructure/local-first-architecture--from-open-design",
       "type": "same-repo"
+    },
+    {
+      "from": "design-systems/token-pipeline-orchestration--from-style-dictionary",
+      "to": "design-systems/reference-resolution-engine--from-style-dictionary",
+      "type": "depends-on"
+    },
+    {
+      "from": "design-systems/token-pipeline-orchestration--from-style-dictionary",
+      "to": "design-systems/transforms-and-transform-groups--from-style-dictionary",
+      "type": "depends-on"
+    },
+    {
+      "from": "design-systems/token-pipeline-orchestration--from-style-dictionary",
+      "to": "plugin-architecture/register-extensibility-api--from-style-dictionary",
+      "type": "depends-on"
+    },
+    {
+      "from": "design-systems/transforms-and-transform-groups--from-style-dictionary",
+      "to": "design-systems/reference-resolution-engine--from-style-dictionary",
+      "type": "depends-on"
+    },
+    {
+      "from": "design-systems/reference-resolution-engine--from-style-dictionary",
+      "to": "design-systems/transforms-and-transform-groups--from-style-dictionary",
+      "type": "same-domain"
+    },
+    {
+      "from": "design-systems/token-pipeline-orchestration--from-style-dictionary",
+      "to": "design-systems/reference-resolution-engine--from-style-dictionary",
+      "type": "same-repo"
+    },
+    {
+      "from": "design-systems/token-pipeline-orchestration--from-style-dictionary",
+      "to": "design-systems/transforms-and-transform-groups--from-style-dictionary",
+      "type": "same-repo"
+    },
+    {
+      "from": "design-systems/token-pipeline-orchestration--from-style-dictionary",
+      "to": "plugin-architecture/register-extensibility-api--from-style-dictionary",
+      "type": "same-repo"
+    },
+    {
+      "from": "design-systems/reference-resolution-engine--from-style-dictionary",
+      "to": "design-systems/transforms-and-transform-groups--from-style-dictionary",
+      "type": "same-repo"
+    },
+    {
+      "from": "design-systems/reference-resolution-engine--from-style-dictionary",
+      "to": "plugin-architecture/register-extensibility-api--from-style-dictionary",
+      "type": "same-repo"
+    },
+    {
+      "from": "design-systems/transforms-and-transform-groups--from-style-dictionary",
+      "to": "plugin-architecture/register-extensibility-api--from-style-dictionary",
+      "type": "same-repo"
+    },
+    {
+      "from": "design-systems/token-pipeline-orchestration--from-style-dictionary",
+      "to": "design-systems/design-systems-library--from-open-design",
+      "type": "same-domain"
+    },
+    {
+      "from": "design-systems/reference-resolution-engine--from-style-dictionary",
+      "to": "design-systems/design-systems-library--from-open-design",
+      "type": "same-domain"
+    },
+    {
+      "from": "design-systems/transforms-and-transform-groups--from-style-dictionary",
+      "to": "design-systems/design-systems-library--from-open-design",
+      "type": "same-domain"
+    },
+    {
+      "from": "plugin-architecture/register-extensibility-api--from-style-dictionary",
+      "to": "plugin-architecture/plugin-system--from-markitdown",
+      "type": "alternative-to"
+    },
+    {
+      "from": "plugin-architecture/register-extensibility-api--from-style-dictionary",
+      "to": "plugin-architecture/plugin-ecosystem--from-open-design",
+      "type": "similar-pattern"
     }
   ]
 }
