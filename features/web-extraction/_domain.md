@@ -18,6 +18,7 @@ Web content is messy: it mixes layout markup, scripts, ads, and navigation chrom
 - [[youtube-extraction--from-markitdown]] — YouTube metadata scraping + transcript API
 - [[smart-scraper-pipeline--from-scrapegraph-ai]] — prompt + URL → structured answer, as a 3-node pipeline (fetch→parse→generate) that reshapes itself via feature flags; the LLM-driven alternative to selector scraping.
 - [[multi-source-fetch-node--from-scrapegraph-ai]] — input normalization: any of {URL via Chromium/requests/BrowserBase/Scrape.do, local HTML/PDF/CSV/JSON/XML/MD} → clean Markdown `Document`s.
+- [[corpus-and-academic-search--from-openpaper]] — two non-merging search subsystems: an internal `ILIKE` substring scan over a paper corpus (no embeddings, recency-ranked) and external academic discovery via OpenAlex (with inverted-index abstract reconstruction) + Exa. The 'search my library AND the web of papers' counterpart to the page-extraction nodes here, plus a 3-pass metadata-hydration fallback (CrossRef/OpenAlex → agentic Exa+Firecrawl).
 
 ## Cross-domain links
 - The scrapegraph-ai features above are built on [[graph-execution-engine--from-scrapegraph-ai]] (the node/edge engine) and feed [[map-reduce-answer-generation--from-scrapegraph-ai]] (the LLM extraction step).

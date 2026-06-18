@@ -12,6 +12,7 @@ and the *control surface* (how a caller steers voice, language, speed, and proso
 | Flow-Matching Sampler | supertonic | [study](study/flow-matching-sampler--from-supertonic.md) | [build](build/flow-matching-sampler--from-supertonic.md) |
 | Expression Tags | supertonic | [study](study/expression-tags--from-supertonic.md) | [build](build/expression-tags--from-supertonic.md) |
 | ElevenLabs Streaming TTS | clicky | [study](study/elevenlabs-streaming-tts--from-clicky.md) | [build](build/elevenlabs-streaming-tts--from-clicky.md) |
+| Audio Overview (TTS) | openpaper | [study](study/audio-overview-tts--from-openpaper.md) | [build](build/audio-overview-tts--from-openpaper.md) |
 
 > Note: [[elevenlabs-streaming-tts--from-clicky]] is the **cloud-API** counterpoint to the on-device
 > supertonic work above — a thin Swift client that POSTs reply text to a Cloudflare Worker `/tts`

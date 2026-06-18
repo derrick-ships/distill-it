@@ -18,6 +18,9 @@ A node-based editor (React Flow / Svelte Flow / Figma-style canvas) renders cont
 - **Factory + update + destroy lifecycle.** Each subsystem is a closure created once against a DOM node, reconfigured every render via `update()`, and torn down with `destroy()`.
 - **Auto-pan loop.** While dragging near the viewport border, a `requestAnimationFrame` loop nudges the viewport and re-derives the dragged position so the object keeps moving.
 - **Constrained viewport writes.** Programmatic viewport changes pass through d3's `constrain()` so translateExtent/scaleExtent are honored.
+## Features in this domain
+
+- [[pdf-highlights-annotations--from-openpaper]] — anchoring user/AI highlights onto a rendered PDF using a zoom-invariant *scaled-rects* position blob (react-pdf-highlighter style) plus stored `raw_text`. A different flavour of canvas math than the node-editor nodes: the transform problem is page-normalized rects rather than a world `[x,y,zoom]`, but it's the same 'map a selection to durable coordinates' challenge.
 
 ## Features in this domain
 

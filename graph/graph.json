@@ -1154,6 +1154,72 @@
       "build": "features/ai-workflow/build/chat-completion-middleware--from-open-webui.md",
       "source": "https://github.com/open-webui/open-webui",
       "notebooklm": ""
+    },
+    {
+      "id": "ai-integration/citation-grounded-chat--from-openpaper",
+      "label": "Citation-Grounded Chat",
+      "domain": "ai-integration",
+      "repo": "openpaper",
+      "summary": "RAG chat that answers ONLY from pre-extracted evidence and tags every claim with inline @cite[n]/@cite[n|paper_id] markers, parsed back into source-anchored footnotes. No-embeddings word-overlap re-anchor for compacted summaries; delimiter-framed JSON streaming.",
+      "study": "features/ai-integration/study/citation-grounded-chat--from-openpaper.md",
+      "build": "features/ai-integration/build/citation-grounded-chat--from-openpaper.md",
+      "source": "https://github.com/khoj-ai/openpaper",
+      "notebooklm": ""
+    },
+    {
+      "id": "content-preprocessing/pdf-ingestion-pipeline--from-openpaper",
+      "label": "PDF Ingestion Pipeline",
+      "domain": "content-preprocessing",
+      "repo": "openpaper",
+      "summary": "Two-service webhook-driven background ingest: server validates+stages to S3, Celery worker extracts markdown (markitdown->pymupdf4llm) + page offsets, renders preview, runs 4 parallel Gemini structured-output calls (shared context cache), POSTs results to a webhook that enriches a placeholder Paper row.",
+      "study": "features/content-preprocessing/study/pdf-ingestion-pipeline--from-openpaper.md",
+      "build": "features/content-preprocessing/build/pdf-ingestion-pipeline--from-openpaper.md",
+      "source": "https://github.com/khoj-ai/openpaper",
+      "notebooklm": ""
+    },
+    {
+      "id": "canvas-interaction/pdf-highlights-annotations--from-openpaper",
+      "label": "PDF Highlights & Annotations",
+      "domain": "canvas-interaction",
+      "repo": "openpaper",
+      "summary": "Anchored PDF highlights storing raw_text + a zoom-invariant scaled-rects position blob (react-pdf-highlighter style), notes attached to highlights, one paper-note per paper. Role-stamped user/assistant (assistant rows immutable); zotero_annotation_key partial-unique index makes Zotero import idempotent.",
+      "study": "features/canvas-interaction/study/pdf-highlights-annotations--from-openpaper.md",
+      "build": "features/canvas-interaction/build/pdf-highlights-annotations--from-openpaper.md",
+      "source": "https://github.com/khoj-ai/openpaper",
+      "notebooklm": ""
+    },
+    {
+      "id": "web-extraction/corpus-and-academic-search--from-openpaper",
+      "label": "Corpus & Academic Search",
+      "domain": "web-extraction",
+      "repo": "openpaper",
+      "summary": "Two separate search subsystems: knowledge-base ILIKE substring scan over papers+highlights+annotations (recency-ranked, no embeddings) and external OpenAlex discovery (filters/sort + inverted-index abstract rebuild); Exa is agent-only. Plus 3-pass metadata hydration (DOI resolve -> enrich -> agentic fallback).",
+      "study": "features/web-extraction/study/corpus-and-academic-search--from-openpaper.md",
+      "build": "features/web-extraction/build/corpus-and-academic-search--from-openpaper.md",
+      "source": "https://github.com/khoj-ai/openpaper",
+      "notebooklm": ""
+    },
+    {
+      "id": "tts/audio-overview-tts--from-openpaper",
+      "label": "Audio Overview (TTS)",
+      "domain": "tts",
+      "repo": "openpaper",
+      "summary": "Spoken 'audio overview' of a paper or project: LLM writes a length-targeted podcast-style script with [^n] citations, markers stripped, chunked at ~10k chars, synthesized via Azure OpenAI gpt-4o-mini-tts, concatenated to one WAV (custom RIFF writer), stored in S3. FastAPI BackgroundTask + poll + presigned URL.",
+      "study": "features/tts/study/audio-overview-tts--from-openpaper.md",
+      "build": "features/tts/build/audio-overview-tts--from-openpaper.md",
+      "source": "https://github.com/khoj-ai/openpaper",
+      "notebooklm": ""
+    },
+    {
+      "id": "credential-management/multi-path-auth--from-openpaper",
+      "label": "Multi-Path Authentication",
+      "domain": "credential-management",
+      "repo": "openpaper",
+      "summary": "Three auth paths over opaque server-side session tokens (NOT JWT): Google OAuth2, email 6-digit code, and Zotero OAuth 1.0a (library link, not login). 64-char token in a sessions table, httpOnly cookie or Bearer. Refuse-don't-merge cross-provider; several documented security gaps (unverified state, plaintext codes).",
+      "study": "features/credential-management/study/multi-path-auth--from-openpaper.md",
+      "build": "features/credential-management/build/multi-path-auth--from-openpaper.md",
+      "source": "https://github.com/khoj-ai/openpaper",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -2556,6 +2622,131 @@
       "from": "ai-workflow/chat-completion-middleware--from-open-webui",
       "to": "messaging/whatsapp-provider-adapter--from-whatsapp-agentkit",
       "type": "similar-pattern"
+    },
+    {
+      "from": "ai-integration/citation-grounded-chat--from-openpaper",
+      "to": "content-preprocessing/pdf-ingestion-pipeline--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "ai-integration/citation-grounded-chat--from-openpaper",
+      "to": "canvas-interaction/pdf-highlights-annotations--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "ai-integration/citation-grounded-chat--from-openpaper",
+      "to": "web-extraction/corpus-and-academic-search--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "ai-integration/citation-grounded-chat--from-openpaper",
+      "to": "tts/audio-overview-tts--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "ai-integration/citation-grounded-chat--from-openpaper",
+      "to": "credential-management/multi-path-auth--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "content-preprocessing/pdf-ingestion-pipeline--from-openpaper",
+      "to": "canvas-interaction/pdf-highlights-annotations--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "content-preprocessing/pdf-ingestion-pipeline--from-openpaper",
+      "to": "web-extraction/corpus-and-academic-search--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "content-preprocessing/pdf-ingestion-pipeline--from-openpaper",
+      "to": "tts/audio-overview-tts--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "content-preprocessing/pdf-ingestion-pipeline--from-openpaper",
+      "to": "credential-management/multi-path-auth--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "canvas-interaction/pdf-highlights-annotations--from-openpaper",
+      "to": "web-extraction/corpus-and-academic-search--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "canvas-interaction/pdf-highlights-annotations--from-openpaper",
+      "to": "tts/audio-overview-tts--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "canvas-interaction/pdf-highlights-annotations--from-openpaper",
+      "to": "credential-management/multi-path-auth--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/corpus-and-academic-search--from-openpaper",
+      "to": "tts/audio-overview-tts--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/corpus-and-academic-search--from-openpaper",
+      "to": "credential-management/multi-path-auth--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "tts/audio-overview-tts--from-openpaper",
+      "to": "credential-management/multi-path-auth--from-openpaper",
+      "type": "same-repo"
+    },
+    {
+      "from": "ai-integration/citation-grounded-chat--from-openpaper",
+      "to": "content-preprocessing/pdf-ingestion-pipeline--from-openpaper",
+      "type": "depends-on"
+    },
+    {
+      "from": "ai-integration/citation-grounded-chat--from-openpaper",
+      "to": "web-extraction/corpus-and-academic-search--from-openpaper",
+      "type": "depends-on"
+    },
+    {
+      "from": "ai-integration/citation-grounded-chat--from-openpaper",
+      "to": "canvas-interaction/pdf-highlights-annotations--from-openpaper",
+      "type": "depends-on"
+    },
+    {
+      "from": "web-extraction/corpus-and-academic-search--from-openpaper",
+      "to": "content-preprocessing/pdf-ingestion-pipeline--from-openpaper",
+      "type": "depends-on"
+    },
+    {
+      "from": "canvas-interaction/pdf-highlights-annotations--from-openpaper",
+      "to": "content-preprocessing/pdf-ingestion-pipeline--from-openpaper",
+      "type": "depends-on"
+    },
+    {
+      "from": "tts/audio-overview-tts--from-openpaper",
+      "to": "content-preprocessing/pdf-ingestion-pipeline--from-openpaper",
+      "type": "depends-on"
+    },
+    {
+      "from": "tts/audio-overview-tts--from-openpaper",
+      "to": "ai-integration/citation-grounded-chat--from-openpaper",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "canvas-interaction/pdf-highlights-annotations--from-openpaper",
+      "to": "credential-management/multi-path-auth--from-openpaper",
+      "type": "depends-on"
+    },
+    {
+      "from": "tts/audio-overview-tts--from-openpaper",
+      "to": "tts/onnx-tts-pipeline--from-supertonic",
+      "type": "alternative-to"
+    },
+    {
+      "from": "tts/audio-overview-tts--from-openpaper",
+      "to": "tts/elevenlabs-streaming-tts--from-clicky",
+      "type": "alternative-to"
     }
   ]
 }

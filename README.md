@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![105 nodes](https://img.shields.io/badge/nodes-105-4299e1?style=flat-square)
+![111 nodes](https://img.shields.io/badge/nodes-111-4299e1?style=flat-square)
 ![46 domains](https://img.shields.io/badge/domains-46-9f7aea?style=flat-square)
-![21 repos](https://img.shields.io/badge/repos-21-68d391?style=flat-square)
+![22 repos](https://img.shields.io/badge/repos-22-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -44,6 +44,12 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 
 | Domain | Feature | From |
 |--------|---------|------|
+| ai-integration | Citation-Grounded Chat | [openpaper](https://github.com/khoj-ai/openpaper) |
+| content-preprocessing | PDF Ingestion Pipeline | [openpaper](https://github.com/khoj-ai/openpaper) |
+| canvas-interaction | PDF Highlights & Annotations | [openpaper](https://github.com/khoj-ai/openpaper) |
+| web-extraction | Corpus & Academic Search | [openpaper](https://github.com/khoj-ai/openpaper) |
+| tts | Audio Overview (TTS) | [openpaper](https://github.com/khoj-ai/openpaper) |
+| credential-management | Multi-Path Authentication | [openpaper](https://github.com/khoj-ai/openpaper) |
 | adaptive-parsing | Adaptive Element Relocation | [Scrapling](https://github.com/D4Vinci/Scrapling) |
 | document-conversion | Converter Pipeline | [markitdown](https://github.com/microsoft/markitdown) |
 | document-conversion | PDF Conversion | [markitdown](https://github.com/microsoft/markitdown) |
