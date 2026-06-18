@@ -34,9 +34,14 @@ Everything feeds into an interactive knowledge graph you can browse and search.
 
 ## Browse the graph
 
-Open [`graph/graph.html`](graph/graph.html) in a browser.
+**▶ [Open the interactive graph](https://htmlpreview.github.io/?https://github.com/derrick-ships/distill-it/blob/main/graph/graph.html)** — one click, nothing to download.
 
-Click any node → see the summary, links to the study doc, build spec, and origin repo.
+Click any node → see the summary and links to the study doc, build spec, and origin repo.
+Drag to rearrange, scroll/pinch to zoom, search to filter, **Fit ⤢** to recenter. Works on mobile.
+
+> The graph is a single **self-contained** file (`graph/graph.html`) — the data is embedded, so it
+> renders anywhere you open it (the link above, `file://`, or any HTML viewer). It's generated from
+> `graph/graph.json` (the source of truth) by `python3 graph/generate.py`.
 
 ---
 
