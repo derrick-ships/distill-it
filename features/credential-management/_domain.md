@@ -19,3 +19,4 @@ Tools that aggregate from multiple platforms face a credential zoo: some sources
 
 - [[multi-tier-credentials--from-last30days-skill]] — three-tier auth pattern with preflight availability checking
 - [[cookie-credential-extraction--from-agent-reach]] — multi-browser cookie harvest (rookiepy→browser_cookie3) driven by declarative per-platform specs, validate-before-save, atomic 0o600 store, and shell-safe best-effort mirrors into upstream tools' credential files
+- [[cloudflare-worker-key-proxy--from-clicky]] — keep paid-API keys out of a shipped client by routing every call through a single-file Cloudflare Worker that holds Anthropic/ElevenLabs/AssemblyAI keys as Worker secrets and streams the upstream `Response.body` straight back (incl. a short-lived AssemblyAI token-broker route). The server-side-secret pattern — and a cautionary tale: it ships with no client auth, CORS, or rate-limiting.

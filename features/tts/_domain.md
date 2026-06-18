@@ -11,6 +11,13 @@ and the *control surface* (how a caller steers voice, language, speed, and proso
 | ONNX TTS Pipeline | supertonic | [study](study/onnx-tts-pipeline--from-supertonic.md) | [build](build/onnx-tts-pipeline--from-supertonic.md) |
 | Flow-Matching Sampler | supertonic | [study](study/flow-matching-sampler--from-supertonic.md) | [build](build/flow-matching-sampler--from-supertonic.md) |
 | Expression Tags | supertonic | [study](study/expression-tags--from-supertonic.md) | [build](build/expression-tags--from-supertonic.md) |
+| ElevenLabs Streaming TTS | clicky | [study](study/elevenlabs-streaming-tts--from-clicky.md) | [build](build/elevenlabs-streaming-tts--from-clicky.md) |
+
+> Note: [[elevenlabs-streaming-tts--from-clicky]] is the **cloud-API** counterpoint to the on-device
+> supertonic work above — a thin Swift client that POSTs reply text to a Cloudflare Worker `/tts`
+> proxy and plays the returned MP3 via `AVAudioPlayer`. The engineering lives in delivery/playback
+> and key-hiding, not in a local generative core; despite "streaming" in the name, playback is
+> whole-response/buffered.
 
 ## Mental model
 A modern small TTS system is **four ONNX graphs in a row**:

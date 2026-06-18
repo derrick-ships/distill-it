@@ -14,3 +14,5 @@ Both features in this domain follow the same enhancement pattern: base conversio
 
 - [[image-llm-captioning--from-markitdown]] — EXIF extraction + LLM vision captioning for images
 - [[audio-transcription--from-markitdown]] — speech_recognition transcription + exiftool metadata for audio
+- [[screen-capture-self-exclusion--from-clicky]] — ScreenCaptureKit single-frame capture of every display that filters out the app's own windows by bundle id (so an AI never sees its own overlays), returning cursor-screen-first labeled JPEGs and reconciling the CG-vs-AppKit multi-monitor coordinate mismatch.
+- [[push-to-talk-streaming-transcription--from-clicky]] — a global modifier-only hotkey (listen-only CGEvent tap) driving AVAudioEngine push-to-talk into a pluggable provider protocol; default AssemblyAI v3 streams 16kHz PCM16 over WebSocket with turn-stitching, with Apple Speech and OpenAI batch as fallbacks. Live realtime STT vs markitdown's file-at-rest transcription.
