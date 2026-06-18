@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![72 nodes](https://img.shields.io/badge/nodes-72-4299e1?style=flat-square)
-![39 domains](https://img.shields.io/badge/domains-39-9f7aea?style=flat-square)
-![13 repos](https://img.shields.io/badge/repos-13-68d391?style=flat-square)
+![78 nodes](https://img.shields.io/badge/nodes-78-4299e1?style=flat-square)
+![42 domains](https://img.shields.io/badge/domains-42-9f7aea?style=flat-square)
+![15 repos](https://img.shields.io/badge/repos-15-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -101,6 +101,9 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | realtime-collab | E2E-Encrypted Collaboration | [excalidraw](https://github.com/excalidraw/excalidraw) |
 | realtime-collab | Scene Reconciliation | [excalidraw](https://github.com/excalidraw/excalidraw) |
 | data-structures | Fractional Indexing (z-order) | [excalidraw](https://github.com/excalidraw/excalidraw) |
+| code-generation | Interview-Driven App Scaffolding | [whatsapp-agentkit](https://github.com/Hainrixz/whatsapp-agentkit) |
+| messaging | WhatsApp Provider Adapter Layer | [whatsapp-agentkit](https://github.com/Hainrixz/whatsapp-agentkit) |
+| agent-architecture | Per-Contact Conversation Memory | [whatsapp-agentkit](https://github.com/Hainrixz/whatsapp-agentkit) |
 | lead-scoring | Rule-Based Lead Scoring | [auto-crm](https://github.com/Hainrixz/auto-crm) |
 | ai-integration | AI Lead Classification (Claude) | [auto-crm](https://github.com/Hainrixz/auto-crm) |
 | lead-ingestion | Webhook Lead Ingestion | [auto-crm](https://github.com/Hainrixz/auto-crm) |
