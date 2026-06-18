@@ -22,6 +22,7 @@ Many LLM products are really just 3-5 deterministic steps (fetch → clean → a
 - [[queue-backed-crawl--from-firecrawl]] — recursive site crawl as a BullMQ + Redis orchestration: a single kickoff job seeds the frontier, each scrape job enqueues children, dedup is an atomic Redis `SADD`, and 'done' is a three-part condition (jobs done AND kickoff done AND sitemap done). A canonical fan-out-with-state pattern.
 - [[declarative-low-code-cdk--from-airbyte]] — define a whole connector in a YAML manifest that a runtime interprets (resolve $refs → propagate $parameters → validate against a component JSON-schema → factory builds live objects). Config-as-connector at scale; the engine behind 600+ Airbyte connectors and the no-code Builder.
 - [[incremental-sync-state--from-airbyte]] — cursor-based incremental reads: a DatetimeBasedCursor slices a date range into resumable windows, tracks the MAX observed cursor value, and emits state at slice boundaries so the next run resumes. A different resumable-progress model than [[queue-backed-crawl--from-firecrawl]]'s Redis sets — here progress IS the cursor value.
+- [[query-processor-middleware-pipeline--from-metabase]] — the Ring/Express-style middleware pattern applied to queries: ~40 ordered query→query transforms in, reducible streaming execution, ordered row-transforming middleware out. Order is the contract; the whole lifecycle is a readable list of function vars.
 
 ## Cross-domain links
 - Contrast with [[agent-architecture]] — agents choose their path; these pipelines have it pre-wired.

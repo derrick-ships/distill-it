@@ -17,3 +17,4 @@ Plugin architecture is the practice of defining a stable contract (interface + r
 
 - [[plugin-system--from-markitdown]] — entry-point-based plugin discovery and converter registration
 - [[register-extensibility-api--from-style-dictionary]] — eight-bucket in-process hook registry (transforms/formats/filters/actions/parsers/preprocessors/...) with static-vs-instance scopes merged on read, and string-name indirection from config to plugin
+- [[multimethod-driver-abstraction--from-metabase]] — one interface for N databases via Clojure multimethods + an isa? hierarchy, where SQL drivers inherit a shared MBQL→HoneySQL compiler and override only dialect quirks. Polymorphism through a data hierarchy; a new DB is a few dialect overrides, not a fork.

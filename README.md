@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![126 nodes](https://img.shields.io/badge/nodes-126-4299e1?style=flat-square)
+![130 nodes](https://img.shields.io/badge/nodes-130-4299e1?style=flat-square)
 ![46 domains](https://img.shields.io/badge/domains-46-9f7aea?style=flat-square)
-![24 repos](https://img.shields.io/badge/repos-24-68d391?style=flat-square)
+![25 repos](https://img.shields.io/badge/repos-25-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -44,6 +44,10 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 
 | Domain | Feature | From |
 |--------|---------|------|
+| data-structures | MBQL — Metabase Query AST | [metabase](https://github.com/metabase/metabase) |
+| pipeline-orchestration | Query Processor Middleware Pipeline | [metabase](https://github.com/metabase/metabase) |
+| plugin-architecture | Multimethod Driver Abstraction | [metabase](https://github.com/metabase/metabase) |
+| rendering | Visualization Auto-Selection | [metabase](https://github.com/metabase/metabase) |
 | pipeline-orchestration | Declarative (Low-Code) CDK | [airbyte](https://github.com/airbytehq/airbyte) |
 | data-portability | Airbyte Protocol | [airbyte](https://github.com/airbytehq/airbyte) |
 | pipeline-orchestration | Incremental Sync & State | [airbyte](https://github.com/airbytehq/airbyte) |

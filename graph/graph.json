@@ -1385,6 +1385,50 @@
       "build": "features/code-generation/build/connector-builder-test-read--from-airbyte.md",
       "source": "https://github.com/airbytehq/airbyte",
       "notebooklm": ""
+    },
+    {
+      "id": "data-structures/mbql-query-ast--from-metabase",
+      "label": "MBQL — Metabase Query AST",
+      "domain": "data-structures",
+      "repo": "metabase",
+      "summary": "A database-agnostic query as a typed nested data structure (EDN/JSON) formally specified by a Malli schema: {:database,:type,:query} with tagged-vector clauses ([:field id opts], [:sum field], [:= lhs rhs]). Everything downstream rewrites the query as DATA; only the driver compiles to a dialect. Legacy + MBQL-5, normalized to one.",
+      "study": "features/data-structures/study/mbql-query-ast--from-metabase.md",
+      "build": "features/data-structures/build/mbql-query-ast--from-metabase.md",
+      "source": "https://github.com/metabase/metabase",
+      "notebooklm": ""
+    },
+    {
+      "id": "pipeline-orchestration/query-processor-middleware-pipeline--from-metabase",
+      "label": "Query Processor Middleware Pipeline",
+      "domain": "pipeline-orchestration",
+      "repo": "metabase",
+      "summary": "Three-phase engine: preprocess threads the MBQL query through ~40 query->query middleware (normalize, validate, resolve joins, permissions/sandboxing, params, desugar, default limit); compile via driver mbql->native; execute as a reducible streaming rows through a reducing-fn (rff) with cooperative cancellation; postprocess threads rows through reducing-fn middleware (format/limit/annotate). Built once by reduce; hot-reloaded.",
+      "study": "features/pipeline-orchestration/study/query-processor-middleware-pipeline--from-metabase.md",
+      "build": "features/pipeline-orchestration/build/query-processor-middleware-pipeline--from-metabase.md",
+      "source": "https://github.com/metabase/metabase",
+      "notebooklm": ""
+    },
+    {
+      "id": "plugin-architecture/multimethod-driver-abstraction--from-metabase",
+      "label": "Multimethod Driver Abstraction",
+      "domain": "plugin-architecture",
+      "repo": "metabase",
+      "summary": "One interface, N databases via Clojure multimethods + an isa? hierarchy. Drivers register! with a parent (:postgres->:sql-jdbc->:sql); multimethods (mbql->native, execute-reducible-query, describe-*, database-supports?) dispatch on the driver keyword and fall through the hierarchy. SQL DBs inherit one shared MBQL->HoneySQL->string compiler (per-[driver,clause] ->honeysql multimethods) and override only dialect quirks.",
+      "study": "features/plugin-architecture/study/multimethod-driver-abstraction--from-metabase.md",
+      "build": "features/plugin-architecture/build/multimethod-driver-abstraction--from-metabase.md",
+      "source": "https://github.com/metabase/metabase",
+      "notebooklm": ""
+    },
+    {
+      "id": "rendering/visualization-auto-selection--from-metabase",
+      "label": "Visualization Auto-Selection",
+      "domain": "rendering",
+      "repo": "metabase",
+      "summary": "A frontend registry of chart types where each visualization self-describes applicability: getSensibleDisplays(data) filters the registry by each viz's isSensible(data); the chosen one's checkRenderable validates with a user-facing reason; renders with column remapping (FK id->label) and multi-series transforms. New charts plug in by registering and answering the same predicates.",
+      "study": "features/rendering/study/visualization-auto-selection--from-metabase.md",
+      "build": "features/rendering/build/visualization-auto-selection--from-metabase.md",
+      "source": "https://github.com/metabase/metabase",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -3252,6 +3296,71 @@
       "from": "web-extraction/declarative-http-stream-stack--from-airbyte",
       "to": "web-extraction/multi-source-fetch-node--from-scrapegraph-ai",
       "type": "similar-pattern"
+    },
+    {
+      "from": "data-structures/mbql-query-ast--from-metabase",
+      "to": "pipeline-orchestration/query-processor-middleware-pipeline--from-metabase",
+      "type": "same-repo"
+    },
+    {
+      "from": "data-structures/mbql-query-ast--from-metabase",
+      "to": "plugin-architecture/multimethod-driver-abstraction--from-metabase",
+      "type": "same-repo"
+    },
+    {
+      "from": "data-structures/mbql-query-ast--from-metabase",
+      "to": "rendering/visualization-auto-selection--from-metabase",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/query-processor-middleware-pipeline--from-metabase",
+      "to": "plugin-architecture/multimethod-driver-abstraction--from-metabase",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/query-processor-middleware-pipeline--from-metabase",
+      "to": "rendering/visualization-auto-selection--from-metabase",
+      "type": "same-repo"
+    },
+    {
+      "from": "plugin-architecture/multimethod-driver-abstraction--from-metabase",
+      "to": "rendering/visualization-auto-selection--from-metabase",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/query-processor-middleware-pipeline--from-metabase",
+      "to": "data-structures/mbql-query-ast--from-metabase",
+      "type": "depends-on"
+    },
+    {
+      "from": "pipeline-orchestration/query-processor-middleware-pipeline--from-metabase",
+      "to": "plugin-architecture/multimethod-driver-abstraction--from-metabase",
+      "type": "depends-on"
+    },
+    {
+      "from": "plugin-architecture/multimethod-driver-abstraction--from-metabase",
+      "to": "data-structures/mbql-query-ast--from-metabase",
+      "type": "depends-on"
+    },
+    {
+      "from": "rendering/visualization-auto-selection--from-metabase",
+      "to": "pipeline-orchestration/query-processor-middleware-pipeline--from-metabase",
+      "type": "depends-on"
+    },
+    {
+      "from": "plugin-architecture/multimethod-driver-abstraction--from-metabase",
+      "to": "pipeline-orchestration/declarative-low-code-cdk--from-airbyte",
+      "type": "alternative-to"
+    },
+    {
+      "from": "data-structures/mbql-query-ast--from-metabase",
+      "to": "data-portability/airbyte-protocol--from-airbyte",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "pipeline-orchestration/query-processor-middleware-pipeline--from-metabase",
+      "to": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
+      "type": "same-domain"
     }
   ]
 }
