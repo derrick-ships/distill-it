@@ -1,0 +1,25 @@
+# Domain: pipeline-orchestration
+
+Composing a unit of work as a **graph of small, single-purpose nodes that pass a shared mutable state dictionary** between them — a deterministic "blackboard" pipeline rather than an autonomous agent loop.
+
+## What this domain is about
+
+Where [[agent-architecture]] is about agents that *decide* what to do next (tool loops, planning), this domain is about pipelines whose shape is *declared up front*: a fixed set of nodes wired by edges, traversed from an entry point until there are no more edges. Each node reads the keys it needs out of one shared `state` dict, does one thing, and writes its results back into the same dict. The graph engine is tiny and dumb on purpose — all the intelligence lives in the nodes, and the same engine runs a 2-node pipeline or a 6-node one without changing.
+
+The defining moves:
+- **Shared-state blackboard**: nodes never call each other directly; they communicate only by reading/writing a dict. This is what makes nodes swappable and pipelines re-composable.
+- **Declarative wiring**: the pipeline is a list of nodes + a list of `(from, to)` edges. Variants of a pipeline are just different edge lists over the same node instances.
+- **Conditional branching**: a special node type returns the *name* of the next node, turning a linear chain into a branch (retry loops, early exit).
+- **Input contracts as data**: each node declares which state keys it needs as a boolean expression string (`"user_prompt & (relevant_chunks | parsed_doc | doc)"`), evaluated against the live state at run time.
+
+## Why it's its own domain
+
+Many LLM products are really just 3-5 deterministic steps (fetch → clean → ask model → merge). Reaching for a full agent framework is overkill. A 100-line node-graph engine gives you observability (per-node timing/token cost), testability (run one node on a fixed state), and recomposition (reorder steps by editing an edge list) without any of the nondeterminism of an agent.
+
+## Features in this domain
+
+- [[graph-execution-engine--from-scrapegraph-ai]] — the ~100-line `BaseGraph` + `BaseNode` core: shared-state traversal, conditional nodes, per-node token/cost accounting, and the boolean input-key DSL that declares each node's data dependencies.
+
+## Cross-domain links
+- Contrast with [[agent-architecture]] — agents choose their path; these pipelines have it pre-wired.
+- The nodes built on this engine live in [[web-extraction]], [[structured-extraction]], and [[research-automation]].

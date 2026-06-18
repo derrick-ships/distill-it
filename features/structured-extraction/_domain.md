@@ -7,6 +7,7 @@ This is distinct from [[content-synthesis]] (which clusters/summarizes) and from
 ## Features studied
 - [[schema-driven-extraction--from-llm-scraper]] — the core `run()` loop: Playwright page → preprocess → AI SDK structured output → typed object.
 - [[streaming-partial-objects--from-llm-scraper]] — `stream()`: progressive partial objects as the model generates, via AI SDK `partialOutputStream`.
+- [[map-reduce-answer-generation--from-scrapegraph-ai]] — when the content is bigger than the context window: answer the question per-chunk in parallel, then merge into one schema-shaped result. A contrasting approach to llm-scraper's single SDK call — chunk-and-merge with hand-written JSON instructions instead of one structured-output call.
 
 ## Cross-domain links
 - Depends on [[content-preprocessing]] — the page must be reduced to an LLM-friendly format first.

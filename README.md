@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![78 nodes](https://img.shields.io/badge/nodes-78-4299e1?style=flat-square)
-![42 domains](https://img.shields.io/badge/domains-42-9f7aea?style=flat-square)
-![15 repos](https://img.shields.io/badge/repos-15-68d391?style=flat-square)
+![89 nodes](https://img.shields.io/badge/nodes-89-4299e1?style=flat-square)
+![43 domains](https://img.shields.io/badge/domains-43-9f7aea?style=flat-square)
+![17 repos](https://img.shields.io/badge/repos-17-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -118,6 +118,12 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | design-systems | OKLCH Theme Palettes | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
 | data-portability | Zod Form Persistence & JSON Portability | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
 | infrastructure | BYOK + Rate-Limited AI Action | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
+| pipeline-orchestration | Graph Execution Engine | [scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) |
+| web-extraction | SmartScraper Pipeline | [scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) |
+| web-extraction | Multi-Source Fetch Node | [scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) |
+| structured-extraction | Map-Reduce Answer Generation | [scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) |
+| ai-integration | Provider-Agnostic Model Layer | [scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) |
+| research-automation | Search-Driven Scraping | [scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) |
 
 ---
 
