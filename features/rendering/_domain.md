@@ -5,3 +5,4 @@ How a product turns its data model into pixels — and the visual identity that 
 ## Features in this domain
 
 - [[hand-drawn-rendering--from-excalidraw]] — Rough.js sketchy shapes with a frozen per-element `seed` for stable (non-shimmering) wobble; size-aware roughness; SVG-path rounded corners; WeakMap shape cache keyed on versionNonce.
+- [[dom-to-pdf-export--from-carousel-generator]] — export a live React view as a multi-page PDF: deep-clone the node, strip editor chrome by `id`-prefix, proxy cross-origin images same-origin, `html-to-image` rasterize at 1.8×, then slice the tall canvas into fixed-size jsPDF pages.

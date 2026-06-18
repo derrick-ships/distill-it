@@ -15,3 +15,4 @@ Raw retrieval from multiple sources produces redundancy: the same story appears 
 ## Features in this domain
 
 - [[cross-source-clustering--from-last30days-skill]] — two-pass clustering with MMR representative selection
+- [[ai-carousel-generation--from-carousel-generator]] — forced OpenAI function-call into a Zod content schema, with a styled/unstyled split so the LLM fills only content and styling defaults are merged in deterministically

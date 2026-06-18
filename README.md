@@ -113,6 +113,11 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | data-portability | CSV Import / Export | [auto-crm](https://github.com/Hainrixz/auto-crm) |
 | activity-tracking | Activity Tracking & Follow-up Buckets | [auto-crm](https://github.com/Hainrixz/auto-crm) |
 | agent-distribution | Self-Customizing CRM (Claude commands) | [auto-crm](https://github.com/Hainrixz/auto-crm) |
+| content-synthesis | AI Carousel Generation | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
+| rendering | DOM-to-PDF Carousel Export | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
+| design-systems | OKLCH Theme Palettes | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
+| data-portability | Zod Form Persistence & JSON Portability | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
+| infrastructure | BYOK + Rate-Limited AI Action | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
 
 ---
 

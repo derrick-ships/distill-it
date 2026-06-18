@@ -24,3 +24,6 @@ done client-side.
 - [[csv-import-export--from-auto-crm]] — partial-success JSON bulk import (201/207 + per-row errors)
   and dual contacts/deals CSV export (`escapeCSV`/`buildCSV`, UTF-8 BOM, humanized values, attachment
   download).
+- [[zod-form-persistence--from-carousel-generator]] — server-less document model: auto-persist to
+  localStorage, **validate-on-read and self-heal** (clear + defaults on schema drift), plus per-field
+  JSON import/export validated by the matching Zod sub-schema before `setValue`.
