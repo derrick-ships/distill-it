@@ -1462,6 +1462,61 @@
       "build": "features/pipeline-orchestration/build/file-actions-executor--from-hazelnut.md",
       "source": "https://github.com/ricardodantas/hazelnut",
       "notebooklm": ""
+    },
+    {
+      "id": "web-cloning/website-cloning-pipeline--from-ai-website-cloner-template",
+      "label": "Website Cloning Pipeline",
+      "domain": "web-cloning",
+      "repo": "ai-website-cloner-template",
+      "summary": "5-phase AI pipeline (recon → foundation → component specs → parallel build → assemble+QA) that converts a target URL into a deployable Next.js 16/React 19 app. Uses getComputedStyle() for pixel-accurate design extraction, git worktrees for parallel agent builds, and spec-driven component construction.",
+      "study": "features/web-cloning/study/website-cloning-pipeline--from-ai-website-cloner-template.md",
+      "build": "features/web-cloning/build/website-cloning-pipeline--from-ai-website-cloner-template.md",
+      "source": "https://github.com/JCodesMore/ai-website-cloner-template",
+      "notebooklm": ""
+    },
+    {
+      "id": "web-extraction/browser-design-token-extraction--from-ai-website-cloner-template",
+      "label": "Browser Design Token Extraction",
+      "domain": "web-extraction",
+      "repo": "ai-website-cloner-template",
+      "summary": "getComputedStyle() on every DOM element via page.evaluate() in headless Chromium to extract final resolved CSS values. Frequency analysis reveals the design system. Interaction states captured via pseudo-class injection. Responsive variants by viewport resize. Colors converted to oklch for Tailwind v4.",
+      "study": "features/web-extraction/study/browser-design-token-extraction--from-ai-website-cloner-template.md",
+      "build": "features/web-extraction/build/browser-design-token-extraction--from-ai-website-cloner-template.md",
+      "source": "https://github.com/JCodesMore/ai-website-cloner-template",
+      "notebooklm": ""
+    },
+    {
+      "id": "code-generation/component-spec-generation--from-ai-website-cloner-template",
+      "label": "Component Specification Generation",
+      "domain": "code-generation",
+      "repo": "ai-website-cloner-template",
+      "summary": "Generates structured Markdown spec documents per page section with: exact oklch colors, px typography values, interaction state diffs, responsive layout changes, public/ asset paths, and real content samples. Spec quality determines AI builder output quality. Stored in docs/research/components/.",
+      "study": "features/code-generation/study/component-spec-generation--from-ai-website-cloner-template.md",
+      "build": "features/code-generation/build/component-spec-generation--from-ai-website-cloner-template.md",
+      "source": "https://github.com/JCodesMore/ai-website-cloner-template",
+      "notebooklm": ""
+    },
+    {
+      "id": "plugin-architecture/multi-platform-agent-sync--from-ai-website-cloner-template",
+      "label": "Multi-Platform Agent Sync",
+      "domain": "plugin-architecture",
+      "repo": "ai-website-cloner-template",
+      "summary": "AGENTS.md as single source of truth for project instructions. sync-agent-rules.sh generates 11+ platform copies (CLAUDE.md, GEMINI.md, .cursor/rules/, .github/copilot-instructions.md, etc.). sync-skills.mjs propagates skill definitions. Generated files carry DO NOT EDIT headers and are committed to git.",
+      "study": "features/plugin-architecture/study/multi-platform-agent-sync--from-ai-website-cloner-template.md",
+      "build": "features/plugin-architecture/build/multi-platform-agent-sync--from-ai-website-cloner-template.md",
+      "source": "https://github.com/JCodesMore/ai-website-cloner-template",
+      "notebooklm": ""
+    },
+    {
+      "id": "dev-tooling/parallel-worktree-build--from-ai-website-cloner-template",
+      "label": "Parallel Worktree Build",
+      "domain": "dev-tooling",
+      "repo": "ai-website-cloner-template",
+      "summary": "git worktree add creates one isolated checkout per AI agent on a separate branch. Agents build non-overlapping page sections concurrently with no merge conflicts. Pre-written page.tsx slot pattern prevents the assembly file from being a conflict hotspot. Branches merged sequentially after all agents finish.",
+      "study": "features/dev-tooling/study/parallel-worktree-build--from-ai-website-cloner-template.md",
+      "build": "features/dev-tooling/build/parallel-worktree-build--from-ai-website-cloner-template.md",
+      "source": "https://github.com/JCodesMore/ai-website-cloner-template",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -3433,6 +3488,76 @@
     {
       "from": "pipeline-orchestration/file-rules-engine--from-hazelnut",
       "to": "pipeline-orchestration/query-processor-middleware-pipeline--from-metabase",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "web-cloning/website-cloning-pipeline--from-ai-website-cloner-template",
+      "to": "web-extraction/browser-design-token-extraction--from-ai-website-cloner-template",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-cloning/website-cloning-pipeline--from-ai-website-cloner-template",
+      "to": "code-generation/component-spec-generation--from-ai-website-cloner-template",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-cloning/website-cloning-pipeline--from-ai-website-cloner-template",
+      "to": "plugin-architecture/multi-platform-agent-sync--from-ai-website-cloner-template",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-cloning/website-cloning-pipeline--from-ai-website-cloner-template",
+      "to": "dev-tooling/parallel-worktree-build--from-ai-website-cloner-template",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/browser-design-token-extraction--from-ai-website-cloner-template",
+      "to": "code-generation/component-spec-generation--from-ai-website-cloner-template",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-cloning/website-cloning-pipeline--from-ai-website-cloner-template",
+      "to": "web-extraction/browser-design-token-extraction--from-ai-website-cloner-template",
+      "type": "depends-on"
+    },
+    {
+      "from": "web-extraction/browser-design-token-extraction--from-ai-website-cloner-template",
+      "to": "code-generation/component-spec-generation--from-ai-website-cloner-template",
+      "type": "depends-on"
+    },
+    {
+      "from": "web-cloning/website-cloning-pipeline--from-ai-website-cloner-template",
+      "to": "dev-tooling/parallel-worktree-build--from-ai-website-cloner-template",
+      "type": "depends-on"
+    },
+    {
+      "from": "plugin-architecture/multi-platform-agent-sync--from-ai-website-cloner-template",
+      "to": "plugin-architecture/skills-system--from-open-design",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "plugin-architecture/multi-platform-agent-sync--from-ai-website-cloner-template",
+      "to": "plugin-architecture/plugin-ecosystem--from-open-design",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "dev-tooling/parallel-worktree-build--from-ai-website-cloner-template",
+      "to": "ai-workflow/agentic-loop--from-open-design",
+      "type": "alternative-to"
+    },
+    {
+      "from": "web-extraction/browser-design-token-extraction--from-ai-website-cloner-template",
+      "to": "web-extraction/smart-scraper-pipeline--from-scrapegraph-ai",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "code-generation/component-spec-generation--from-ai-website-cloner-template",
+      "to": "code-generation/interview-driven-scaffolding--from-whatsapp-agentkit",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "web-cloning/website-cloning-pipeline--from-ai-website-cloner-template",
+      "to": "codegen/design-artifact-generation--from-open-design",
       "type": "similar-pattern"
     }
   ]

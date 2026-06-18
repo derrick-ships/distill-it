@@ -25,5 +25,8 @@ Web content is messy: it mixes layout markup, scripts, ads, and navigation chrom
 - [[agentic-browser-actions--from-firecrawl]] — an AI agent drives a hosted browser from a natural-language goal (click/scroll/type/wait) before capture, returning post-interaction HTML/markdown. The interactive-web answer to JS-gated content, as a scrape-pipeline transformer.
 - [[declarative-http-stream-stack--from-airbyte]] — the four-component REST-pull engine (requester → paginator → extractor → selector) wired by a retriever loop, all driven by string interpolation. The API-record-oriented counterpart to the page-scraping pipelines in this domain; pagination splits how-to-compute-the-token from where-to-inject-it.
 
+- [[browser-design-token-extraction--from-ai-website-cloner-template]] — runs getComputedStyle() on every DOM element via headless Chromium to extract the final resolved CSS values (colors, typography, spacing) for any page, regardless of its framework. Frequency analysis reveals the design system. Part of the website cloning pipeline.
+
 ## Cross-domain links
 - The scrapegraph-ai features above are built on [[graph-execution-engine--from-scrapegraph-ai]] (the node/edge engine) and feed [[map-reduce-answer-generation--from-scrapegraph-ai]] (the LLM extraction step).
+- [[browser-design-token-extraction--from-ai-website-cloner-template]] feeds [[web-cloning/website-cloning-pipeline--from-ai-website-cloner-template]] (design → specs → components).
