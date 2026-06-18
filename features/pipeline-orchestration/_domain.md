@@ -19,6 +19,7 @@ Many LLM products are really just 3-5 deterministic steps (fetch → clean → a
 ## Features in this domain
 
 - [[graph-execution-engine--from-scrapegraph-ai]] — the ~100-line `BaseGraph` + `BaseNode` core: shared-state traversal, conditional nodes, per-node token/cost accounting, and the boolean input-key DSL that declares each node's data dependencies.
+- [[queue-backed-crawl--from-firecrawl]] — recursive site crawl as a BullMQ + Redis orchestration: a single kickoff job seeds the frontier, each scrape job enqueues children, dedup is an atomic Redis `SADD`, and 'done' is a three-part condition (jobs done AND kickoff done AND sitemap done). A canonical fan-out-with-state pattern.
 
 ## Cross-domain links
 - Contrast with [[agent-architecture]] — agents choose their path; these pipelines have it pre-wired.

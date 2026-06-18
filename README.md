@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![111 nodes](https://img.shields.io/badge/nodes-111-4299e1?style=flat-square)
+![115 nodes](https://img.shields.io/badge/nodes-115-4299e1?style=flat-square)
 ![46 domains](https://img.shields.io/badge/domains-46-9f7aea?style=flat-square)
-![22 repos](https://img.shields.io/badge/repos-22-68d391?style=flat-square)
+![23 repos](https://img.shields.io/badge/repos-23-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -44,6 +44,10 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 
 | Domain | Feature | From |
 |--------|---------|------|
+| web-extraction | Scrape Engine + Fallback Pipeline | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| pipeline-orchestration | Queue-Backed Crawl | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| structured-extraction | LLM Extract (map-reduce) | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| web-extraction | Web Search (+ scrape) | [firecrawl](https://github.com/firecrawl/firecrawl) |
 | ai-integration | Citation-Grounded Chat | [openpaper](https://github.com/khoj-ai/openpaper) |
 | content-preprocessing | PDF Ingestion Pipeline | [openpaper](https://github.com/khoj-ai/openpaper) |
 | canvas-interaction | PDF Highlights & Annotations | [openpaper](https://github.com/khoj-ai/openpaper) |

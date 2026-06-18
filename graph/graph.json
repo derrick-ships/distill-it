@@ -1220,6 +1220,50 @@
       "build": "features/credential-management/build/multi-path-auth--from-openpaper.md",
       "source": "https://github.com/khoj-ai/openpaper",
       "notebooklm": ""
+    },
+    {
+      "id": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "label": "Scrape Engine + Fallback Pipeline",
+      "domain": "web-extraction",
+      "repo": "firecrawl",
+      "summary": "URL -> clean output (md/html/screenshot/links/json) via a capability-driven engine fallback chain (fetch -> playwright -> fire-engine chrome-cdp/tlsclient with stealth/retry -> pdf) chosen by feature flags, then a fixed transformer stack. maxAge index cache for low latency.",
+      "study": "features/web-extraction/study/scrape-engine-fallback-pipeline--from-firecrawl.md",
+      "build": "features/web-extraction/build/scrape-engine-fallback-pipeline--from-firecrawl.md",
+      "source": "https://github.com/firecrawl/firecrawl",
+      "notebooklm": ""
+    },
+    {
+      "id": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
+      "label": "Queue-Backed Crawl",
+      "domain": "pipeline-orchestration",
+      "repo": "firecrawl",
+      "summary": "Recursive site crawl on BullMQ + Redis state: one kickoff job seeds the frontier (sitemap + start page), each scrape job extracts links and enqueues children, dedup via atomic Redis SADD (lockURL). Done = jobs==jobs_done AND kickoff done AND sitemap done. Status pages a ZSET; WS streams; per-team concurrency.",
+      "study": "features/pipeline-orchestration/study/queue-backed-crawl--from-firecrawl.md",
+      "build": "features/pipeline-orchestration/build/queue-backed-crawl--from-firecrawl.md",
+      "source": "https://github.com/firecrawl/firecrawl",
+      "notebooklm": ""
+    },
+    {
+      "id": "structured-extraction/llm-extract-map-reduce--from-firecrawl",
+      "label": "LLM Extract (map-reduce)",
+      "domain": "structured-extraction",
+      "repo": "firecrawl",
+      "summary": "Prompt+schema+URL(s)/domain -> one structured object via an async map-reduce job: analyzeSchemaAndPrompt decides single-answer vs multi-entity, spreadSchemas splits the schema, docs chunked x50 and batch-extracted concurrently, null-aware merge + dedup + rerank, then merged. Redis-backed status steps.",
+      "study": "features/structured-extraction/study/llm-extract-map-reduce--from-firecrawl.md",
+      "build": "features/structured-extraction/build/llm-extract-map-reduce--from-firecrawl.md",
+      "source": "https://github.com/firecrawl/firecrawl",
+      "notebooklm": ""
+    },
+    {
+      "id": "web-extraction/web-search-with-scrape--from-firecrawl",
+      "label": "Web Search (+ optional scrape)",
+      "domain": "web-extraction",
+      "repo": "firecrawl",
+      "summary": "Query a search provider (fire-engine -> SearXNG -> DuckDuckGo fallback) returning normalized web/news/images, then optionally scrape every result concurrently through the same scrape pipeline (3-day cache) and merge content back by URL. Soft-fails; search bills search credits, scrapes self-bill; keyless reserve/reconcile.",
+      "study": "features/web-extraction/study/web-search-with-scrape--from-firecrawl.md",
+      "build": "features/web-extraction/build/web-search-with-scrape--from-firecrawl.md",
+      "source": "https://github.com/firecrawl/firecrawl",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -2746,6 +2790,86 @@
     {
       "from": "tts/audio-overview-tts--from-openpaper",
       "to": "tts/elevenlabs-streaming-tts--from-clicky",
+      "type": "alternative-to"
+    },
+    {
+      "from": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "to": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "to": "structured-extraction/llm-extract-map-reduce--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "to": "web-extraction/web-search-with-scrape--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
+      "to": "structured-extraction/llm-extract-map-reduce--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
+      "to": "web-extraction/web-search-with-scrape--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "structured-extraction/llm-extract-map-reduce--from-firecrawl",
+      "to": "web-extraction/web-search-with-scrape--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
+      "to": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "type": "depends-on"
+    },
+    {
+      "from": "web-extraction/web-search-with-scrape--from-firecrawl",
+      "to": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "type": "depends-on"
+    },
+    {
+      "from": "structured-extraction/llm-extract-map-reduce--from-firecrawl",
+      "to": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "type": "depends-on"
+    },
+    {
+      "from": "structured-extraction/llm-extract-map-reduce--from-firecrawl",
+      "to": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
+      "type": "depends-on"
+    },
+    {
+      "from": "structured-extraction/llm-extract-map-reduce--from-firecrawl",
+      "to": "web-extraction/web-search-with-scrape--from-firecrawl",
+      "type": "depends-on"
+    },
+    {
+      "from": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "to": "web-extraction/web-search-with-scrape--from-firecrawl",
+      "type": "same-domain"
+    },
+    {
+      "from": "web-extraction/web-search-with-scrape--from-firecrawl",
+      "to": "web-extraction/smart-scraper-pipeline--from-scrapegraph-ai",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "to": "web-extraction/multi-source-fetch-node--from-scrapegraph-ai",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "to": "content-preprocessing/page-format-pipeline--from-llm-scraper",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "web-extraction/web-search-with-scrape--from-firecrawl",
+      "to": "web-extraction/corpus-and-academic-search--from-openpaper",
       "type": "alternative-to"
     }
   ]
