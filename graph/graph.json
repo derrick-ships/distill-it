@@ -692,9 +692,72 @@
       "build": "features/realtime/build/multiplayer-sync--from-tldraw.md",
       "source": "https://github.com/tldraw/tldraw",
       "notebooklm": ""
+    },
+    {
+      "id": "agent-guardrails/deterministic-security-hooks--from-pagokit",
+      "label": "Deterministic Security Hooks",
+      "domain": "agent-guardrails",
+      "repo": "pagokit",
+      "summary": "Enforce rules on an AI agent's output via Claude Code hooks: PreToolUse/PostToolUse/Stop on Write|Edit|MultiEdit -> one dispatcher -> pluggable run(ctx)->finding|null checks. Exit 2 blocks the write; fail-open on crashes/timeouts. Comment/string stripping + test allowlist + pagokit-ignore bypass + audit log. Domain-agnostic guardrail engine.",
+      "study": "features/agent-guardrails/study/deterministic-security-hooks--from-pagokit.md",
+      "build": "features/agent-guardrails/build/deterministic-security-hooks--from-pagokit.md",
+      "source": "https://github.com/Hainrixz/agente-pagokit",
+      "notebooklm": ""
+    },
+    {
+      "id": "payments/payment-provider-advisor--from-pagokit",
+      "label": "Payment Provider Advisor",
+      "domain": "payments",
+      "repo": "pagokit",
+      "summary": "Data-driven gateway selection: providers.json catalog with context-keyed score_modifiers. ≤5 questions -> hard filters (region/currency/methods/capability/KYC eliminate) -> score = base 5 + matching modifiers -> top pick. Recommendation gives reasons, real fee calc, KYC timeline, anti-patterns, 'verified on <date>'; never shows the score. Adding a provider = adding a JSON row.",
+      "study": "features/payments/study/payment-provider-advisor--from-pagokit.md",
+      "build": "features/payments/build/payment-provider-advisor--from-pagokit.md",
+      "source": "https://github.com/Hainrixz/agente-pagokit",
+      "notebooklm": ""
+    },
+    {
+      "id": "payments/secure-payment-webhook--from-pagokit",
+      "label": "Secure Payment Webhook & Idempotency",
+      "domain": "payments",
+      "repo": "pagokit",
+      "summary": "Correct payment integration shape: checkout with crypto.randomUUID() idempotency key; webhook in strict order raw body -> verify signature -> reject stale timestamp (replay, ~300s) -> dedup by event id -> act -> 200. Parse-before-verify is the core bug. Per-provider scheme read from data. 5 tables incl. webhook_events_processed. Enforced by the deterministic hooks.",
+      "study": "features/payments/study/secure-payment-webhook--from-pagokit.md",
+      "build": "features/payments/build/secure-payment-webhook--from-pagokit.md",
+      "source": "https://github.com/Hainrixz/agente-pagokit",
+      "notebooklm": ""
     }
   ],
   "edges": [
+    {
+      "from": "agent-guardrails/deterministic-security-hooks--from-pagokit",
+      "to": "payments/secure-payment-webhook--from-pagokit",
+      "type": "same-repo"
+    },
+    {
+      "from": "agent-guardrails/deterministic-security-hooks--from-pagokit",
+      "to": "payments/payment-provider-advisor--from-pagokit",
+      "type": "same-repo"
+    },
+    {
+      "from": "payments/payment-provider-advisor--from-pagokit",
+      "to": "payments/secure-payment-webhook--from-pagokit",
+      "type": "same-domain"
+    },
+    {
+      "from": "agent-guardrails/deterministic-security-hooks--from-pagokit",
+      "to": "agent-distribution/agent-driven-install--from-agent-reach",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "payments/secure-payment-webhook--from-pagokit",
+      "to": "infrastructure/byok-proxy--from-open-design",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "payments/payment-provider-advisor--from-pagokit",
+      "to": "document-conversion/converter-pipeline--from-markitdown",
+      "type": "similar-pattern"
+    },
     {
       "from": "tts/flow-matching-sampler--from-supertonic",
       "to": "tts/onnx-tts-pipeline--from-supertonic",
