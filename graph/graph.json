@@ -1143,6 +1143,17 @@
       "build": "features/macos-ui/build/system-hud-replacement--from-boring-notch.md",
       "source": "https://github.com/TheBoredTeam/boring.notch",
       "notebooklm": ""
+    },
+    {
+      "id": "ai-workflow/chat-completion-middleware--from-open-webui",
+      "label": "Chat-Completion Middleware",
+      "domain": "ai-workflow",
+      "repo": "open-webui",
+      "summary": "One ordered async pipeline every chat completion flows through: process_chat_payload mutates a shared form_data in fixed order (pipeline/filter inlet -> memory -> web search -> image gen -> code interpreter -> tools -> files), then model call + stream, then process_chat_response runs outlet filters + background title/tag/follow-up tasks. Central fork: native FC exposes capabilities as tool specs vs non-native prompt-injection + a separate task-model tool-selection call. Server/MCP/terminal/client/builtin tools merge into one tools_dict; extra_params is the DI bundle; sources side-channel for citations.",
+      "study": "features/ai-workflow/study/chat-completion-middleware--from-open-webui.md",
+      "build": "features/ai-workflow/build/chat-completion-middleware--from-open-webui.md",
+      "source": "https://github.com/open-webui/open-webui",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -2529,6 +2540,21 @@
     {
       "from": "media-control/multi-provider-media-control--from-boring-notch",
       "to": "agent-architecture/ordered-backend-routing--from-agent-reach",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "ai-workflow/chat-completion-middleware--from-open-webui",
+      "to": "ai-workflow/agentic-loop--from-open-design",
+      "type": "same-domain"
+    },
+    {
+      "from": "ai-workflow/chat-completion-middleware--from-open-webui",
+      "to": "ai-workflow/agent-cli-integration--from-open-design",
+      "type": "same-domain"
+    },
+    {
+      "from": "ai-workflow/chat-completion-middleware--from-open-webui",
+      "to": "messaging/whatsapp-provider-adapter--from-whatsapp-agentkit",
       "type": "similar-pattern"
     }
   ]
