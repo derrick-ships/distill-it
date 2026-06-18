@@ -17,3 +17,4 @@ Agent architecture covers the structural decisions that determine how an AI skil
 
 - [[agent-output-contract--from-last30days-skill]] — 5-law output contract pattern for consistent LLM behavior
 - [[ordered-backend-routing--from-agent-reach]] — each capability is a Channel owning an ordered backend list; two-phase health-gated selection (first `ok` wins, then first `warn`) with user-pinnable, unknown-value-ignored overrides
+- [[conversation-memory--from-whatsapp-agentkit]] — minimal async per-contact chat memory: one SQL table keyed on phone number, rolling last-N window returned LLM-shaped, SQLite/Postgres swap via one env var

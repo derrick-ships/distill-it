@@ -725,6 +725,39 @@
       "build": "features/payments/build/secure-payment-webhook--from-pagokit.md",
       "source": "https://github.com/Hainrixz/agente-pagokit",
       "notebooklm": ""
+    },
+    {
+      "id": "code-generation/interview-driven-scaffolding--from-whatsapp-agentkit",
+      "label": "Interview-Driven App Scaffolding",
+      "domain": "code-generation",
+      "repo": "whatsapp-agentkit",
+      "summary": "The product IS a prompt: CLAUDE.md + a /build-agent slash command drive a 5-phase, phase-gated flow (verify env, 10-question interview, generate the full app from inline templates parameterized by answers, local test, deploy). Generates only the chosen variant. No code ships; the app materializes when the LLM runs the recipe.",
+      "study": "features/code-generation/study/interview-driven-scaffolding--from-whatsapp-agentkit.md",
+      "build": "features/code-generation/build/interview-driven-scaffolding--from-whatsapp-agentkit.md",
+      "source": "https://github.com/Hainrixz/whatsapp-agentkit",
+      "notebooklm": ""
+    },
+    {
+      "id": "messaging/whatsapp-provider-adapter--from-whatsapp-agentkit",
+      "label": "WhatsApp Provider Adapter Layer",
+      "domain": "messaging",
+      "repo": "whatsapp-agentkit",
+      "summary": "Adapter/strategy pattern for a messaging channel: abstract ProveedorWhatsApp + env-driven factory + Meta/Twilio adapters normalizing webhooks into a common MensajeEntrante. Core code never branches on provider; base carries a no-op validar_webhook only Meta overrides; lazy-imports the chosen adapter.",
+      "study": "features/messaging/study/whatsapp-provider-adapter--from-whatsapp-agentkit.md",
+      "build": "features/messaging/build/whatsapp-provider-adapter--from-whatsapp-agentkit.md",
+      "source": "https://github.com/Hainrixz/whatsapp-agentkit",
+      "notebooklm": ""
+    },
+    {
+      "id": "agent-architecture/conversation-memory--from-whatsapp-agentkit",
+      "label": "Per-Contact Conversation Memory",
+      "domain": "agent-architecture",
+      "repo": "whatsapp-agentkit",
+      "summary": "Minimal async chat memory: one SQLAlchemy table keyed+indexed on phone number, stores user/assistant turns, reads last-N newest-first then reverses to chronological, returns LLM-shaped {role,content} dicts. SQLite local / Postgres prod via one env var (auto-rewrites to asyncpg). Window cap is the only cost control; fetch-before-save avoids duplicating the current turn.",
+      "study": "features/agent-architecture/study/conversation-memory--from-whatsapp-agentkit.md",
+      "build": "features/agent-architecture/build/conversation-memory--from-whatsapp-agentkit.md",
+      "source": "https://github.com/Hainrixz/whatsapp-agentkit",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -1557,6 +1590,56 @@
       "from": "schema-migrations/schema-migrations--from-tldraw",
       "to": "realtime/multiplayer-sync--from-tldraw",
       "type": "same-repo"
+    },
+    {
+      "from": "code-generation/interview-driven-scaffolding--from-whatsapp-agentkit",
+      "to": "messaging/whatsapp-provider-adapter--from-whatsapp-agentkit",
+      "type": "same-repo"
+    },
+    {
+      "from": "code-generation/interview-driven-scaffolding--from-whatsapp-agentkit",
+      "to": "agent-architecture/conversation-memory--from-whatsapp-agentkit",
+      "type": "same-repo"
+    },
+    {
+      "from": "messaging/whatsapp-provider-adapter--from-whatsapp-agentkit",
+      "to": "agent-architecture/conversation-memory--from-whatsapp-agentkit",
+      "type": "same-repo"
+    },
+    {
+      "from": "code-generation/interview-driven-scaffolding--from-whatsapp-agentkit",
+      "to": "messaging/whatsapp-provider-adapter--from-whatsapp-agentkit",
+      "type": "depends-on"
+    },
+    {
+      "from": "code-generation/interview-driven-scaffolding--from-whatsapp-agentkit",
+      "to": "agent-architecture/conversation-memory--from-whatsapp-agentkit",
+      "type": "depends-on"
+    },
+    {
+      "from": "messaging/whatsapp-provider-adapter--from-whatsapp-agentkit",
+      "to": "agent-architecture/conversation-memory--from-whatsapp-agentkit",
+      "type": "depends-on"
+    },
+    {
+      "from": "code-generation/interview-driven-scaffolding--from-whatsapp-agentkit",
+      "to": "code-generation/scraper-code-generation--from-llm-scraper",
+      "type": "same-domain"
+    },
+    {
+      "from": "agent-architecture/conversation-memory--from-whatsapp-agentkit",
+      "to": "agent-architecture/agent-output-contract--from-last30days-skill",
+      "type": "same-domain"
+    },
+    {
+      "from": "agent-architecture/conversation-memory--from-whatsapp-agentkit",
+      "to": "agent-architecture/ordered-backend-routing--from-agent-reach",
+      "type": "same-domain"
+    },
+    {
+      "from": "messaging/whatsapp-provider-adapter--from-whatsapp-agentkit",
+      "to": "agent-architecture/ordered-backend-routing--from-agent-reach",
+      "type": "similar-pattern"
     }
   ]
 }
