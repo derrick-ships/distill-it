@@ -16,3 +16,4 @@ Raw retrieval from multiple sources produces redundancy: the same story appears 
 
 - [[cross-source-clustering--from-last30days-skill]] — two-pass clustering with MMR representative selection
 - [[ai-carousel-generation--from-carousel-generator]] — forced OpenAI function-call into a Zod content schema, with a styled/unstyled split so the LLM fills only content and styling defaults are merged in deterministically
+- [[generate-llms-txt--from-firecrawl]] — auto-build a site's llms.txt (titled page list + one-line descriptions) and optional llms-full.txt by composing map → scrape → per-page summary LLM. A clean example of synthesizing a machine-readable index from a whole site.

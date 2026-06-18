@@ -9,7 +9,7 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![115 nodes](https://img.shields.io/badge/nodes-115-4299e1?style=flat-square)
+![121 nodes](https://img.shields.io/badge/nodes-121-4299e1?style=flat-square)
 ![46 domains](https://img.shields.io/badge/domains-46-9f7aea?style=flat-square)
 ![23 repos](https://img.shields.io/badge/repos-23-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
@@ -44,6 +44,12 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 
 | Domain | Feature | From |
 |--------|---------|------|
+| web-extraction | Site URL Map | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| web-extraction | Agentic Browser Actions | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| research-automation | Deep Research Loop | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| content-synthesis | Generate llms.txt | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| payments | Credit Billing & Concurrency | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| credential-management | Keyless & x402 Access | [firecrawl](https://github.com/firecrawl/firecrawl) |
 | web-extraction | Scrape Engine + Fallback Pipeline | [firecrawl](https://github.com/firecrawl/firecrawl) |
 | pipeline-orchestration | Queue-Backed Crawl | [firecrawl](https://github.com/firecrawl/firecrawl) |
 | structured-extraction | LLM Extract (map-reduce) | [firecrawl](https://github.com/firecrawl/firecrawl) |

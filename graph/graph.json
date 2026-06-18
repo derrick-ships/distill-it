@@ -1264,6 +1264,72 @@
       "build": "features/web-extraction/build/web-search-with-scrape--from-firecrawl.md",
       "source": "https://github.com/firecrawl/firecrawl",
       "notebooklm": ""
+    },
+    {
+      "id": "web-extraction/site-url-map--from-firecrawl",
+      "label": "Site URL Map",
+      "domain": "web-extraction",
+      "repo": "firecrawl",
+      "summary": "Fast URL discovery for a domain (no page scrape): merge sitemap.xml + fire-engine index (<=100, cached per-URL), dedup, filter by subdomain/external/limit, and optionally rerank by embedding cosine similarity against a search query. Seconds, not a crawl.",
+      "study": "features/web-extraction/study/site-url-map--from-firecrawl.md",
+      "build": "features/web-extraction/build/site-url-map--from-firecrawl.md",
+      "source": "https://github.com/firecrawl/firecrawl",
+      "notebooklm": ""
+    },
+    {
+      "id": "web-extraction/agentic-browser-actions--from-firecrawl",
+      "label": "Agentic Browser Actions",
+      "domain": "web-extraction",
+      "repo": "firecrawl",
+      "summary": "An AI agent drives a hosted browser to satisfy a natural-language instruction (click/scroll/type/wait) before capture, returning post-interaction HTML/markdown. A scrape-pipeline transformer (performAgent) calling fire-engine smart-scrape; tiered Gemini models, cost-capped soft-fail, disabled under ZDR.",
+      "study": "features/web-extraction/study/agentic-browser-actions--from-firecrawl.md",
+      "build": "features/web-extraction/build/agentic-browser-actions--from-firecrawl.md",
+      "source": "https://github.com/firecrawl/firecrawl",
+      "notebooklm": ""
+    },
+    {
+      "id": "research-automation/deep-research-loop--from-firecrawl",
+      "label": "Deep Research Loop",
+      "domain": "research-automation",
+      "repo": "firecrawl",
+      "summary": "Autonomous depth-bounded research: from a topic (no URLs), loop generate-queries -> search+scrape -> record sources -> analyze -> pick next topic until maxDepth or timeLimit, then synthesize a report. Async job, Redis-streamed activities+sources; reuses the search+scrape path.",
+      "study": "features/research-automation/study/deep-research-loop--from-firecrawl.md",
+      "build": "features/research-automation/build/deep-research-loop--from-firecrawl.md",
+      "source": "https://github.com/firecrawl/firecrawl",
+      "notebooklm": ""
+    },
+    {
+      "id": "content-synthesis/generate-llms-txt--from-firecrawl",
+      "label": "Generate llms.txt",
+      "domain": "content-synthesis",
+      "repo": "firecrawl",
+      "summary": "Auto-generate a site's llms.txt (titled page list + one-line descriptions) and optional llms-full.txt (full markdown, delimiter-separated) by composing map -> scrape -> per-page one-line-summary LLM. Async job, Redis status, Supabase cache, entry/page caps.",
+      "study": "features/content-synthesis/study/generate-llms-txt--from-firecrawl.md",
+      "build": "features/content-synthesis/build/generate-llms-txt--from-firecrawl.md",
+      "source": "https://github.com/firecrawl/firecrawl",
+      "notebooklm": ""
+    },
+    {
+      "id": "payments/credit-billing-and-concurrency--from-firecrawl",
+      "label": "Credit Billing & Concurrency",
+      "domain": "payments",
+      "repo": "firecrawl",
+      "summary": "Metering: checkTeamCredits gates work from a cached balance chunk; billTeam decrements (Supabase RPC) non-blocking; sub-jobs self-bill. Concurrency via Redis sorted-sets: over-limit jobs parked in a queue, released as actives finish under plan/crawl maxConcurrency; expiry-scored actives swept.",
+      "study": "features/payments/study/credit-billing-and-concurrency--from-firecrawl.md",
+      "build": "features/payments/build/credit-billing-and-concurrency--from-firecrawl.md",
+      "source": "https://github.com/firecrawl/firecrawl",
+      "notebooklm": ""
+    },
+    {
+      "id": "credential-management/keyless-and-x402-access--from-firecrawl",
+      "label": "Keyless & x402 Paid Access",
+      "domain": "credential-management",
+      "repo": "firecrawl",
+      "summary": "Two account-less tiers over the same metering. Keyless: IP -> synthetic team preview_keyless_{ip}, two env-gated daily limits (off unless both set), reserve-then-reconcile credits in Redis, agent-aware 429. x402: HTTP-402 pay-per-call via @x402/express EVM exact scheme settled by a facilitator on a configurable network.",
+      "study": "features/credential-management/study/keyless-and-x402-access--from-firecrawl.md",
+      "build": "features/credential-management/build/keyless-and-x402-access--from-firecrawl.md",
+      "source": "https://github.com/firecrawl/firecrawl",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -2871,6 +2937,166 @@
       "from": "web-extraction/web-search-with-scrape--from-firecrawl",
       "to": "web-extraction/corpus-and-academic-search--from-openpaper",
       "type": "alternative-to"
+    },
+    {
+      "from": "web-extraction/site-url-map--from-firecrawl",
+      "to": "web-extraction/agentic-browser-actions--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/site-url-map--from-firecrawl",
+      "to": "research-automation/deep-research-loop--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/site-url-map--from-firecrawl",
+      "to": "content-synthesis/generate-llms-txt--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/site-url-map--from-firecrawl",
+      "to": "payments/credit-billing-and-concurrency--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/site-url-map--from-firecrawl",
+      "to": "credential-management/keyless-and-x402-access--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/agentic-browser-actions--from-firecrawl",
+      "to": "research-automation/deep-research-loop--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/agentic-browser-actions--from-firecrawl",
+      "to": "content-synthesis/generate-llms-txt--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/agentic-browser-actions--from-firecrawl",
+      "to": "payments/credit-billing-and-concurrency--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/agentic-browser-actions--from-firecrawl",
+      "to": "credential-management/keyless-and-x402-access--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "research-automation/deep-research-loop--from-firecrawl",
+      "to": "content-synthesis/generate-llms-txt--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "research-automation/deep-research-loop--from-firecrawl",
+      "to": "payments/credit-billing-and-concurrency--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "research-automation/deep-research-loop--from-firecrawl",
+      "to": "credential-management/keyless-and-x402-access--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "content-synthesis/generate-llms-txt--from-firecrawl",
+      "to": "payments/credit-billing-and-concurrency--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "content-synthesis/generate-llms-txt--from-firecrawl",
+      "to": "credential-management/keyless-and-x402-access--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "payments/credit-billing-and-concurrency--from-firecrawl",
+      "to": "credential-management/keyless-and-x402-access--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/site-url-map--from-firecrawl",
+      "to": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/site-url-map--from-firecrawl",
+      "to": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/site-url-map--from-firecrawl",
+      "to": "structured-extraction/llm-extract-map-reduce--from-firecrawl",
+      "type": "depends-on"
+    },
+    {
+      "from": "web-extraction/agentic-browser-actions--from-firecrawl",
+      "to": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/agentic-browser-actions--from-firecrawl",
+      "to": "research-automation/deep-research-loop--from-firecrawl",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "research-automation/deep-research-loop--from-firecrawl",
+      "to": "web-extraction/web-search-with-scrape--from-firecrawl",
+      "type": "depends-on"
+    },
+    {
+      "from": "research-automation/deep-research-loop--from-firecrawl",
+      "to": "web-extraction/agentic-browser-actions--from-firecrawl",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "content-synthesis/generate-llms-txt--from-firecrawl",
+      "to": "web-extraction/site-url-map--from-firecrawl",
+      "type": "depends-on"
+    },
+    {
+      "from": "content-synthesis/generate-llms-txt--from-firecrawl",
+      "to": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "type": "depends-on"
+    },
+    {
+      "from": "content-synthesis/generate-llms-txt--from-firecrawl",
+      "to": "structured-extraction/llm-extract-map-reduce--from-firecrawl",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "payments/credit-billing-and-concurrency--from-firecrawl",
+      "to": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "payments/credit-billing-and-concurrency--from-firecrawl",
+      "to": "credential-management/keyless-and-x402-access--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "payments/credit-billing-and-concurrency--from-firecrawl",
+      "to": "web-extraction/web-search-with-scrape--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "credential-management/keyless-and-x402-access--from-firecrawl",
+      "to": "payments/credit-billing-and-concurrency--from-firecrawl",
+      "type": "depends-on"
+    },
+    {
+      "from": "credential-management/keyless-and-x402-access--from-firecrawl",
+      "to": "web-extraction/web-search-with-scrape--from-firecrawl",
+      "type": "same-repo"
+    },
+    {
+      "from": "credential-management/keyless-and-x402-access--from-firecrawl",
+      "to": "credential-management/multi-tier-credentials--from-last30days-skill",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "research-automation/deep-research-loop--from-firecrawl",
+      "to": "research-automation/multi-source-research-engine--from-last30days-skill",
+      "type": "similar-pattern"
     }
   ]
 }

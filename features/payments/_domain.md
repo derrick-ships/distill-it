@@ -18,6 +18,7 @@
 |---------|------|-------|-------|
 | Payment Provider Advisor | pagokit | [study](study/payment-provider-advisor--from-pagokit.md) | [build](build/payment-provider-advisor--from-pagokit.md) |
 | Secure Payment Webhook & Idempotency | pagokit | [study](study/secure-payment-webhook--from-pagokit.md) | [build](build/secure-payment-webhook--from-pagokit.md) |
+- [[credit-billing-and-concurrency--from-firecrawl]] — credit metering (pre-flight check + non-blocking decrement, self-billing sub-jobs) plus a Redis sorted-set concurrency queue that PARKS over-limit jobs and releases them as slots free, with expiry-scored sweeping. The metering spine of a paid scraping API.
 
 ## Related domains
 - [[agent-guardrails]] — PagoKit's payment-security rules are *enforced* by deterministic hooks, not just recommended.
