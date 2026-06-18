@@ -12,6 +12,7 @@ skew).
 | Feature | Repo | Study | Build |
 |---------|------|-------|-------|
 | Multiplayer Sync | tldraw | [study](study/multiplayer-sync--from-tldraw.md) | [build](build/multiplayer-sync--from-tldraw.md) |
+- [[debounced-file-watcher--from-hazelnut]] — watches folders via OS file events with last-seen-time debouncing (collapses the burst of events from a half-written file), a background initial scan of existing files, and longest-prefix routing of each file to its directory's rule set. The 'react the instant a file appears, but only once it settles' pattern.
 
 ## Mental model
 tldraw's server-authoritative sync (the alternative to CRDTs):

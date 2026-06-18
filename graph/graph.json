@@ -1429,6 +1429,39 @@
       "build": "features/rendering/build/visualization-auto-selection--from-metabase.md",
       "source": "https://github.com/metabase/metabase",
       "notebooklm": ""
+    },
+    {
+      "id": "realtime/debounced-file-watcher--from-hazelnut",
+      "label": "Debounced File Watcher",
+      "domain": "realtime",
+      "repo": "hazelnut",
+      "summary": "Watches dirs via the OS notify API, polls a channel non-blockingly, debounces by last-seen-time per path (cap+cleanup), acts only on Create/Modify, routes each file to its watched dir's allowed rule set via longest-prefix canonical matching, and runs a background initial scan of existing files. Skips symlinks + NotFound races.",
+      "study": "features/realtime/study/debounced-file-watcher--from-hazelnut.md",
+      "build": "features/realtime/build/debounced-file-watcher--from-hazelnut.md",
+      "source": "https://github.com/ricardodantas/hazelnut",
+      "notebooklm": ""
+    },
+    {
+      "id": "pipeline-orchestration/file-rules-engine--from-hazelnut",
+      "label": "File Rules Engine",
+      "domain": "pipeline-orchestration",
+      "repo": "hazelnut",
+      "summary": "Condition->action rules over file paths. A Condition is an all-optional struct matched by AND (extension(s), glob/regex name, size >/<, age-days >/<, is_directory, is_hidden; empty=all). Engine evaluates ordered enable-able rules (first/all/filtered-by-name, stop_processing) and executes actions, stopping after a destructive one. Perf: one metadata syscall for size+age; thread-local cap-1000 glob/regex caches.",
+      "study": "features/pipeline-orchestration/study/file-rules-engine--from-hazelnut.md",
+      "build": "features/pipeline-orchestration/build/file-rules-engine--from-hazelnut.md",
+      "source": "https://github.com/ricardodantas/hazelnut",
+      "notebooklm": ""
+    },
+    {
+      "id": "pipeline-orchestration/file-actions-executor--from-hazelnut",
+      "label": "File Actions Executor",
+      "domain": "pipeline-orchestration",
+      "repo": "hazelnut",
+      "summary": "A tagged Action enum with per-variant execute(path): Move/Copy (~-expanded dest, opt create_destination, overwrite-guarded), Rename (pattern {name}{ext}{date}), Trash (recoverable) vs Delete (permanent), Archive (zip), RunScript (placeholder {path}{name}{dir} -> platform shell). Move/rename/trash/delete are destructive and stop the chain.",
+      "study": "features/pipeline-orchestration/study/file-actions-executor--from-hazelnut.md",
+      "build": "features/pipeline-orchestration/build/file-actions-executor--from-hazelnut.md",
+      "source": "https://github.com/ricardodantas/hazelnut",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -3361,6 +3394,46 @@
       "from": "pipeline-orchestration/query-processor-middleware-pipeline--from-metabase",
       "to": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
       "type": "same-domain"
+    },
+    {
+      "from": "realtime/debounced-file-watcher--from-hazelnut",
+      "to": "pipeline-orchestration/file-rules-engine--from-hazelnut",
+      "type": "same-repo"
+    },
+    {
+      "from": "realtime/debounced-file-watcher--from-hazelnut",
+      "to": "pipeline-orchestration/file-actions-executor--from-hazelnut",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/file-rules-engine--from-hazelnut",
+      "to": "pipeline-orchestration/file-actions-executor--from-hazelnut",
+      "type": "same-repo"
+    },
+    {
+      "from": "realtime/debounced-file-watcher--from-hazelnut",
+      "to": "pipeline-orchestration/file-rules-engine--from-hazelnut",
+      "type": "depends-on"
+    },
+    {
+      "from": "pipeline-orchestration/file-rules-engine--from-hazelnut",
+      "to": "pipeline-orchestration/file-actions-executor--from-hazelnut",
+      "type": "depends-on"
+    },
+    {
+      "from": "realtime/debounced-file-watcher--from-hazelnut",
+      "to": "pipeline-orchestration/file-actions-executor--from-hazelnut",
+      "type": "depends-on"
+    },
+    {
+      "from": "realtime/debounced-file-watcher--from-hazelnut",
+      "to": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "pipeline-orchestration/file-rules-engine--from-hazelnut",
+      "to": "pipeline-orchestration/query-processor-middleware-pipeline--from-metabase",
+      "type": "similar-pattern"
     }
   ]
 }
