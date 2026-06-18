@@ -692,6 +692,105 @@
       "build": "features/realtime/build/multiplayer-sync--from-tldraw.md",
       "source": "https://github.com/tldraw/tldraw",
       "notebooklm": ""
+    },
+    {
+      "id": "lead-scoring/rule-based-lead-scoring--from-auto-crm",
+      "label": "Rule-Based Lead Scoring",
+      "domain": "lead-scoring",
+      "repo": "auto-crm",
+      "summary": "Deterministic 0-100 lead score: temperature base + contact completeness + capped engagement - recency decay + deal-value bonus, clamped; thresholds 70/40 -> hot/warm/cold. Offline, pure, doubles as the AI classifier's fallback.",
+      "study": "features/lead-scoring/study/rule-based-lead-scoring--from-auto-crm.md",
+      "build": "features/lead-scoring/build/rule-based-lead-scoring--from-auto-crm.md",
+      "source": "https://github.com/Hainrixz/auto-crm",
+      "notebooklm": ""
+    },
+    {
+      "id": "ai-integration/ai-lead-classification--from-auto-crm",
+      "label": "AI Lead Classification (Claude)",
+      "domain": "ai-integration",
+      "repo": "auto-crm",
+      "summary": "Optional Claude Sonnet lead grader -> strict JSON {temperature, confidence, nextAction, reasoning} in Spanish. Null-client-as-feature-flag, regex {...} JSON extraction, total silent fallback to the rule-based scorer. Same write contract.",
+      "study": "features/ai-integration/study/ai-lead-classification--from-auto-crm.md",
+      "build": "features/ai-integration/build/ai-lead-classification--from-auto-crm.md",
+      "source": "https://github.com/Hainrixz/auto-crm",
+      "notebooklm": ""
+    },
+    {
+      "id": "lead-ingestion/webhook-lead-ingestion--from-auto-crm",
+      "label": "Webhook Lead Ingestion",
+      "domain": "lead-ingestion",
+      "repo": "auto-crm",
+      "summary": "Public POST endpoint mapping multilingual/Typeform field aliases -> contact. Optional x-webhook-secret auth, name required, defaults webhook/cold/0. No dedup, no scoring on ingest (by design); echoes received keys on 400.",
+      "study": "features/lead-ingestion/study/webhook-lead-ingestion--from-auto-crm.md",
+      "build": "features/lead-ingestion/build/webhook-lead-ingestion--from-auto-crm.md",
+      "source": "https://github.com/Hainrixz/auto-crm",
+      "notebooklm": ""
+    },
+    {
+      "id": "agent-architecture/mcp-crm-server--from-auto-crm",
+      "label": "MCP CRM Server",
+      "domain": "agent-architecture",
+      "repo": "auto-crm",
+      "summary": "Exposes a local SQLite CRM to Claude as 10 stdio MCP tools (contacts/deals/activities/pipeline/followups/stats) over better-sqlite3 (WAL, FKs). Read-tools pre-aggregate; no auth (stdio local-only); shares the live DB with the web app.",
+      "study": "features/agent-architecture/study/mcp-crm-server--from-auto-crm.md",
+      "build": "features/agent-architecture/build/mcp-crm-server--from-auto-crm.md",
+      "source": "https://github.com/Hainrixz/auto-crm",
+      "notebooklm": ""
+    },
+    {
+      "id": "canvas-interaction/kanban-pipeline-dnd--from-auto-crm",
+      "label": "Kanban Pipeline (drag-and-drop)",
+      "domain": "canvas-interaction",
+      "repo": "auto-crm",
+      "summary": "@dnd-kit sales pipeline board. Optimistic update with full-board snapshot rollback: snapshot on drag start, move in onDragOver, PUT /api/pipeline on drop, restore+toast on failure. 8px activation, closestCorners, DragOverlay.",
+      "study": "features/canvas-interaction/study/kanban-pipeline-dnd--from-auto-crm.md",
+      "build": "features/canvas-interaction/build/kanban-pipeline-dnd--from-auto-crm.md",
+      "source": "https://github.com/Hainrixz/auto-crm",
+      "notebooklm": ""
+    },
+    {
+      "id": "analytics/crm-dashboard-kpis--from-auto-crm",
+      "label": "CRM Dashboard KPIs & Analytics",
+      "domain": "analytics",
+      "repo": "auto-crm",
+      "summary": "KPI cards (contacts, active deals, pipeline value, conversion) + Recharts breakdowns. One server-side getStats() reused by web UI and MCP crm_get_stats so numbers never drift; won/lost via stage flags not names; shared color tokens.",
+      "study": "features/analytics/study/crm-dashboard-kpis--from-auto-crm.md",
+      "build": "features/analytics/build/crm-dashboard-kpis--from-auto-crm.md",
+      "source": "https://github.com/Hainrixz/auto-crm",
+      "notebooklm": ""
+    },
+    {
+      "id": "data-portability/csv-import-export--from-auto-crm",
+      "label": "CSV Import / Export",
+      "domain": "data-portability",
+      "repo": "auto-crm",
+      "summary": "Partial-success JSON bulk import (201/207 + per-row errors, name required) and dual contacts/deals CSV export with correct escaping, UTF-8 BOM for Excel, humanized values, attachment download with dated filename.",
+      "study": "features/data-portability/study/csv-import-export--from-auto-crm.md",
+      "build": "features/data-portability/build/csv-import-export--from-auto-crm.md",
+      "source": "https://github.com/Hainrixz/auto-crm",
+      "notebooklm": ""
+    },
+    {
+      "id": "activity-tracking/followup-buckets--from-auto-crm",
+      "label": "Activity Tracking & Follow-up Buckets",
+      "domain": "activity-tracking",
+      "repo": "auto-crm",
+      "summary": "Activities timeline; pending follow-up = scheduledAt set & completedAt null. Buckets incomplete items into overdue/today/upcoming/unscheduled via Unix-seconds day-window math. Backs web board + MCP crm_get_followups; feeds scoring recency.",
+      "study": "features/activity-tracking/study/followup-buckets--from-auto-crm.md",
+      "build": "features/activity-tracking/build/followup-buckets--from-auto-crm.md",
+      "source": "https://github.com/Hainrixz/auto-crm",
+      "notebooklm": ""
+    },
+    {
+      "id": "agent-distribution/self-customizing-crm--from-auto-crm",
+      "label": "Self-Customizing CRM via Claude Code Commands",
+      "domain": "agent-distribution",
+      "repo": "auto-crm",
+      "summary": "The configuration layer is an AI agent: .claude/commands/*.md runbooks let Claude edit the real Drizzle schema/components to fit the business instead of a settings UI. Structural vs operational commands, guard-railed by CLAUDE.md/AGENTS.md.",
+      "study": "features/agent-distribution/study/self-customizing-crm--from-auto-crm.md",
+      "build": "features/agent-distribution/build/self-customizing-crm--from-auto-crm.md",
+      "source": "https://github.com/Hainrixz/auto-crm",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -1494,6 +1593,126 @@
       "from": "schema-migrations/schema-migrations--from-tldraw",
       "to": "realtime/multiplayer-sync--from-tldraw",
       "type": "same-repo"
+    },
+    {
+      "from": "lead-scoring/rule-based-lead-scoring--from-auto-crm",
+      "to": "ai-integration/ai-lead-classification--from-auto-crm",
+      "type": "same-repo"
+    },
+    {
+      "from": "ai-integration/ai-lead-classification--from-auto-crm",
+      "to": "lead-ingestion/webhook-lead-ingestion--from-auto-crm",
+      "type": "same-repo"
+    },
+    {
+      "from": "lead-ingestion/webhook-lead-ingestion--from-auto-crm",
+      "to": "agent-architecture/mcp-crm-server--from-auto-crm",
+      "type": "same-repo"
+    },
+    {
+      "from": "agent-architecture/mcp-crm-server--from-auto-crm",
+      "to": "canvas-interaction/kanban-pipeline-dnd--from-auto-crm",
+      "type": "same-repo"
+    },
+    {
+      "from": "canvas-interaction/kanban-pipeline-dnd--from-auto-crm",
+      "to": "analytics/crm-dashboard-kpis--from-auto-crm",
+      "type": "same-repo"
+    },
+    {
+      "from": "analytics/crm-dashboard-kpis--from-auto-crm",
+      "to": "data-portability/csv-import-export--from-auto-crm",
+      "type": "same-repo"
+    },
+    {
+      "from": "data-portability/csv-import-export--from-auto-crm",
+      "to": "activity-tracking/followup-buckets--from-auto-crm",
+      "type": "same-repo"
+    },
+    {
+      "from": "activity-tracking/followup-buckets--from-auto-crm",
+      "to": "agent-distribution/self-customizing-crm--from-auto-crm",
+      "type": "same-repo"
+    },
+    {
+      "from": "agent-distribution/self-customizing-crm--from-auto-crm",
+      "to": "lead-scoring/rule-based-lead-scoring--from-auto-crm",
+      "type": "same-repo"
+    },
+    {
+      "from": "ai-integration/ai-lead-classification--from-auto-crm",
+      "to": "lead-scoring/rule-based-lead-scoring--from-auto-crm",
+      "type": "depends-on"
+    },
+    {
+      "from": "lead-ingestion/webhook-lead-ingestion--from-auto-crm",
+      "to": "lead-scoring/rule-based-lead-scoring--from-auto-crm",
+      "type": "depends-on"
+    },
+    {
+      "from": "data-portability/csv-import-export--from-auto-crm",
+      "to": "lead-scoring/rule-based-lead-scoring--from-auto-crm",
+      "type": "depends-on"
+    },
+    {
+      "from": "lead-scoring/rule-based-lead-scoring--from-auto-crm",
+      "to": "activity-tracking/followup-buckets--from-auto-crm",
+      "type": "depends-on"
+    },
+    {
+      "from": "analytics/crm-dashboard-kpis--from-auto-crm",
+      "to": "canvas-interaction/kanban-pipeline-dnd--from-auto-crm",
+      "type": "depends-on"
+    },
+    {
+      "from": "agent-architecture/mcp-crm-server--from-auto-crm",
+      "to": "activity-tracking/followup-buckets--from-auto-crm",
+      "type": "depends-on"
+    },
+    {
+      "from": "agent-architecture/mcp-crm-server--from-auto-crm",
+      "to": "analytics/crm-dashboard-kpis--from-auto-crm",
+      "type": "depends-on"
+    },
+    {
+      "from": "agent-distribution/self-customizing-crm--from-auto-crm",
+      "to": "agent-architecture/mcp-crm-server--from-auto-crm",
+      "type": "same-domain"
+    },
+    {
+      "from": "agent-distribution/self-customizing-crm--from-auto-crm",
+      "to": "activity-tracking/followup-buckets--from-auto-crm",
+      "type": "depends-on"
+    },
+    {
+      "from": "agent-distribution/self-customizing-crm--from-auto-crm",
+      "to": "analytics/crm-dashboard-kpis--from-auto-crm",
+      "type": "depends-on"
+    },
+    {
+      "from": "ai-integration/ai-lead-classification--from-auto-crm",
+      "to": "ai-integration/provider-agnostic-llm--from-llm-scraper",
+      "type": "alternative-to"
+    },
+    {
+      "from": "agent-architecture/mcp-crm-server--from-auto-crm",
+      "to": "agent-architecture/agent-output-contract--from-last30days-skill",
+      "type": "same-domain"
+    },
+    {
+      "from": "agent-architecture/mcp-crm-server--from-auto-crm",
+      "to": "agent-architecture/ordered-backend-routing--from-agent-reach",
+      "type": "same-domain"
+    },
+    {
+      "from": "canvas-interaction/kanban-pipeline-dnd--from-auto-crm",
+      "to": "canvas-interaction/node-dragging--from-xyflow",
+      "type": "alternative-to"
+    },
+    {
+      "from": "agent-distribution/self-customizing-crm--from-auto-crm",
+      "to": "agent-distribution/agent-driven-install--from-agent-reach",
+      "type": "similar-pattern"
     }
   ]
 }

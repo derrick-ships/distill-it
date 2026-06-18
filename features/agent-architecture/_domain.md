@@ -17,3 +17,4 @@ Agent architecture covers the structural decisions that determine how an AI skil
 
 - [[agent-output-contract--from-last30days-skill]] — 5-law output contract pattern for consistent LLM behavior
 - [[ordered-backend-routing--from-agent-reach]] — each capability is a Channel owning an ordered backend list; two-phase health-gated selection (first `ok` wins, then first `warn`) with user-pinnable, unknown-value-ignored overrides
+- [[mcp-crm-server--from-auto-crm]] — exposes a whole product (a local SQLite CRM) to an LLM as 10 stdio MCP tools shaped around the domain's nouns/verbs; read-tools pre-aggregate so the model narrates instead of computing, and the no-auth local-trust model rides on stdio being local-only

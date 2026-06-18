@@ -18,3 +18,4 @@ When the user of a tool is (or works through) an AI agent, the natural installer
 ## Features in this domain
 
 - [[agent-driven-install--from-agent-reach]] — install.md as an agent-executable runbook: goal + "never a wrapper" framing, hard safety boundaries, artifact-location table, env-branched steps, user checkpoints, and the update/`watch` maintenance loop
+- [[self-customizing-crm--from-auto-crm]] — `.claude/commands/*.md` as the *configuration layer* of a product: the agent edits the real Drizzle schema/components to fit the business instead of a settings UI; structural (setup/connect/customize/import) vs operational (add-lead/analyze/briefing/digest) commands, guard-railed by CLAUDE.md/AGENTS.md

@@ -24,3 +24,4 @@ A node-based editor (React Flow / Svelte Flow / Figma-style canvas) renders cont
 - [[pan-zoom-canvas--from-xyflow]] — the d3-zoom-wrapped infinite viewport (wheel/pinch/drag, fit-view, animated transforms)
 - [[node-dragging--from-xyflow]] — d3-drag node movement with multi-select, snap-to-grid, drag threshold, and auto-pan
 - [[minimap-navigation--from-xyflow]] — overview panel that maps clicks/drags back onto the main viewport
+- [[kanban-pipeline-dnd--from-auto-crm]] — a column/card Kanban (sales pipeline) on @dnd-kit; the contrasting "easy mode" of this domain — list/column DnD out of the box with an 8px activation threshold and optimistic-update-with-full-snapshot-rollback, vs xyflow's hand-rolled free-canvas dragging
