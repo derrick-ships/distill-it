@@ -1110,6 +1110,39 @@
       "build": "features/onboarding/build/first-launch-video-onboarding--from-clicky.md",
       "source": "https://github.com/farzaa/clicky",
       "notebooklm": ""
+    },
+    {
+      "id": "macos-ui/notch-shaped-window--from-boring-notch",
+      "label": "Notch-Shaped Always-On-Top Window",
+      "domain": "macos-ui",
+      "repo": "boring-notch",
+      "summary": "Borderless non-activating NSPanel shaped to the MacBook notch, pinned above everything across Spaces & fullscreen via a private CGSSpace at Int32.max (flag=0x1 mandatory), plus a SkyLight-framework path for lock-screen visibility. Sizing from NSScreen.auxiliaryTopArea (width) + safeAreaInsets.top (height). Private CGS/SkyLight APIs via @_silgen_name and dlopen.",
+      "study": "features/macos-ui/study/notch-shaped-window--from-boring-notch.md",
+      "build": "features/macos-ui/build/notch-shaped-window--from-boring-notch.md",
+      "source": "https://github.com/TheBoredTeam/boring.notch",
+      "notebooklm": ""
+    },
+    {
+      "id": "media-control/multi-provider-media-control--from-boring-notch",
+      "label": "Multi-Provider Media Control",
+      "domain": "media-control",
+      "repo": "boring-notch",
+      "summary": "Unified now-playing across Apple Music/Spotify (AppleScript), YouTube Music (local HTTP+WebSocket@26538), and system NowPlaying (private MediaRemote read via a Perl DynaLoader subprocess, commands via MediaRemote.framework in-process). One MediaControllerProtocol publishing a normalized PlaybackState; MusicManager selects+hot-swaps the active adapter; capability flags + deprecation fallback.",
+      "study": "features/media-control/study/multi-provider-media-control--from-boring-notch.md",
+      "build": "features/media-control/build/multi-provider-media-control--from-boring-notch.md",
+      "source": "https://github.com/TheBoredTeam/boring.notch",
+      "notebooklm": ""
+    },
+    {
+      "id": "macos-ui/system-hud-replacement--from-boring-notch",
+      "label": "System HUD Replacement",
+      "domain": "macos-ui",
+      "repo": "boring-notch",
+      "summary": "CGEventTap at .cghidEventTap (.defaultTap) intercepting NX_SYSDEFINED(14) media keys; suppresses Apple's OSD by returning nil (consuming the event), then sets the value itself — volume via public CoreAudio (kAudioDevicePropertyVolumeScalar/Mute), brightness/backlight via private API in an XPC helper — and shows a custom auto-hiding notch HUD. Needs Accessibility permission.",
+      "study": "features/macos-ui/study/system-hud-replacement--from-boring-notch.md",
+      "build": "features/macos-ui/build/system-hud-replacement--from-boring-notch.md",
+      "source": "https://github.com/TheBoredTeam/boring.notch",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -2447,6 +2480,56 @@
       "from": "rendering/notch-anchored-companion-overlay--from-clicky",
       "to": "media-processing/screen-capture-self-exclusion--from-clicky",
       "type": "same-repo"
+    },
+    {
+      "from": "macos-ui/notch-shaped-window--from-boring-notch",
+      "to": "media-control/multi-provider-media-control--from-boring-notch",
+      "type": "same-repo"
+    },
+    {
+      "from": "macos-ui/notch-shaped-window--from-boring-notch",
+      "to": "macos-ui/system-hud-replacement--from-boring-notch",
+      "type": "same-repo"
+    },
+    {
+      "from": "media-control/multi-provider-media-control--from-boring-notch",
+      "to": "macos-ui/system-hud-replacement--from-boring-notch",
+      "type": "same-repo"
+    },
+    {
+      "from": "macos-ui/notch-shaped-window--from-boring-notch",
+      "to": "macos-ui/system-hud-replacement--from-boring-notch",
+      "type": "same-domain"
+    },
+    {
+      "from": "macos-ui/system-hud-replacement--from-boring-notch",
+      "to": "macos-ui/notch-shaped-window--from-boring-notch",
+      "type": "depends-on"
+    },
+    {
+      "from": "media-control/multi-provider-media-control--from-boring-notch",
+      "to": "macos-ui/notch-shaped-window--from-boring-notch",
+      "type": "depends-on"
+    },
+    {
+      "from": "macos-ui/notch-shaped-window--from-boring-notch",
+      "to": "infrastructure/local-first-architecture--from-open-design",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "media-control/multi-provider-media-control--from-boring-notch",
+      "to": "email-platform/email-provider-abstraction--from-inbox-zero",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "media-control/multi-provider-media-control--from-boring-notch",
+      "to": "messaging/whatsapp-provider-adapter--from-whatsapp-agentkit",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "media-control/multi-provider-media-control--from-boring-notch",
+      "to": "agent-architecture/ordered-backend-routing--from-agent-reach",
+      "type": "similar-pattern"
     }
   ]
 }
