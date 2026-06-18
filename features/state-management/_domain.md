@@ -14,6 +14,7 @@ hang off a single source of truth.
 |---------|------|-------|-------|
 | Reactive Record Store | tldraw | [study](study/reactive-record-store--from-tldraw.md) | [build](build/reactive-record-store--from-tldraw.md) |
 | Reactive Store Architecture | xyflow | [study](study/reactive-store--from-xyflow.md) | [build](build/reactive-store--from-xyflow.md) |
+| JSON File Store with Async-Mutex | open-carrusel | [study](study/json-mutex-store--from-open-carrusel.md) | [build](build/json-mutex-store--from-open-carrusel.md) |
 
 ## Mental model
 Two complementary takes on the same problem appear across the repos:

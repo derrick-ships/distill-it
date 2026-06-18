@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![78 nodes](https://img.shields.io/badge/nodes-78-4299e1?style=flat-square)
+![82 nodes](https://img.shields.io/badge/nodes-82-4299e1?style=flat-square)
 ![42 domains](https://img.shields.io/badge/domains-42-9f7aea?style=flat-square)
-![15 repos](https://img.shields.io/badge/repos-15-68d391?style=flat-square)
+![16 repos](https://img.shields.io/badge/repos-16-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -113,6 +113,10 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | data-portability | CSV Import / Export | [auto-crm](https://github.com/Hainrixz/auto-crm) |
 | activity-tracking | Activity Tracking & Follow-up Buckets | [auto-crm](https://github.com/Hainrixz/auto-crm) |
 | agent-distribution | Self-Customizing CRM (Claude commands) | [auto-crm](https://github.com/Hainrixz/auto-crm) |
+| agent-architecture | Claude CLI Subprocess Agent | [open-carrusel](https://github.com/Hainrixz/open-carrusel) |
+| rendering | HTML→PNG Slide Export | [open-carrusel](https://github.com/Hainrixz/open-carrusel) |
+| agent-guardrails | Staged Actions Confirmation Queue | [open-carrusel](https://github.com/Hainrixz/open-carrusel) |
+| state-management | JSON File Store with Async-Mutex | [open-carrusel](https://github.com/Hainrixz/open-carrusel) |
 
 ---
 
