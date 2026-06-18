@@ -16,7 +16,7 @@
       "label": "Converter Pipeline",
       "domain": "document-conversion",
       "repo": "markitdown",
-      "summary": "Priority-sorted pluggable converter registry. Source-type dispatch → layered file detection → sorted converter chain. First accepts+succeeds wins. Output normalized to clean Markdown.",
+      "summary": "Priority-sorted pluggable converter registry. Source-type dispatch \u2192 layered file detection \u2192 sorted converter chain. First accepts+succeeds wins. Output normalized to clean Markdown.",
       "study": "features/document-conversion/study/converter-pipeline--from-markitdown.md",
       "build": "features/document-conversion/build/converter-pipeline--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -27,7 +27,7 @@
       "label": "PDF Conversion",
       "domain": "document-conversion",
       "repo": "markitdown",
-      "summary": "Dual-library PDF extraction: pdfplumber primary (table/form column detection, page.close() memory management) → pdfminer fallback. Markdown tables from column-clustered word positions.",
+      "summary": "Dual-library PDF extraction: pdfplumber primary (table/form column detection, page.close() memory management) \u2192 pdfminer fallback. Markdown tables from column-clustered word positions.",
       "study": "features/document-conversion/study/pdf-conversion--from-markitdown.md",
       "build": "features/document-conversion/build/pdf-conversion--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -38,7 +38,7 @@
       "label": "Office Doc Conversion",
       "domain": "document-conversion",
       "repo": "markitdown",
-      "summary": "DOCX/PPTX/XLSX → Markdown via python-docx, python-pptx, pandas. Tables go HTML→Markdown via HtmlConverter.convert_string(). PPTX handles charts, speaker notes, and optional LLM image captions.",
+      "summary": "DOCX/PPTX/XLSX \u2192 Markdown via python-docx, python-pptx, pandas. Tables go HTML\u2192Markdown via HtmlConverter.convert_string(). PPTX handles charts, speaker notes, and optional LLM image captions.",
       "study": "features/document-conversion/study/office-doc-conversion--from-markitdown.md",
       "build": "features/document-conversion/build/office-doc-conversion--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -49,7 +49,7 @@
       "label": "ZIP Archive Traversal",
       "domain": "document-conversion",
       "repo": "markitdown",
-      "summary": "Recursive ZIP extraction: iterate entries → BytesIO streams → call parent pipeline on each file. Silent skip on conversion failure. Nested ZIPs handled automatically.",
+      "summary": "Recursive ZIP extraction: iterate entries \u2192 BytesIO streams \u2192 call parent pipeline on each file. Silent skip on conversion failure. Nested ZIPs handled automatically.",
       "study": "features/document-conversion/study/zip-archive-traversal--from-markitdown.md",
       "build": "features/document-conversion/build/zip-archive-traversal--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -71,7 +71,7 @@
       "label": "Magika File Detection",
       "domain": "file-detection",
       "repo": "markitdown",
-      "summary": "Layered type detection: extension+MIME hints → mimetypes bidirectional enrichment → Magika ML content scan → charset_normalizer for text files. Returns ranked StreamInfo list.",
+      "summary": "Layered type detection: extension+MIME hints \u2192 mimetypes bidirectional enrichment \u2192 Magika ML content scan \u2192 charset_normalizer for text files. Returns ranked StreamInfo list.",
       "study": "features/file-detection/study/magika-file-detection--from-markitdown.md",
       "build": "features/file-detection/build/magika-file-detection--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -93,7 +93,7 @@
       "label": "Audio Transcription",
       "domain": "media-processing",
       "repo": "markitdown",
-      "summary": "WAV/MP3/M4A/MP4 → Markdown via speech_recognition (Google Web Speech API) + exiftool metadata. Duration excluded (wrong from memory stream). Temp file needed for non-WAV formats.",
+      "summary": "WAV/MP3/M4A/MP4 \u2192 Markdown via speech_recognition (Google Web Speech API) + exiftool metadata. Duration excluded (wrong from memory stream). Temp file needed for non-WAV formats.",
       "study": "features/media-processing/study/audio-transcription--from-markitdown.md",
       "build": "features/media-processing/build/audio-transcription--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -104,7 +104,7 @@
       "label": "YouTube Extraction",
       "domain": "web-extraction",
       "repo": "markitdown",
-      "summary": "YouTube watch URL → Markdown. Meta tag scrape for views/keywords/duration. Recursive ytInitialData JSON search for description. youtube_transcript_api with 3-retry logic for transcript.",
+      "summary": "YouTube watch URL \u2192 Markdown. Meta tag scrape for views/keywords/duration. Recursive ytInitialData JSON search for description. youtube_transcript_api with 3-retry logic for transcript.",
       "study": "features/web-extraction/study/youtube-extraction--from-markitdown.md",
       "build": "features/web-extraction/build/youtube-extraction--from-markitdown.md",
       "source": "https://github.com/microsoft/markitdown",
@@ -148,7 +148,7 @@
       "label": "Multi-Source Research Engine",
       "domain": "research-automation",
       "repo": "last30days-skill",
-      "summary": "ThreadPoolExecutor fan-out to 6–20 sources. Depth tiers (quick/default/deep) cap source count. 2-phase retrieval with 5xx retry. Unified Report schema. Five emit formats (compact/json/context/md/html).",
+      "summary": "ThreadPoolExecutor fan-out to 6\u201320 sources. Depth tiers (quick/default/deep) cap source count. 2-phase retrieval with 5xx retry. Unified Report schema. Five emit formats (compact/json/context/md/html).",
       "study": "features/research-automation/study/multi-source-research-engine--from-last30days-skill.md",
       "build": "features/research-automation/build/multi-source-research-engine--from-last30days-skill.md",
       "source": "https://github.com/mvanhorn/last30days-skill",
@@ -159,7 +159,7 @@
       "label": "Entity Resolution",
       "domain": "research-automation",
       "repo": "last30days-skill",
-      "summary": "4 parallel searches resolve topic → {subreddits, handles, repos, context}. X handles get 3× URL weight. GitHub -action canonicalization. News context capped at 300 chars for LLM injection.",
+      "summary": "4 parallel searches resolve topic \u2192 {subreddits, handles, repos, context}. X handles get 3\u00d7 URL weight. GitHub -action canonicalization. News context capped at 300 chars for LLM injection.",
       "study": "features/research-automation/study/entity-resolution--from-last30days-skill.md",
       "build": "features/research-automation/build/entity-resolution--from-last30days-skill.md",
       "source": "https://github.com/mvanhorn/last30days-skill",
@@ -203,7 +203,7 @@
       "label": "Schema-Driven Extraction",
       "domain": "structured-extraction",
       "repo": "llm-scraper",
-      "summary": "Playwright page + Zod/JSON schema → typed object. Preprocess page, then AI SDK generateText with schema as `output` constraint, read result.output. Schema is both TS type and runtime constraint. One method: run(). No retry loop.",
+      "summary": "Playwright page + Zod/JSON schema \u2192 typed object. Preprocess page, then AI SDK generateText with schema as `output` constraint, read result.output. Schema is both TS type and runtime constraint. One method: run(). No retry loop.",
       "study": "features/structured-extraction/study/schema-driven-extraction--from-llm-scraper.md",
       "build": "features/structured-extraction/build/schema-driven-extraction--from-llm-scraper.md",
       "source": "https://github.com/mishushakov/llm-scraper",
@@ -214,7 +214,7 @@
       "label": "Streaming Partial Objects",
       "domain": "structured-extraction",
       "repo": "llm-scraper",
-      "summary": "stream() variant: AI SDK streamText with schema output → partialOutputStream async iterable. Each emission is a schema-conformant partial; last is complete. Mirror of run() but returns {stream,url}. For responsive UIs.",
+      "summary": "stream() variant: AI SDK streamText with schema output \u2192 partialOutputStream async iterable. Each emission is a schema-conformant partial; last is complete. Mirror of run() but returns {stream,url}. For responsive UIs.",
       "study": "features/structured-extraction/study/streaming-partial-objects--from-llm-scraper.md",
       "build": "features/structured-extraction/build/streaming-partial-objects--from-llm-scraper.md",
       "source": "https://github.com/mishushakov/llm-scraper",
@@ -225,7 +225,7 @@
       "label": "Page Format Pipeline",
       "domain": "content-preprocessing",
       "repo": "llm-scraper",
-      "summary": "preprocess(page,options) → {url,content,format}. Six formats: raw_html, markdown (Turndown), text (Mozilla Readability via CDN in-page), html (cleanup scrub, default), image (base64 screenshot), custom. Cost/fidelity dial.",
+      "summary": "preprocess(page,options) \u2192 {url,content,format}. Six formats: raw_html, markdown (Turndown), text (Mozilla Readability via CDN in-page), html (cleanup scrub, default), image (base64 screenshot), custom. Cost/fidelity dial.",
       "study": "features/content-preprocessing/study/page-format-pipeline--from-llm-scraper.md",
       "build": "features/content-preprocessing/build/page-format-pipeline--from-llm-scraper.md",
       "source": "https://github.com/mishushakov/llm-scraper",
@@ -302,7 +302,7 @@
       "label": "Bulk Archiver",
       "domain": "inbox-cleanup",
       "repo": "inbox-zero",
-      "summary": "Risk-tiered archive triage. Pure function scoring senders by category-name substring: HIGH (marketing/promotion/newsletter/sale), MEDIUM (notification/alert/receipt/update), LOW (other). Returns {confidence, reason} candidates. Only HIGH is one-click — tiering is the safety mechanism. Scoring decoupled from execution.",
+      "summary": "Risk-tiered archive triage. Pure function scoring senders by category-name substring: HIGH (marketing/promotion/newsletter/sale), MEDIUM (notification/alert/receipt/update), LOW (other). Returns {confidence, reason} candidates. Only HIGH is one-click \u2014 tiering is the safety mechanism. Scoring decoupled from execution.",
       "study": "features/inbox-cleanup/study/bulk-archiver--from-inbox-zero.md",
       "build": "features/inbox-cleanup/build/bulk-archiver--from-inbox-zero.md",
       "source": "https://github.com/elie222/inbox-zero",
@@ -324,7 +324,7 @@
       "label": "Ordered Backend Routing",
       "domain": "agent-architecture",
       "repo": "agent-reach",
-      "summary": "Each capability is a Channel with an ORDERED backends list (preferred→fallbacks). Two-phase check: collect all candidates, first `ok` wins, then first `warn` — so an installed-but-logged-out backend can't mask a working fallback. active_backend records the live one. User pin via <name>_backend (unknown value ignored). Switching backend = reorder a list, not code.",
+      "summary": "Each capability is a Channel with an ORDERED backends list (preferred\u2192fallbacks). Two-phase check: collect all candidates, first `ok` wins, then first `warn` \u2014 so an installed-but-logged-out backend can't mask a working fallback. active_backend records the live one. User pin via <name>_backend (unknown value ignored). Switching backend = reorder a list, not code.",
       "study": "features/agent-architecture/study/ordered-backend-routing--from-agent-reach.md",
       "build": "features/agent-architecture/build/ordered-backend-routing--from-agent-reach.md",
       "source": "https://github.com/Panniantong/Agent-Reach",
@@ -335,7 +335,7 @@
       "label": "Channel Health Diagnostics",
       "domain": "diagnostics",
       "repo": "agent-reach",
-      "summary": "probe_command EXECUTES a side-effect-free command to classify missing/broken(stale venv shebang, exit 126/127)/timeout/ok — which() existence is not health. doctor aggregates per-channel (exceptions degrade to error, stale active_backend cleared), groups by tier, annotates the active backend only when >1 exists, and audits config.yaml permissions (chmod 600). Retries only transient failures.",
+      "summary": "probe_command EXECUTES a side-effect-free command to classify missing/broken(stale venv shebang, exit 126/127)/timeout/ok \u2014 which() existence is not health. doctor aggregates per-channel (exceptions degrade to error, stale active_backend cleared), groups by tier, annotates the active backend only when >1 exists, and audits config.yaml permissions (chmod 600). Retries only transient failures.",
       "study": "features/diagnostics/study/channel-health-diagnostics--from-agent-reach.md",
       "build": "features/diagnostics/build/channel-health-diagnostics--from-agent-reach.md",
       "source": "https://github.com/Panniantong/Agent-Reach",
@@ -346,7 +346,7 @@
       "label": "Cookie Credential Extraction",
       "domain": "credential-management",
       "repo": "agent-reach",
-      "summary": "Multi-browser cookie harvest (rookiepy→browser_cookie3) driven by declarative per-platform specs (named cookies vs whole Cookie-header). Validate-before-save: require a logged-in marker (auth_token+ct0, xq_a_token) — presence≠valid. Atomic 0o600 write (O_CREAT+mode, no write-then-chmod race). shlex-quoted best-effort mirrors into upstream tools' credential files.",
+      "summary": "Multi-browser cookie harvest (rookiepy\u2192browser_cookie3) driven by declarative per-platform specs (named cookies vs whole Cookie-header). Validate-before-save: require a logged-in marker (auth_token+ct0, xq_a_token) \u2014 presence\u2260valid. Atomic 0o600 write (O_CREAT+mode, no write-then-chmod race). shlex-quoted best-effort mirrors into upstream tools' credential files.",
       "study": "features/credential-management/study/cookie-credential-extraction--from-agent-reach.md",
       "build": "features/credential-management/build/cookie-credential-extraction--from-agent-reach.md",
       "source": "https://github.com/Panniantong/Agent-Reach",
@@ -401,7 +401,7 @@
       "label": "Agentic Loop",
       "domain": "ai-workflow",
       "repo": "open-design",
-      "summary": "3-stage linear pipeline (plan→generate→critique) in a single agent conversation thread. Critique Theater: 5-panelist jury (Designer/Critic/Brand/A11Y/Copy) with convergence enforcement. Iteration ceiling via OD_MAX_DEVLOOP_ITERATIONS.",
+      "summary": "3-stage linear pipeline (plan\u2192generate\u2192critique) in a single agent conversation thread. Critique Theater: 5-panelist jury (Designer/Critic/Brand/A11Y/Copy) with convergence enforcement. Iteration ceiling via OD_MAX_DEVLOOP_ITERATIONS.",
       "study": "features/ai-workflow/study/agentic-loop--from-open-design.md",
       "build": "features/ai-workflow/build/agentic-loop--from-open-design.md",
       "source": "https://github.com/nexu-io/open-design",
@@ -566,7 +566,7 @@
       "label": "Token Pipeline Orchestration",
       "domain": "design-systems",
       "repo": "style-dictionary",
-      "summary": "End-to-end build engine: load+deep-merge tokens, keep 3 synced representations, then per-platform transform↔resolve convergence loop → filter → format → write. structuredClone-isolated platforms run concurrently; abstracted FS runs in browser or Node.",
+      "summary": "End-to-end build engine: load+deep-merge tokens, keep 3 synced representations, then per-platform transform\u2194resolve convergence loop \u2192 filter \u2192 format \u2192 write. structuredClone-isolated platforms run concurrently; abstracted FS runs in browser or Node.",
       "study": "features/design-systems/study/token-pipeline-orchestration--from-style-dictionary.md",
       "build": "features/design-systems/build/token-pipeline-orchestration--from-style-dictionary.md",
       "source": "https://github.com/style-dictionary/style-dictionary",
@@ -687,7 +687,7 @@
       "label": "Multiplayer Sync",
       "domain": "realtime",
       "repo": "tldraw",
-      "summary": "Server-authoritative optimistic-rebase sync over WebSockets. Clients edit locally, stash speculative changes, push NetworkDiffs with a clientClock; server applies, assigns serverClock, returns commit/discard/rebase and broadcasts patches. Clients rebase (rewind→apply→replay). Presence synced-not-persisted; tombstone catch-up; per-session schema migration. Reference server = Cloudflare Durable Object.",
+      "summary": "Server-authoritative optimistic-rebase sync over WebSockets. Clients edit locally, stash speculative changes, push NetworkDiffs with a clientClock; server applies, assigns serverClock, returns commit/discard/rebase and broadcasts patches. Clients rebase (rewind\u2192apply\u2192replay). Presence synced-not-persisted; tombstone catch-up; per-session schema migration. Reference server = Cloudflare Durable Object.",
       "study": "features/realtime/study/multiplayer-sync--from-tldraw.md",
       "build": "features/realtime/build/multiplayer-sync--from-tldraw.md",
       "source": "https://github.com/tldraw/tldraw",
@@ -709,7 +709,7 @@
       "label": "Payment Provider Advisor",
       "domain": "payments",
       "repo": "pagokit",
-      "summary": "Data-driven gateway selection: providers.json catalog with context-keyed score_modifiers. ≤5 questions -> hard filters (region/currency/methods/capability/KYC eliminate) -> score = base 5 + matching modifiers -> top pick. Recommendation gives reasons, real fee calc, KYC timeline, anti-patterns, 'verified on <date>'; never shows the score. Adding a provider = adding a JSON row.",
+      "summary": "Data-driven gateway selection: providers.json catalog with context-keyed score_modifiers. \u22645 questions -> hard filters (region/currency/methods/capability/KYC eliminate) -> score = base 5 + matching modifiers -> top pick. Recommendation gives reasons, real fee calc, KYC timeline, anti-patterns, 'verified on <date>'; never shows the score. Adding a provider = adding a JSON row.",
       "study": "features/payments/study/payment-provider-advisor--from-pagokit.md",
       "build": "features/payments/build/payment-provider-advisor--from-pagokit.md",
       "source": "https://github.com/Hainrixz/agente-pagokit",
@@ -977,6 +977,39 @@
       "study": "features/research-automation/study/search-driven-scraping--from-scrapegraph-ai.md",
       "build": "features/research-automation/build/search-driven-scraping--from-scrapegraph-ai.md",
       "source": "https://github.com/ScrapeGraphAI/Scrapegraph-ai",
+      "notebooklm": ""
+    },
+    {
+      "id": "state-management/change-based-mutation-model--from-penpot",
+      "label": "Change-Based Mutation Model",
+      "domain": "state-management",
+      "repo": "penpot",
+      "summary": "Every edit is a serializable `change` (tagged by :type, ~40 types) applied via a process-change dispatch table. Each forward change is built with its inverse (redo vector / undo list), so undo/redo, persistence, and realtime collab all replay the same change list. Event sourcing for a design file.",
+      "study": "features/state-management/study/change-based-mutation-model--from-penpot.md",
+      "build": "features/state-management/build/change-based-mutation-model--from-penpot.md",
+      "source": "https://github.com/penpot/penpot",
+      "notebooklm": ""
+    },
+    {
+      "id": "design-systems/native-design-tokens--from-penpot",
+      "label": "Native Design Tokens",
+      "domain": "design-systems",
+      "repo": "penpot",
+      "summary": "Typed tokens (color/spacing/shadow/typography...) in ordered token sets; themes select which sets are active. Resolved view = merge active sets in global order (later overrides earlier) then resolve {path} references. All token edits ride the file change/undo system.",
+      "study": "features/design-systems/study/native-design-tokens--from-penpot.md",
+      "build": "features/design-systems/build/native-design-tokens--from-penpot.md",
+      "source": "https://github.com/penpot/penpot",
+      "notebooklm": ""
+    },
+    {
+      "id": "rendering/wasm-skia-render-engine--from-penpot",
+      "label": "WASM/Skia Render Engine",
+      "domain": "rendering",
+      "repo": "penpot",
+      "summary": "Rust->WASM (Emscripten) renderer on Skia drawing to one GPU canvas. C-ABI boundary (numbers+pointers only): 'current shape + setters' turtle API plus packed fixed-size binary records in shared linear memory (28-byte path segs, 160-byte fills; alloc->write->read->free). Tile-based incremental rendering with a frame-spread loop.",
+      "study": "features/rendering/study/wasm-skia-render-engine--from-penpot.md",
+      "build": "features/rendering/build/wasm-skia-render-engine--from-penpot.md",
+      "source": "https://github.com/penpot/penpot",
       "notebooklm": ""
     }
   ],
@@ -2155,6 +2188,86 @@
       "from": "structured-extraction/map-reduce-answer-generation--from-scrapegraph-ai",
       "to": "structured-extraction/streaming-partial-objects--from-llm-scraper",
       "type": "similar-pattern"
+    },
+    {
+      "from": "state-management/change-based-mutation-model--from-penpot",
+      "to": "design-systems/native-design-tokens--from-penpot",
+      "type": "same-repo"
+    },
+    {
+      "from": "state-management/change-based-mutation-model--from-penpot",
+      "to": "rendering/wasm-skia-render-engine--from-penpot",
+      "type": "same-repo"
+    },
+    {
+      "from": "design-systems/native-design-tokens--from-penpot",
+      "to": "rendering/wasm-skia-render-engine--from-penpot",
+      "type": "same-repo"
+    },
+    {
+      "from": "design-systems/native-design-tokens--from-penpot",
+      "to": "state-management/change-based-mutation-model--from-penpot",
+      "type": "depends-on"
+    },
+    {
+      "from": "rendering/wasm-skia-render-engine--from-penpot",
+      "to": "state-management/change-based-mutation-model--from-penpot",
+      "type": "depends-on"
+    },
+    {
+      "from": "state-management/change-based-mutation-model--from-penpot",
+      "to": "state-management/reactive-record-store--from-tldraw",
+      "type": "same-domain"
+    },
+    {
+      "from": "state-management/change-based-mutation-model--from-penpot",
+      "to": "state-management/reactive-store--from-xyflow",
+      "type": "same-domain"
+    },
+    {
+      "from": "design-systems/native-design-tokens--from-penpot",
+      "to": "design-systems/reference-resolution-engine--from-style-dictionary",
+      "type": "same-domain"
+    },
+    {
+      "from": "design-systems/native-design-tokens--from-penpot",
+      "to": "design-systems/token-pipeline-orchestration--from-style-dictionary",
+      "type": "same-domain"
+    },
+    {
+      "from": "rendering/wasm-skia-render-engine--from-penpot",
+      "to": "rendering/hand-drawn-rendering--from-excalidraw",
+      "type": "same-domain"
+    },
+    {
+      "from": "state-management/change-based-mutation-model--from-penpot",
+      "to": "realtime-collab/scene-reconciliation--from-excalidraw",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "state-management/change-based-mutation-model--from-penpot",
+      "to": "realtime/multiplayer-sync--from-tldraw",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "state-management/change-based-mutation-model--from-penpot",
+      "to": "schema-migrations/schema-migrations--from-tldraw",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "design-systems/native-design-tokens--from-penpot",
+      "to": "design-systems/transforms-and-transform-groups--from-style-dictionary",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "design-systems/native-design-tokens--from-penpot",
+      "to": "design-systems/oklch-theme-palettes--from-carousel-generator",
+      "type": "alternative-to"
+    },
+    {
+      "from": "rendering/wasm-skia-render-engine--from-penpot",
+      "to": "rendering/dom-to-pdf-export--from-carousel-generator",
+      "type": "alternative-to"
     }
   ]
 }
