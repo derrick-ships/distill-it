@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![121 nodes](https://img.shields.io/badge/nodes-121-4299e1?style=flat-square)
+![126 nodes](https://img.shields.io/badge/nodes-126-4299e1?style=flat-square)
 ![46 domains](https://img.shields.io/badge/domains-46-9f7aea?style=flat-square)
-![23 repos](https://img.shields.io/badge/repos-23-68d391?style=flat-square)
+![24 repos](https://img.shields.io/badge/repos-24-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -44,6 +44,11 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 
 | Domain | Feature | From |
 |--------|---------|------|
+| pipeline-orchestration | Declarative (Low-Code) CDK | [airbyte](https://github.com/airbytehq/airbyte) |
+| data-portability | Airbyte Protocol | [airbyte](https://github.com/airbytehq/airbyte) |
+| pipeline-orchestration | Incremental Sync & State | [airbyte](https://github.com/airbytehq/airbyte) |
+| web-extraction | Declarative HTTP Stream Stack | [airbyte](https://github.com/airbytehq/airbyte) |
+| code-generation | Connector Builder Test-Read | [airbyte](https://github.com/airbytehq/airbyte) |
 | web-extraction | Site URL Map | [firecrawl](https://github.com/firecrawl/firecrawl) |
 | web-extraction | Agentic Browser Actions | [firecrawl](https://github.com/firecrawl/firecrawl) |
 | research-automation | Deep Research Loop | [firecrawl](https://github.com/firecrawl/firecrawl) |

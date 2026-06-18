@@ -1330,6 +1330,61 @@
       "build": "features/credential-management/build/keyless-and-x402-access--from-firecrawl.md",
       "source": "https://github.com/firecrawl/firecrawl",
       "notebooklm": ""
+    },
+    {
+      "id": "pipeline-orchestration/declarative-low-code-cdk--from-airbyte",
+      "label": "Declarative (Low-Code) CDK",
+      "domain": "pipeline-orchestration",
+      "repo": "airbyte",
+      "summary": "Define a whole connector in a YAML manifest (instance of a component JSON-schema); a runtime interprets it: resolve $refs -> propagate $parameters -> validate -> ModelToComponentFactory builds live components. One manifest runs on a sync or concurrent engine (worker count declared). Normalization+migration keep old manifests working.",
+      "study": "features/pipeline-orchestration/study/declarative-low-code-cdk--from-airbyte.md",
+      "build": "features/pipeline-orchestration/build/declarative-low-code-cdk--from-airbyte.md",
+      "source": "https://github.com/airbytehq/airbyte",
+      "notebooklm": ""
+    },
+    {
+      "id": "data-portability/airbyte-protocol--from-airbyte",
+      "label": "Airbyte Protocol",
+      "domain": "data-portability",
+      "repo": "airbyte",
+      "summary": "Universal source<->destination contract: a connector is a CLI emitting newline-delimited JSON AirbyteMessages (tagged union) over stdout. Commands spec/check/discover/read; read interleaves RECORD + STATE (resumable checkpoints) with LOG/TRACE/CONTROL. Language-agnostic (Docker + stdout); the platform persists STATE.",
+      "study": "features/data-portability/study/airbyte-protocol--from-airbyte.md",
+      "build": "features/data-portability/build/airbyte-protocol--from-airbyte.md",
+      "source": "https://github.com/airbytehq/airbyte",
+      "notebooklm": ""
+    },
+    {
+      "id": "pipeline-orchestration/incremental-sync-state--from-airbyte",
+      "label": "Incremental Sync & State",
+      "domain": "pipeline-orchestration",
+      "repo": "airbyte",
+      "summary": "Cursor-based incremental reads: DatetimeBasedCursor slices [start-lookback,end] into step windows -> one stream_slice per window (injected via interpolation), observes each record's cursor_field tracking the MAX, and emits state {cursor_field: highest} at slice boundaries so the next run resumes. Lookback catches late updates; destinations dedup on PK.",
+      "study": "features/pipeline-orchestration/study/incremental-sync-state--from-airbyte.md",
+      "build": "features/pipeline-orchestration/build/incremental-sync-state--from-airbyte.md",
+      "source": "https://github.com/airbytehq/airbyte",
+      "notebooklm": ""
+    },
+    {
+      "id": "web-extraction/declarative-http-stream-stack--from-airbyte",
+      "label": "Declarative HTTP Stream Stack",
+      "domain": "web-extraction",
+      "repo": "airbyte",
+      "summary": "Four swappable components + a retriever loop pull records from a REST API: HttpRequester (interpolated url/params + error-handler/backoff) -> DefaultPaginator (strategy computes next token; option says where to inject) -> DpathExtractor (field_path into JSON; [] = whole response) -> RecordSelector (filter+normalize+transform). SimpleRetriever loops until token is None.",
+      "study": "features/web-extraction/study/declarative-http-stream-stack--from-airbyte.md",
+      "build": "features/web-extraction/build/declarative-http-stream-stack--from-airbyte.md",
+      "source": "https://github.com/airbytehq/airbyte",
+      "notebooklm": ""
+    },
+    {
+      "id": "code-generation/connector-builder-test-read--from-airbyte",
+      "label": "Connector Builder Test-Read",
+      "domain": "code-generation",
+      "repo": "airbyte",
+      "summary": "Backend for the no-code builder: run a bounded, instrumented test read of an in-progress manifest with the SAME production engine, capped by TestLimits{max_records,max_pages_per_slice,max_slices}, capturing every HTTP request/response grouped by slice/page + inferred schema, returned as a StreamRead wrapped in a protocol RECORD. Plus resolve/full-resolve manifest.",
+      "study": "features/code-generation/study/connector-builder-test-read--from-airbyte.md",
+      "build": "features/code-generation/build/connector-builder-test-read--from-airbyte.md",
+      "source": "https://github.com/airbytehq/airbyte",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -3096,6 +3151,106 @@
     {
       "from": "research-automation/deep-research-loop--from-firecrawl",
       "to": "research-automation/multi-source-research-engine--from-last30days-skill",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "pipeline-orchestration/declarative-low-code-cdk--from-airbyte",
+      "to": "data-portability/airbyte-protocol--from-airbyte",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/declarative-low-code-cdk--from-airbyte",
+      "to": "pipeline-orchestration/incremental-sync-state--from-airbyte",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/declarative-low-code-cdk--from-airbyte",
+      "to": "web-extraction/declarative-http-stream-stack--from-airbyte",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/declarative-low-code-cdk--from-airbyte",
+      "to": "code-generation/connector-builder-test-read--from-airbyte",
+      "type": "same-repo"
+    },
+    {
+      "from": "data-portability/airbyte-protocol--from-airbyte",
+      "to": "pipeline-orchestration/incremental-sync-state--from-airbyte",
+      "type": "same-repo"
+    },
+    {
+      "from": "data-portability/airbyte-protocol--from-airbyte",
+      "to": "web-extraction/declarative-http-stream-stack--from-airbyte",
+      "type": "same-repo"
+    },
+    {
+      "from": "data-portability/airbyte-protocol--from-airbyte",
+      "to": "code-generation/connector-builder-test-read--from-airbyte",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/incremental-sync-state--from-airbyte",
+      "to": "web-extraction/declarative-http-stream-stack--from-airbyte",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/incremental-sync-state--from-airbyte",
+      "to": "code-generation/connector-builder-test-read--from-airbyte",
+      "type": "same-repo"
+    },
+    {
+      "from": "web-extraction/declarative-http-stream-stack--from-airbyte",
+      "to": "code-generation/connector-builder-test-read--from-airbyte",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/declarative-low-code-cdk--from-airbyte",
+      "to": "web-extraction/declarative-http-stream-stack--from-airbyte",
+      "type": "depends-on"
+    },
+    {
+      "from": "pipeline-orchestration/declarative-low-code-cdk--from-airbyte",
+      "to": "pipeline-orchestration/incremental-sync-state--from-airbyte",
+      "type": "depends-on"
+    },
+    {
+      "from": "pipeline-orchestration/declarative-low-code-cdk--from-airbyte",
+      "to": "data-portability/airbyte-protocol--from-airbyte",
+      "type": "depends-on"
+    },
+    {
+      "from": "pipeline-orchestration/incremental-sync-state--from-airbyte",
+      "to": "data-portability/airbyte-protocol--from-airbyte",
+      "type": "depends-on"
+    },
+    {
+      "from": "pipeline-orchestration/incremental-sync-state--from-airbyte",
+      "to": "web-extraction/declarative-http-stream-stack--from-airbyte",
+      "type": "depends-on"
+    },
+    {
+      "from": "web-extraction/declarative-http-stream-stack--from-airbyte",
+      "to": "data-portability/airbyte-protocol--from-airbyte",
+      "type": "depends-on"
+    },
+    {
+      "from": "code-generation/connector-builder-test-read--from-airbyte",
+      "to": "pipeline-orchestration/declarative-low-code-cdk--from-airbyte",
+      "type": "depends-on"
+    },
+    {
+      "from": "code-generation/connector-builder-test-read--from-airbyte",
+      "to": "data-portability/airbyte-protocol--from-airbyte",
+      "type": "depends-on"
+    },
+    {
+      "from": "web-extraction/declarative-http-stream-stack--from-airbyte",
+      "to": "web-extraction/scrape-engine-fallback-pipeline--from-firecrawl",
+      "type": "alternative-to"
+    },
+    {
+      "from": "web-extraction/declarative-http-stream-stack--from-airbyte",
+      "to": "web-extraction/multi-source-fetch-node--from-scrapegraph-ai",
       "type": "similar-pattern"
     }
   ]

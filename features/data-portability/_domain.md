@@ -27,3 +27,4 @@ done client-side.
 - [[zod-form-persistence--from-carousel-generator]] — server-less document model: auto-persist to
   localStorage, **validate-on-read and self-heal** (clear + defaults on schema drift), plus per-field
   JSON import/export validated by the matching Zod sub-schema before `setValue`.
+- [[airbyte-protocol--from-airbyte]] — the universal source↔destination contract: a connector is a CLI emitting newline-delimited JSON AirbyteMessages (tagged union: record/state/log/trace/catalog/spec/control) over stdout. State is a first-class interleaved message enabling resumable syncs. The canonical 'any source → any destination' data-movement interface.

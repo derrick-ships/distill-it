@@ -23,6 +23,7 @@ Web content is messy: it mixes layout markup, scripts, ads, and navigation chrom
 - [[web-search-with-scrape--from-firecrawl]] — fuses web search (fire-engine → SearXNG → DuckDuckGo fallback) with concurrent scraping of every result through that same pipeline, merged by URL. The general-web counterpart to [[corpus-and-academic-search--from-openpaper]]'s domain-specific search+scrape.
 - [[site-url-map--from-firecrawl]] — fast URL discovery for a domain (sitemap + fire-engine index, dedup, optional cosine-rerank by a search query) WITHOUT scraping page bodies. The reconnaissance step before a crawl/extract.
 - [[agentic-browser-actions--from-firecrawl]] — an AI agent drives a hosted browser from a natural-language goal (click/scroll/type/wait) before capture, returning post-interaction HTML/markdown. The interactive-web answer to JS-gated content, as a scrape-pipeline transformer.
+- [[declarative-http-stream-stack--from-airbyte]] — the four-component REST-pull engine (requester → paginator → extractor → selector) wired by a retriever loop, all driven by string interpolation. The API-record-oriented counterpart to the page-scraping pipelines in this domain; pagination splits how-to-compute-the-token from where-to-inject-it.
 
 ## Cross-domain links
 - The scrapegraph-ai features above are built on [[graph-execution-engine--from-scrapegraph-ai]] (the node/edge engine) and feed [[map-reduce-answer-generation--from-scrapegraph-ai]] (the LLM extraction step).
