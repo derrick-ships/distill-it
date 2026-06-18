@@ -17,6 +17,7 @@ This is distinct from [[plugin-architecture]] (how an agent extension is *packag
 | Feature | Repo | Study | Build |
 |---------|------|-------|-------|
 | Deterministic Security Hooks | pagokit | [study](study/deterministic-security-hooks--from-pagokit.md) | [build](build/deterministic-security-hooks--from-pagokit.md) |
+| Staged Actions Confirmation Queue | open-carrusel | [study](study/staged-actions-queue--from-open-carrusel.md) | [build](build/staged-actions-queue--from-open-carrusel.md) |
 
 ## Related domains
 - [[plugin-architecture]] — guardrail hooks are usually shipped *as* part of a plugin; this domain is the enforcement idea, that one is the packaging.
