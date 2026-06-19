@@ -1649,6 +1649,94 @@
       "build": "features/infrastructure/build/async-to-sync-status-bridging--from-permissionskit.md",
       "source": "https://github.com/sparrowcode/PermissionsKit",
       "notebooklm": ""
+    },
+    {
+      "id": "codegen/ai-chat-stream--from-dyad",
+      "label": "AI Chat Stream",
+      "domain": "codegen",
+      "repo": "dyad",
+      "summary": "Multi-provider LLM streaming chat via Vercel AI SDK. Assembles context (history, file contents, MCP tools, code index), streams response chunks to renderer, parses XML action tags mid-stream to write files and install deps, saves full SDK message objects to SQLite for multi-turn continuity.",
+      "study": "features/codegen/study/ai-chat-stream--from-dyad.md",
+      "build": "features/codegen/build/ai-chat-stream--from-dyad.md",
+      "source": "https://github.com/dyad-sh/dyad",
+      "notebooklm": ""
+    },
+    {
+      "id": "ai-integration/mcp-integration--from-dyad",
+      "label": "MCP Integration",
+      "domain": "ai-integration",
+      "repo": "dyad",
+      "summary": "Model Context Protocol client manager: SQLite-backed server configs, per-tool consent tracking, 8s tool listing timeout with forced dispose, OAuth discovery+PKCE flow, error classification (discovery_failed vs unauthorized) for actionable UI messages.",
+      "study": "features/ai-integration/study/mcp-integration--from-dyad.md",
+      "build": "features/ai-integration/build/mcp-integration--from-dyad.md",
+      "source": "https://github.com/dyad-sh/dyad",
+      "notebooklm": ""
+    },
+    {
+      "id": "codegen/code-explorer--from-dyad",
+      "label": "Code Explorer",
+      "domain": "codegen",
+      "repo": "dyad",
+      "summary": "TypeScript-compiler-backed codebase indexer in worker threads. Discovers tsconfig in monorepos by scoring dir names, extracts exported symbols with line numbers, ranks against query via stemming+architecture heuristics, injects top symbols into AI system prompt.",
+      "study": "features/codegen/study/code-explorer--from-dyad.md",
+      "build": "features/codegen/build/code-explorer--from-dyad.md",
+      "source": "https://github.com/dyad-sh/dyad",
+      "notebooklm": ""
+    },
+    {
+      "id": "dev-tooling/dependency-manager--from-dyad",
+      "label": "Dependency Manager",
+      "domain": "dev-tooling",
+      "repo": "dyad",
+      "summary": "Auto npm installer triggered by AI-emitted <dyad-add-dependency> XML tags. Validates package names via regex, selects npm/pnpm, optionally routes through Socket Firewall, executes install with timeout, replaces tag in stored DB message with result tag.",
+      "study": "features/dev-tooling/study/dependency-manager--from-dyad.md",
+      "build": "features/dev-tooling/build/dependency-manager--from-dyad.md",
+      "source": "https://github.com/dyad-sh/dyad",
+      "notebooklm": ""
+    },
+    {
+      "id": "deployment/cloud-deploy--from-dyad",
+      "label": "Cloud Deploy",
+      "domain": "deployment",
+      "repo": "dyad",
+      "summary": "One-click Vercel deployment from a local Electron builder. Token validation, framework auto-detection (config files then package.json deps), project create via REST API, env var sync (Neon/Supabase) before first build, deployment status polling for live URL.",
+      "study": "features/deployment/study/cloud-deploy--from-dyad.md",
+      "build": "features/deployment/build/cloud-deploy--from-dyad.md",
+      "source": "https://github.com/dyad-sh/dyad",
+      "notebooklm": ""
+    },
+    {
+      "id": "credential-management/byok-settings--from-dyad",
+      "label": "BYOK Settings",
+      "domain": "credential-management",
+      "repo": "dyad",
+      "summary": "Bring-your-own-keys settings system: atomic JSON write (temp+rename), Electron safeStorage encryption for all secrets (API keys, tokens, service accounts), effective settings merge with defaults, unlogged IPC handlers, custom AI provider CRUD in SQLite.",
+      "study": "features/credential-management/study/byok-settings--from-dyad.md",
+      "build": "features/credential-management/build/byok-settings--from-dyad.md",
+      "source": "https://github.com/dyad-sh/dyad",
+      "notebooklm": ""
+    },
+    {
+      "id": "app-management/multi-app-library--from-dyad",
+      "label": "Multi-App Library",
+      "domain": "app-management",
+      "repo": "dyad",
+      "summary": "Multi-project portfolio in a local builder: SQLite app+collection schema, template scaffold with git init, child-process lifecycle map, commit-keyed PNG thumbnails with LRU pruning, soft-deleted collections, ripgrep content search with byte-to-char offset conversion.",
+      "study": "features/app-management/study/multi-app-library--from-dyad.md",
+      "build": "features/app-management/build/multi-app-library--from-dyad.md",
+      "source": "https://github.com/dyad-sh/dyad",
+      "notebooklm": ""
+    },
+    {
+      "id": "codegen/image-generation--from-dyad",
+      "label": "Image Generation",
+      "domain": "codegen",
+      "repo": "dyad",
+      "summary": "In-builder AI image generation: 4 style-theme prompt prefixes, AbortController map for cancellation, 120s timeout, handles b64_json and URL responses, HTTPS-only URL validation, 50MB cap, file-locked write to .dyad/media/, returns relative path for AI code references.",
+      "study": "features/codegen/study/image-generation--from-dyad.md",
+      "build": "features/codegen/build/image-generation--from-dyad.md",
+      "source": "https://github.com/dyad-sh/dyad",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -3851,6 +3939,66 @@
       "from": "infrastructure/modular-permission-packaging--from-permissionskit",
       "to": "infrastructure/local-first-architecture--from-open-design",
       "type": "same-domain"
+    },
+    {
+      "from": "codegen/ai-chat-stream--from-dyad",
+      "to": "ai-integration/mcp-integration--from-dyad",
+      "type": "depends-on"
+    },
+    {
+      "from": "codegen/ai-chat-stream--from-dyad",
+      "to": "codegen/code-explorer--from-dyad",
+      "type": "depends-on"
+    },
+    {
+      "from": "codegen/ai-chat-stream--from-dyad",
+      "to": "dev-tooling/dependency-manager--from-dyad",
+      "type": "depends-on"
+    },
+    {
+      "from": "codegen/ai-chat-stream--from-dyad",
+      "to": "credential-management/byok-settings--from-dyad",
+      "type": "depends-on"
+    },
+    {
+      "from": "codegen/ai-chat-stream--from-dyad",
+      "to": "app-management/multi-app-library--from-dyad",
+      "type": "same-repo"
+    },
+    {
+      "from": "codegen/code-explorer--from-dyad",
+      "to": "codegen/ai-chat-stream--from-dyad",
+      "type": "same-domain"
+    },
+    {
+      "from": "codegen/image-generation--from-dyad",
+      "to": "codegen/ai-chat-stream--from-dyad",
+      "type": "same-domain"
+    },
+    {
+      "from": "deployment/cloud-deploy--from-dyad",
+      "to": "credential-management/byok-settings--from-dyad",
+      "type": "depends-on"
+    },
+    {
+      "from": "deployment/cloud-deploy--from-dyad",
+      "to": "app-management/multi-app-library--from-dyad",
+      "type": "same-repo"
+    },
+    {
+      "from": "codegen/image-generation--from-dyad",
+      "to": "credential-management/byok-settings--from-dyad",
+      "type": "depends-on"
+    },
+    {
+      "from": "codegen/image-generation--from-dyad",
+      "to": "app-management/multi-app-library--from-dyad",
+      "type": "same-repo"
+    },
+    {
+      "from": "credential-management/byok-settings--from-dyad",
+      "to": "credential-management/multi-tier-credentials--from-last30days-skill",
+      "type": "similar-pattern"
     }
   ]
 }
