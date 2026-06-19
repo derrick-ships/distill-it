@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![171 nodes](https://img.shields.io/badge/nodes-171-4299e1?style=flat-square)
-![57 domains](https://img.shields.io/badge/domains-57-9f7aea?style=flat-square)
-![33 repos](https://img.shields.io/badge/repos-33-68d391?style=flat-square)
+![175 nodes](https://img.shields.io/badge/nodes-175-4299e1?style=flat-square)
+![58 domains](https://img.shields.io/badge/domains-58-9f7aea?style=flat-square)
+![34 repos](https://img.shields.io/badge/repos-34-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---

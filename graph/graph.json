@@ -727,14 +727,6 @@
       "notebooklm": ""
     },
     {
-      "id": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
-      "label": "Multi-Studio Shell Architecture",
-      "domain": "ui-architecture",
-      "repo": "open-generative-ai",
-      "summary": "Thin shell hosts ~12 interchangeable 'studios' behind tabs; one shared packages/studio barrel re-exports all studios + the API layer, consumed unchanged by web (Next.js) and desktop (Electron). Shell owns auth/key/balance/drag-drop, gates app on a key, mounts the active studio with uniform props. Add a feature = export a studio + add a tab.",
-      "study": "features/ui-architecture/study/multi-studio-shell-architecture--from-open-generative-ai.md",
-      "build": "features/ui-architecture/build/multi-studio-shell-architecture--from-open-generative-ai.md",
-      "source": "https://github.com/Anil-matcha/Open-Generative-AI",
       "id": "agent-guardrails/deterministic-security-hooks--from-pagokit",
       "label": "Deterministic Security Hooks",
       "domain": "agent-guardrails",
@@ -1920,6 +1912,17 @@
       "study": "features/browser-automation/study/browser-session-stealth--from-browser-use.md",
       "build": "features/browser-automation/build/browser-session-stealth--from-browser-use.md",
       "source": "https://github.com/browser-use/browser-use",
+      "notebooklm": ""
+    },
+    {
+      "id": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
+      "label": "Multi-Studio Shell Architecture",
+      "domain": "ui-architecture",
+      "repo": "open-generative-ai",
+      "summary": "Thin shell hosts ~12 interchangeable 'studios' behind tabs; one shared packages/studio barrel re-exports all studios + the API layer, consumed unchanged by web (Next.js) and desktop (Electron). Shell owns auth/key/balance/drag-drop, gates app on a key, mounts the active studio with uniform props. Add a feature = export a studio + add a tab.",
+      "study": "features/ui-architecture/study/multi-studio-shell-architecture--from-open-generative-ai.md",
+      "build": "features/ui-architecture/build/multi-studio-shell-architecture--from-open-generative-ai.md",
+      "source": "https://github.com/Anil-matcha/Open-Generative-AI",
       "notebooklm": ""
     }
   ],
@@ -4405,8 +4408,6 @@
       "type": "same-domain"
     },
     {
-      "from": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
-      "to": "infrastructure/local-first-architecture--from-open-design",
       "from": "web-extraction/indexed-dom-serialization--from-browser-use",
       "to": "web-extraction/agentic-browser-actions--from-firecrawl",
       "type": "similar-pattern"
@@ -4429,6 +4430,11 @@
     {
       "from": "agent-architecture/agent-loop-recovery--from-browser-use",
       "to": "agent-architecture/agent-output-contract--from-last30days-skill",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
+      "to": "infrastructure/local-first-architecture--from-open-design",
       "type": "similar-pattern"
     }
   ]
