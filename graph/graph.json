@@ -1572,6 +1572,50 @@
       "build": "features/ai-workflow/build/silent-ai-text-transform--from-asyar.md",
       "source": "https://github.com/Xoshbin/asyar",
       "notebooklm": ""
+    },
+    {
+      "id": "plugin-architecture/capability-module-system--from-vlc",
+      "label": "Capability-Based Module System",
+      "domain": "plugin-architecture",
+      "repo": "vlc",
+      "summary": "Runtime capability registry where every subsystem (codec, output, UI, network) is a module declaring (capability_string, priority_score). module_need() collects, sorts by score, tries in order, returns first success. Enables hardware-acceleration fallback, platform isolation, and third-party plugins with zero core changes.",
+      "study": "features/plugin-architecture/study/capability-module-system--from-vlc.md",
+      "build": "features/plugin-architecture/build/capability-module-system--from-vlc.md",
+      "source": "https://code.videolan.org/videolan/vlc",
+      "notebooklm": ""
+    },
+    {
+      "id": "media-processing/media-pipeline--from-vlc",
+      "label": "Media Pipeline",
+      "domain": "media-processing",
+      "repo": "vlc",
+      "summary": "Multi-stage runtime-assembled pipeline: MRL parse → access (bytes) → stream filters → demux (container/packets) → decoder threads (compressed→raw) → vout/aout (render). Input thread drives a main loop with control queue (seek, pause, rate). All stages swappable modules; timeshift buffer optional between demux and decoders.",
+      "study": "features/media-processing/study/media-pipeline--from-vlc.md",
+      "build": "features/media-processing/build/media-pipeline--from-vlc.md",
+      "source": "https://code.videolan.org/videolan/vlc",
+      "notebooklm": ""
+    },
+    {
+      "id": "media-processing/libvlc-embeddable-engine--from-vlc",
+      "label": "libVLC Embeddable Engine",
+      "domain": "media-processing",
+      "repo": "vlc",
+      "summary": "LGPL C library wrapping VLC's full multimedia engine. API: libvlc_new(args) → libvlc_media_new_location(url) → libvlc_media_player_new() → set_xwindow/hwnd/nsobject() → play(). Event system fires on internal thread; state machine covers Opening/Buffering/Playing/Paused/Ended/Error. Bindings for C++, Python, C#, Java, Swift.",
+      "study": "features/media-processing/study/libvlc-embeddable-engine--from-vlc.md",
+      "build": "features/media-processing/build/libvlc-embeddable-engine--from-vlc.md",
+      "source": "https://code.videolan.org/videolan/vlc",
+      "notebooklm": ""
+    },
+    {
+      "id": "streaming/stream-output-transcoding--from-vlc",
+      "label": "Stream Output & Transcoding",
+      "domain": "streaming",
+      "repo": "vlc",
+      "summary": "Declarative stream_out chain: '#transcode{vcodec=h264,vb=800,acodec=mp3}:http{mux=ts,dst=:8080/}'. Transcode module decodes→filters→re-encodes per track; duplicate fans to N outputs. VLM API manages named broadcasts. PCR-aware for MPEG-TS. Hardware encoders (NVENC/VideoToolbox) drop-in via module system.",
+      "study": "features/streaming/study/stream-output-transcoding--from-vlc.md",
+      "build": "features/streaming/build/stream-output-transcoding--from-vlc.md",
+      "source": "https://code.videolan.org/videolan/vlc",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -3703,6 +3747,41 @@
     {
       "from": "ai-workflow/silent-ai-text-transform--from-asyar",
       "to": "ai-workflow/agentic-loop--from-open-design",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "plugin-architecture/capability-module-system--from-vlc",
+      "to": "media-processing/media-pipeline--from-vlc",
+      "type": "same-repo"
+    },
+    {
+      "from": "plugin-architecture/capability-module-system--from-vlc",
+      "to": "media-processing/libvlc-embeddable-engine--from-vlc",
+      "type": "same-repo"
+    },
+    {
+      "from": "plugin-architecture/capability-module-system--from-vlc",
+      "to": "streaming/stream-output-transcoding--from-vlc",
+      "type": "same-repo"
+    },
+    {
+      "from": "media-processing/media-pipeline--from-vlc",
+      "to": "media-processing/libvlc-embeddable-engine--from-vlc",
+      "type": "same-repo"
+    },
+    {
+      "from": "media-processing/media-pipeline--from-vlc",
+      "to": "streaming/stream-output-transcoding--from-vlc",
+      "type": "depends-on"
+    },
+    {
+      "from": "plugin-architecture/capability-module-system--from-vlc",
+      "to": "plugin-architecture/plugin-system--from-markitdown",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "plugin-architecture/capability-module-system--from-vlc",
+      "to": "plugin-architecture/register-extensibility-api--from-style-dictionary",
       "type": "similar-pattern"
     }
   ]
