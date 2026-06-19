@@ -1825,6 +1825,50 @@
       "build": "features/persistence/build/chat-persistence--from-bolt-diy.md",
       "source": "https://github.com/stackblitz-labs/bolt.diy",
       "notebooklm": ""
+    },
+    {
+      "id": "llm-orchestration/lcel-runnable-protocol--from-langchain",
+      "label": "LCEL / Runnable Protocol",
+      "domain": "llm-orchestration",
+      "repo": "langchain",
+      "summary": "Universal Runnable[Input,Output] interface + pipe (|) composition. invoke/ainvoke/batch/stream on any component. RunnableSequence, RunnableParallel, RunnableLambda, RunnablePassthrough. Streaming, async, and callbacks propagate automatically through any assembled chain.",
+      "study": "features/llm-orchestration/study/lcel-runnable-protocol--from-langchain.md",
+      "build": "features/llm-orchestration/build/lcel-runnable-protocol--from-langchain.md",
+      "source": "https://github.com/langchain-ai/langchain",
+      "notebooklm": ""
+    },
+    {
+      "id": "structured-extraction/structured-output--from-langchain",
+      "label": "Structured Output",
+      "domain": "structured-extraction",
+      "repo": "langchain",
+      "summary": "model.with_structured_output(schema) wraps any chat model to return a Pydantic instance or typed dict. Uses tool-calling API (schema forced as single tool) + PydanticToolsParser; fallback to JSON mode. include_raw=True returns {raw, parsed, parsing_error}.",
+      "study": "features/structured-extraction/study/structured-output--from-langchain.md",
+      "build": "features/structured-extraction/build/structured-output--from-langchain.md",
+      "source": "https://github.com/langchain-ai/langchain",
+      "notebooklm": ""
+    },
+    {
+      "id": "agent-architecture/tool-calling-agent--from-langchain",
+      "label": "Tool Calling + Agent Loop",
+      "domain": "agent-architecture",
+      "repo": "langchain",
+      "summary": "@tool decorator builds StructuredTool from function+docstring+type hints. bind_tools() attaches schemas to model. AgentExecutor runs the ReAct loop: model returns ToolCall list → execute tools → ToolMessages fed back → repeat until no tool_calls (AgentFinish). Capped by max_iterations/max_execution_time.",
+      "study": "features/agent-architecture/study/tool-calling-agent--from-langchain.md",
+      "build": "features/agent-architecture/build/tool-calling-agent--from-langchain.md",
+      "source": "https://github.com/langchain-ai/langchain",
+      "notebooklm": ""
+    },
+    {
+      "id": "retrieval/rag-pipeline--from-langchain",
+      "label": "RAG Pipeline",
+      "domain": "retrieval",
+      "repo": "langchain",
+      "summary": "Full RAG: DocumentLoader → RecursiveCharacterTextSplitter (chunk_size/overlap/separator cascade) → BaseEmbeddings → VectorStore → BaseRetriever → LCEL chain (RunnableParallel wires context+question into prompt → LLM → StrOutputParser). MMR retrieval, metadata filtering, source return variants.",
+      "study": "features/retrieval/study/rag-pipeline--from-langchain.md",
+      "build": "features/retrieval/build/rag-pipeline--from-langchain.md",
+      "source": "https://github.com/langchain-ai/langchain",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -4197,6 +4241,71 @@
       "from": "ai-integration/context-optimization--from-bolt-diy",
       "to": "ai-integration/azure-doc-intelligence--from-markitdown",
       "type": "same-domain"
+    },
+    {
+      "from": "llm-orchestration/lcel-runnable-protocol--from-langchain",
+      "to": "structured-extraction/structured-output--from-langchain",
+      "type": "same-repo"
+    },
+    {
+      "from": "llm-orchestration/lcel-runnable-protocol--from-langchain",
+      "to": "agent-architecture/tool-calling-agent--from-langchain",
+      "type": "same-repo"
+    },
+    {
+      "from": "llm-orchestration/lcel-runnable-protocol--from-langchain",
+      "to": "retrieval/rag-pipeline--from-langchain",
+      "type": "same-repo"
+    },
+    {
+      "from": "structured-extraction/structured-output--from-langchain",
+      "to": "agent-architecture/tool-calling-agent--from-langchain",
+      "type": "same-repo"
+    },
+    {
+      "from": "structured-extraction/structured-output--from-langchain",
+      "to": "llm-orchestration/lcel-runnable-protocol--from-langchain",
+      "type": "depends-on"
+    },
+    {
+      "from": "agent-architecture/tool-calling-agent--from-langchain",
+      "to": "llm-orchestration/lcel-runnable-protocol--from-langchain",
+      "type": "depends-on"
+    },
+    {
+      "from": "retrieval/rag-pipeline--from-langchain",
+      "to": "llm-orchestration/lcel-runnable-protocol--from-langchain",
+      "type": "depends-on"
+    },
+    {
+      "from": "agent-architecture/tool-calling-agent--from-langchain",
+      "to": "structured-extraction/structured-output--from-langchain",
+      "type": "depends-on"
+    },
+    {
+      "from": "structured-extraction/structured-output--from-langchain",
+      "to": "structured-extraction/schema-driven-extraction--from-llm-scraper",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "agent-architecture/tool-calling-agent--from-langchain",
+      "to": "agent-architecture/agent-output-contract--from-last30days-skill",
+      "type": "same-domain"
+    },
+    {
+      "from": "agent-architecture/tool-calling-agent--from-langchain",
+      "to": "agent-architecture/conversation-memory--from-whatsapp-agentkit",
+      "type": "same-domain"
+    },
+    {
+      "from": "retrieval/rag-pipeline--from-langchain",
+      "to": "research-automation/multi-source-research-engine--from-last30days-skill",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "llm-orchestration/lcel-runnable-protocol--from-langchain",
+      "to": "ai-integration/provider-agnostic-llm--from-llm-scraper",
+      "type": "similar-pattern"
     }
   ]
 }

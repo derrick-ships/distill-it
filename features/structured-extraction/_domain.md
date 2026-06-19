@@ -10,6 +10,8 @@ This is distinct from [[content-synthesis]] (which clusters/summarizes) and from
 - [[map-reduce-answer-generation--from-scrapegraph-ai]] — when the content is bigger than the context window: answer the question per-chunk in parallel, then merge into one schema-shaped result. A contrasting approach to llm-scraper's single SDK call — chunk-and-merge with hand-written JSON instructions instead of one structured-output call.
 - [[llm-extract-map-reduce--from-firecrawl]] — prompt+schema+URLs → one structured object via an async map-reduce: classify single-answer vs multi-entity, split the schema, chunk docs ×50 and batch-extract concurrently, then null-aware merge + dedup + rerank. The multi-page, production scale-up of the single-page 'prompt → JSON' extractors.
 
+- [[structured-output--from-langchain]] — `model.with_structured_output(schema)` — bind any Pydantic model or JSON Schema to a chat model to guarantee typed responses; handles JSON mode vs tool-call mode transparently.
+
 ## Cross-domain links
 - Depends on [[content-preprocessing]] — the page must be reduced to an LLM-friendly format first.
 - Pairs with [[ai-integration]] — the model is provider-agnostic behind one interface.
