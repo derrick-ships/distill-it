@@ -62,14 +62,16 @@ export async function handleServerSideProxy(prefix, request, params, apiKey) {
 }
 ```
 
-This is wired into a Next.js App Router catch-all route (`app/api/v1/[[...path]]/route.js` and siblings for `agents`, `workflow`, `app`). Each route exports the HTTP verbs and reads the key from the request cookie before delegating. Sketch of the route file:
+This is wired into a Next.js App Router catch-all route. **Mind the path composition:** the browser `BASE_URL` is `/api`, and the client then appends the gateway's own path `/api/v1/...` (e.g. `submitAndPoll` posts to `` `${BASE_URL}/api/v1/${endpoint}` ``). So the request the browser actually fires is **`/api/api/v1/...`** — the first `/api` is the same-origin *proxy mount*, the rest is the gateway path echoed through. The route file must therefore live at **`app/api/api/v1/[[...path]]/route.js`** (serving `/api/api/v1/...`), with siblings under `app/api/` for the other gateway prefixes the client uses (`app/api/agents/[[...path]]`, `app/api/workflow/[[...path]]`, `app/api/app/[[...path]]`). Each route exports the HTTP verbs, reads the key from the request cookie, and forwards with `prefix='api/v1'` so the upstream URL becomes `https://api.muapi.ai/api/v1/...`. Sketch of the route file:
 
 ```javascript
+// app/api/api/v1/[[...path]]/route.js   ← note the doubled "api": /api mount + api/v1 gateway path
 import { handleServerSideProxy } from 'studio';   // re-exported from packages/studio/src/muapi.js
 import { cookies } from 'next/headers';
 
 async function handler(request, { params }) {
     const apiKey = (await cookies()).get('muapi_key')?.value;   // key set by the modal (see below)
+    // prefix 'api/v1' is what gets re-prepended to the UPSTREAM url (BASE_URL is the gateway server-side):
     const { status, contentType, data } = await handleServerSideProxy('api/v1', request, params, apiKey);
     return new Response(data, { status, headers: { 'Content-Type': contentType } });
 }
@@ -136,6 +138,7 @@ const handleKeySave = useCallback((key) => {
 - **`arrayBuffer()` is mandatory for media.** Parsing as JSON/text corrupts images and video. Always pass bytes through and echo the upstream `Content-Type`.
 - **The auth bridge is fire-and-forget.** Many concurrent failures fire many events; debounce in the listener or you'll thrash the modal. The dispatcher also no-ops on the server (`typeof window === 'undefined'`), so server-side proxy 401s won't reach the client UI unless the client's own poll also sees a 401 — which it does, since the proxy returns the upstream status.
 - **Two routes, two key readers.** If you change where/how the key is stored, update *both* the client (`localStorage`) and the server (`cookie`) paths, or the browser will think it's authed while the proxy sends no key (or vice versa).
+- **The doubled `/api` is load-bearing, not a typo.** Because `BASE_URL='/api'` and the client appends the gateway path `/api/v1/...`, the in-browser request is `/api/api/v1/...`. The proxy route must be mounted to match exactly (`app/api/api/v1/[[...path]]`). If you port this and "simplify" the route to `app/api/v1/...`, every generation/poll request 404s in the browser. Either keep the mount aligned with the client's composition, or change the client so `BASE_URL` is `''` (and routes live at `app/api/v1/...`) — but change both sides together.
 
 ## Origin (reference only)
-`Anil-matcha/Open-Generative-AI` — `packages/studio/src/muapi.js` (`BASE_URL` switch, `handleProxyRequest`, `handleServerSideProxy`, `notifyAuthRequired`); `app/api/**/[[...path]]/route.js` (catch-all proxy routes reading the `muapi_key` cookie); `components/StandaloneShell.js` (`handleKeySave`, auth-event listener, key persistence); `components/ApiKeyModal.js` (key entry UI).
+`Anil-matcha/Open-Generative-AI` — `packages/studio/src/muapi.js` (`BASE_URL` switch, `handleProxyRequest`, `handleServerSideProxy`, `notifyAuthRequired`); `app/api/api/v1/[[...path]]/route.js` (+ siblings `app/api/agents|workflow|app/[[...path]]/route.js`) — catch-all proxy routes reading the `muapi_key` cookie; note the doubled `api` segment matches the client's `/api` mount + `api/v1` gateway path; `components/StandaloneShell.js` (`handleKeySave`, auth-event listener, key persistence); `components/ApiKeyModal.js` (key entry UI).

@@ -24,5 +24,5 @@ Almost all the real engineering is in two files inside one shared package, `pack
 - `packages/studio/src/index.js` — barrel re-exporting all studios + `export * from './muapi'`.
 - `components/StandaloneShell.js` — the shell: `TABS`, tab switch, key/auth/balance state, `handleKeySave`, auth-event listener.
 - `components/ApiKeyModal.js` — API-key entry UI.
-- `app/api/**/[[...path]]/route.js` — catch-all proxy routes (read `muapi_key` cookie, delegate to `handleServerSideProxy`).
+- `app/api/api/v1/[[...path]]/route.js` (+ siblings `app/api/agents|workflow|app/[[...path]]/route.js`) — catch-all proxy routes (read `muapi_key` cookie, delegate to `handleServerSideProxy`). The doubled `api` is intentional: the browser `BASE_URL` is `/api` and the client appends the gateway path `/api/v1/...`, so requests land at `/api/api/v1/...`.
 - `app/studio/[[...slug]]/page.js`, `app/layout.js` — trivial route + bare layout (state lives in the shell).
