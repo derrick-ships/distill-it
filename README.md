@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![171 nodes](https://img.shields.io/badge/nodes-171-4299e1?style=flat-square)
-![57 domains](https://img.shields.io/badge/domains-57-9f7aea?style=flat-square)
-![33 repos](https://img.shields.io/badge/repos-33-68d391?style=flat-square)
+![175 nodes](https://img.shields.io/badge/nodes-175-4299e1?style=flat-square)
+![58 domains](https://img.shields.io/badge/domains-58-9f7aea?style=flat-square)
+![34 repos](https://img.shields.io/badge/repos-34-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -129,6 +129,10 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | realtime-collab | E2E-Encrypted Collaboration | [excalidraw](https://github.com/excalidraw/excalidraw) |
 | realtime-collab | Scene Reconciliation | [excalidraw](https://github.com/excalidraw/excalidraw) |
 | data-structures | Fractional Indexing (z-order) | [excalidraw](https://github.com/excalidraw/excalidraw) |
+| ai-integration | Submit-and-Poll Generation Client | [open-generative-ai](https://github.com/Anil-matcha/Open-Generative-AI) |
+| ai-integration | Centralized Model Registry | [open-generative-ai](https://github.com/Anil-matcha/Open-Generative-AI) |
+| credential-management | Browser→Host API Proxy + Auth Bridge | [open-generative-ai](https://github.com/Anil-matcha/Open-Generative-AI) |
+| ui-architecture | Multi-Studio Shell Architecture | [open-generative-ai](https://github.com/Anil-matcha/Open-Generative-AI) |
 | code-generation | Interview-Driven App Scaffolding | [whatsapp-agentkit](https://github.com/Hainrixz/whatsapp-agentkit) |
 | messaging | WhatsApp Provider Adapter Layer | [whatsapp-agentkit](https://github.com/Hainrixz/whatsapp-agentkit) |
 | agent-architecture | Per-Contact Conversation Memory | [whatsapp-agentkit](https://github.com/Hainrixz/whatsapp-agentkit) |

@@ -694,6 +694,39 @@
       "notebooklm": ""
     },
     {
+      "id": "ai-integration/submit-and-poll-generation-client--from-open-generative-ai",
+      "label": "Submit-and-Poll Generation Client",
+      "domain": "ai-integration",
+      "repo": "open-generative-ai",
+      "summary": "Universal async-job primitive: POST to /api/v1/{endpoint} → get request_id → poll /predictions/{id}/result every 2s (sleep-first, retry-5xx, fail-4xx) until completed/succeeded/success, then normalize output to one .url. One function backs image/video/i2v/lipsync/audio; per-task maxAttempts budgets.",
+      "study": "features/ai-integration/study/submit-and-poll-generation-client--from-open-generative-ai.md",
+      "build": "features/ai-integration/build/submit-and-poll-generation-client--from-open-generative-ai.md",
+      "source": "https://github.com/Anil-matcha/Open-Generative-AI",
+      "notebooklm": ""
+    },
+    {
+      "id": "ai-integration/centralized-model-registry--from-open-generative-ai",
+      "label": "Centralized Model Registry",
+      "domain": "ai-integration",
+      "repo": "open-generative-ai",
+      "summary": "One declarative file describes 200+ models (id, endpoint, inputs schema with type/default/enum/min-max). Drives BOTH API routing (endpoint lookup) and self-building UI forms. Capability arrays (t2iModels/i2iModels/t2vModels). id != endpoint by design. Adding a model = adding an object.",
+      "study": "features/ai-integration/study/centralized-model-registry--from-open-generative-ai.md",
+      "build": "features/ai-integration/build/centralized-model-registry--from-open-generative-ai.md",
+      "source": "https://github.com/Anil-matcha/Open-Generative-AI",
+      "notebooklm": ""
+    },
+    {
+      "id": "credential-management/browser-host-api-proxy--from-open-generative-ai",
+      "label": "Browser→Host API Proxy + Auth Bridge",
+      "domain": "credential-management",
+      "repo": "open-generative-ai",
+      "summary": "Same-origin Next.js catch-all proxy forwards browser calls to api.muapi.ai injecting x-api-key, stripping hop-by-hop headers, returning raw bytes (media-safe). Env switch lets Electron/SSR bypass the proxy. Global 'muapi:auth-required' DOM event on 401/403 drives re-auth. Key in localStorage + cookie. BYOK threat model.",
+      "study": "features/credential-management/study/browser-host-api-proxy--from-open-generative-ai.md",
+      "build": "features/credential-management/build/browser-host-api-proxy--from-open-generative-ai.md",
+      "source": "https://github.com/Anil-matcha/Open-Generative-AI",
+      "notebooklm": ""
+    },
+    {
       "id": "agent-guardrails/deterministic-security-hooks--from-pagokit",
       "label": "Deterministic Security Hooks",
       "domain": "agent-guardrails",
@@ -1879,6 +1912,17 @@
       "study": "features/browser-automation/study/browser-session-stealth--from-browser-use.md",
       "build": "features/browser-automation/build/browser-session-stealth--from-browser-use.md",
       "source": "https://github.com/browser-use/browser-use",
+      "notebooklm": ""
+    },
+    {
+      "id": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
+      "label": "Multi-Studio Shell Architecture",
+      "domain": "ui-architecture",
+      "repo": "open-generative-ai",
+      "summary": "Thin shell hosts ~12 interchangeable 'studios' behind tabs; one shared packages/studio barrel re-exports all studios + the API layer, consumed unchanged by web (Next.js) and desktop (Electron). Shell owns auth/key/balance/drag-drop, gates app on a key, mounts the active studio with uniform props. Add a feature = export a studio + add a tab.",
+      "study": "features/ui-architecture/study/multi-studio-shell-architecture--from-open-generative-ai.md",
+      "build": "features/ui-architecture/build/multi-studio-shell-architecture--from-open-generative-ai.md",
+      "source": "https://github.com/Anil-matcha/Open-Generative-AI",
       "notebooklm": ""
     }
   ],
@@ -4309,6 +4353,61 @@
       "type": "similar-pattern"
     },
     {
+      "from": "schema-migrations/schema-migrations--from-tldraw",
+      "to": "realtime/multiplayer-sync--from-tldraw",
+      "type": "same-repo"
+    },
+    {
+      "from": "ai-integration/submit-and-poll-generation-client--from-open-generative-ai",
+      "to": "ai-integration/centralized-model-registry--from-open-generative-ai",
+      "type": "depends-on"
+    },
+    {
+      "from": "ai-integration/submit-and-poll-generation-client--from-open-generative-ai",
+      "to": "credential-management/browser-host-api-proxy--from-open-generative-ai",
+      "type": "depends-on"
+    },
+    {
+      "from": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
+      "to": "ai-integration/submit-and-poll-generation-client--from-open-generative-ai",
+      "type": "depends-on"
+    },
+    {
+      "from": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
+      "to": "ai-integration/centralized-model-registry--from-open-generative-ai",
+      "type": "depends-on"
+    },
+    {
+      "from": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
+      "to": "credential-management/browser-host-api-proxy--from-open-generative-ai",
+      "type": "depends-on"
+    },
+    {
+      "from": "ai-integration/centralized-model-registry--from-open-generative-ai",
+      "to": "credential-management/browser-host-api-proxy--from-open-generative-ai",
+      "type": "same-repo"
+    },
+    {
+      "from": "ai-integration/submit-and-poll-generation-client--from-open-generative-ai",
+      "to": "ai-integration/provider-agnostic-llm--from-llm-scraper",
+      "type": "alternative-to"
+    },
+    {
+      "from": "ai-integration/centralized-model-registry--from-open-generative-ai",
+      "to": "plugin-architecture/register-extensibility-api--from-style-dictionary",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "credential-management/browser-host-api-proxy--from-open-generative-ai",
+      "to": "infrastructure/byok-proxy--from-open-design",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "credential-management/browser-host-api-proxy--from-open-generative-ai",
+      "to": "credential-management/multi-tier-credentials--from-last30days-skill",
+      "type": "same-domain"
+    },
+    {
       "from": "web-extraction/indexed-dom-serialization--from-browser-use",
       "to": "web-extraction/agentic-browser-actions--from-firecrawl",
       "type": "similar-pattern"
@@ -4331,6 +4430,11 @@
     {
       "from": "agent-architecture/agent-loop-recovery--from-browser-use",
       "to": "agent-architecture/agent-output-contract--from-last30days-skill",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "ui-architecture/multi-studio-shell-architecture--from-open-generative-ai",
+      "to": "infrastructure/local-first-architecture--from-open-design",
       "type": "similar-pattern"
     }
   ]
