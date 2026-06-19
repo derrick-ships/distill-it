@@ -1825,6 +1825,28 @@
       "build": "features/persistence/build/chat-persistence--from-bolt-diy.md",
       "source": "https://github.com/stackblitz-labs/bolt.diy",
       "notebooklm": ""
+    },
+    {
+      "id": "code-intelligence/semantic-symbol-tools--from-serena",
+      "label": "Semantic Symbol Tools",
+      "domain": "code-intelligence",
+      "repo": "serena",
+      "summary": "MCP-exposed LSP-backed toolkit for AI agents: find/navigate/edit code symbols by name-path (ClassName/method), replace bodies, insert before/after, rename across codebase, safe-delete, pull diagnostics — no line numbers needed, 40+ languages.",
+      "study": "features/code-intelligence/study/semantic-symbol-tools--from-serena.md",
+      "build": "features/code-intelligence/build/semantic-symbol-tools--from-serena.md",
+      "source": "https://github.com/oraios/serena",
+      "notebooklm": ""
+    },
+    {
+      "id": "dev-tooling/agent-dashboard--from-serena",
+      "label": "Agent Dashboard",
+      "domain": "dev-tooling",
+      "repo": "serena",
+      "summary": "Flask REST API + SPA dashboard running in a background thread alongside the agent. In-memory log ring-buffer, tool call stats, config/memory/task CRUD. Platform-adaptive display: browser (Linux/macOS), pywebview native window (Windows), or system-tray aggregator for multiple instances.",
+      "study": "features/dev-tooling/study/agent-dashboard--from-serena.md",
+      "build": "features/dev-tooling/build/agent-dashboard--from-serena.md",
+      "source": "https://github.com/oraios/serena",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -4197,6 +4219,16 @@
       "from": "ai-integration/context-optimization--from-bolt-diy",
       "to": "ai-integration/azure-doc-intelligence--from-markitdown",
       "type": "same-domain"
+    },
+    {
+      "from": "code-intelligence/semantic-symbol-tools--from-serena",
+      "to": "dev-tooling/agent-dashboard--from-serena",
+      "type": "same-repo"
+    },
+    {
+      "from": "code-intelligence/semantic-symbol-tools--from-serena",
+      "to": "diagnostics/dependency-manager--from-dyad",
+      "type": "similar-pattern"
     }
   ]
 }
