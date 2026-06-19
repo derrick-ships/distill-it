@@ -26,6 +26,7 @@ Web content is messy: it mixes layout markup, scripts, ads, and navigation chrom
 - [[declarative-http-stream-stack--from-airbyte]] — the four-component REST-pull engine (requester → paginator → extractor → selector) wired by a retriever loop, all driven by string interpolation. The API-record-oriented counterpart to the page-scraping pipelines in this domain; pagination splits how-to-compute-the-token from where-to-inject-it.
 
 - [[browser-design-token-extraction--from-ai-website-cloner-template]] — runs getComputedStyle() on every DOM element via headless Chromium to extract the final resolved CSS values (colors, typography, spacing) for any page, regardless of its framework. Frequency analysis reveals the design system. Part of the website cloning pipeline.
+- [[indexed-dom-serialization--from-browser-use]] — the agent-perception counterpart to the page-extraction features here: walks the live DOM over CDP, classifies visible *interactive* elements, and renders a numbered element list (`[N]<button>`) for an LLM, keyed by Chrome's `backendNodeId`. Reading a page for *acting on it*, not for content.
 
 ## Cross-domain links
 - The scrapegraph-ai features above are built on [[graph-execution-engine--from-scrapegraph-ai]] (the node/edge engine) and feed [[map-reduce-answer-generation--from-scrapegraph-ai]] (the LLM extraction step).
