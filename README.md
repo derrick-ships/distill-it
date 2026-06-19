@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![133 nodes](https://img.shields.io/badge/nodes-133-4299e1?style=flat-square)
-![46 domains](https://img.shields.io/badge/domains-46-9f7aea?style=flat-square)
-![26 repos](https://img.shields.io/badge/repos-26-68d391?style=flat-square)
+![150 nodes](https://img.shields.io/badge/nodes-150-4299e1?style=flat-square)
+![51 domains](https://img.shields.io/badge/domains-51-9f7aea?style=flat-square)
+![30 repos](https://img.shields.io/badge/repos-30-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -159,6 +159,9 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | media-control | Multi-Provider Media Control | [boring.notch](https://github.com/TheBoredTeam/boring.notch) |
 | macos-ui | System HUD Replacement | [boring.notch](https://github.com/TheBoredTeam/boring.notch) |
 | ai-workflow | Chat-Completion Middleware | [open-webui](https://github.com/open-webui/open-webui) |
+| permissions | Unified Permission Abstraction | [PermissionsKit](https://github.com/sparrowcode/PermissionsKit) |
+| infrastructure | Modular Per-Permission Packaging | [PermissionsKit](https://github.com/sparrowcode/PermissionsKit) |
+| infrastructure | Async-to-Sync Status Bridging | [PermissionsKit](https://github.com/sparrowcode/PermissionsKit) |
 
 ---
 
