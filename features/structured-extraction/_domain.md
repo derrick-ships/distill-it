@@ -10,6 +10,11 @@ This is distinct from [[content-synthesis]] (which clusters/summarizes) and from
 - [[map-reduce-answer-generation--from-scrapegraph-ai]] — when the content is bigger than the context window: answer the question per-chunk in parallel, then merge into one schema-shaped result. A contrasting approach to llm-scraper's single SDK call — chunk-and-merge with hand-written JSON instructions instead of one structured-output call.
 - [[llm-extract-map-reduce--from-firecrawl]] — prompt+schema+URLs → one structured object via an async map-reduce: classify single-answer vs multi-entity, split the schema, chunk docs ×50 and batch-extract concurrently, then null-aware merge + dedup + rerank. The multi-page, production scale-up of the single-page 'prompt → JSON' extractors.
 
+- [[llm-structured-extraction--from-crawl4ai]] — LiteLLM-backed extraction with Pydantic schema constraints; chunks page content, sends to model, parses XML-tagged JSON blocks; supports any OpenAI-compatible provider; includes token usage tracking and schema auto-generation.
+- [[css-xpath-schema-extraction--from-crawl4ai]] — deterministic CSS/XPath extraction via JsonCssExtractionStrategy (BeautifulSoup4) and JsonLxmlExtractionStrategy (lxml with selector caching and multi-strategy fallback); field types include text, attribute, regex, nested, list, computed.
+- [[chunking-strategies--from-crawl4ai]] — seven text-splitting strategies (Identity, Regex, NLP Sentence, Topic Segmentation, Fixed Word, Sliding Window, Overlapping Window) for preparing page content for LLM extraction or RAG vector ingestion.
+
 ## Cross-domain links
 - Depends on [[content-preprocessing]] — the page must be reduced to an LLM-friendly format first.
 - Pairs with [[ai-integration]] — the model is provider-agnostic behind one interface.
+- Upstream: [[web-scraping]] — crawl4ai's scraping pipeline feeds content into these extraction strategies.
