@@ -1574,6 +1574,72 @@
       "notebooklm": ""
     },
     {
+      "id": "launcher/command-palette-launcher--from-asyar",
+      "label": "Command-Palette Launcher",
+      "domain": "launcher",
+      "repo": "asyar",
+      "summary": "Always-running Tauri window revealed on global hotkey. Fuzzy-searches a merged pool of OS apps + manifest-registered built-in commands + extension commands + user aliases. Frequency-weighted ranking, view-stack navigation, no cold-start (hide not destroy).",
+      "study": "features/launcher/study/command-palette-launcher--from-asyar.md",
+      "build": "features/launcher/build/command-palette-launcher--from-asyar.md",
+      "source": "https://github.com/Xoshbin/asyar",
+      "notebooklm": ""
+    },
+    {
+      "id": "launcher/alias-system--from-asyar",
+      "label": "Alias System",
+      "domain": "launcher",
+      "repo": "asyar",
+      "summary": "User-defined shorthand names (e.g. 'gm' → Gmail) mapped to any app or command. Thin TS IPC wrapper; Rust owns SQLite storage, conflict detection, validation. Aliases inject as top-priority synthetic entries in the search pool.",
+      "study": "features/launcher/study/alias-system--from-asyar.md",
+      "build": "features/launcher/build/alias-system--from-asyar.md",
+      "source": "https://github.com/Xoshbin/asyar",
+      "notebooklm": ""
+    },
+    {
+      "id": "productivity/snippets-text-expansion--from-asyar",
+      "label": "Snippets / Text Expansion",
+      "domain": "productivity",
+      "repo": "asyar",
+      "summary": "Two-mode text expansion: (1) in-launcher selection → paste, (2) background Rust key-listener detects typed keyword → backspace-erase + clipboard-hijack paste + 200ms clipboard restore. Template vars ({date}/{time}/{cursor}). Requires OS Accessibility permission.",
+      "study": "features/productivity/study/snippets-text-expansion--from-asyar.md",
+      "build": "features/productivity/build/snippets-text-expansion--from-asyar.md",
+      "source": "https://github.com/Xoshbin/asyar",
+      "notebooklm": ""
+    },
+    {
+      "id": "platform/deep-link-command-triggers--from-asyar",
+      "label": "Deep Link Command Triggers",
+      "domain": "platform",
+      "repo": "asyar",
+      "summary": "asyar:// custom URL scheme lets any app trigger extension commands. Rust parse_extension_deeplink() validates scheme/host/path with character allowlists; emits asyar:deeplink:extension Tauri event; TS routes to extension worker. Security: allowlists prevent injection; no auth (local-only).",
+      "study": "features/platform/study/deep-link-command-triggers--from-asyar.md",
+      "build": "features/platform/build/deep-link-command-triggers--from-asyar.md",
+      "source": "https://github.com/Xoshbin/asyar",
+      "notebooklm": ""
+    },
+    {
+      "id": "platform/background-command-scheduling--from-asyar",
+      "label": "Background Command Scheduling",
+      "domain": "platform",
+      "repo": "asyar",
+      "summary": "Tokio-based scheduler fires extension commands at manifest-declared intervals (10s–86400s). SchedulerState HashMap<extId::cmdId, JoinHandle> guards active tasks. Skip-first-tick; delivers DELIVER or MOUNT Tauri events. Dynamic start/stop on extension enable/disable.",
+      "study": "features/platform/study/background-command-scheduling--from-asyar.md",
+      "build": "features/platform/build/background-command-scheduling--from-asyar.md",
+      "source": "https://github.com/Xoshbin/asyar",
+      "notebooklm": ""
+    },
+    {
+      "id": "platform/local-backup-restore--from-asyar",
+      "label": "Local Backup & Restore",
+      "domain": "platform",
+      "repo": "asyar",
+      "summary": "Full-snapshot local backup of all user data (snippets/agents/aliases/scripts/MCP configs/extension prefs). Optional AES-256-GCM encryption with Argon2 key derivation. Binary format: MAGIC(9)+salt(16)+nonce(12)+ciphertext. Schema version field + migration chain for import compatibility.",
+      "study": "features/platform/study/local-backup-restore--from-asyar.md",
+      "build": "features/platform/build/local-backup-restore--from-asyar.md",
+      "source": "https://github.com/Xoshbin/asyar",
+      "notebooklm": ""
+    },
+    {
       "id": "plugin-architecture/capability-module-system--from-vlc",
       "label": "Capability-Based Module System",
       "domain": "plugin-architecture",
@@ -4197,6 +4263,51 @@
       "from": "ai-integration/context-optimization--from-bolt-diy",
       "to": "ai-integration/azure-doc-intelligence--from-markitdown",
       "type": "same-domain"
+    },
+    {
+      "from": "launcher/command-palette-launcher--from-asyar",
+      "to": "launcher/alias-system--from-asyar",
+      "type": "same-repo"
+    },
+    {
+      "from": "launcher/command-palette-launcher--from-asyar",
+      "to": "plugin-architecture/sandboxed-extension-system--from-asyar",
+      "type": "depends-on"
+    },
+    {
+      "from": "launcher/alias-system--from-asyar",
+      "to": "launcher/command-palette-launcher--from-asyar",
+      "type": "depends-on"
+    },
+    {
+      "from": "productivity/snippets-text-expansion--from-asyar",
+      "to": "launcher/command-palette-launcher--from-asyar",
+      "type": "depends-on"
+    },
+    {
+      "from": "platform/deep-link-command-triggers--from-asyar",
+      "to": "plugin-architecture/sandboxed-extension-system--from-asyar",
+      "type": "depends-on"
+    },
+    {
+      "from": "platform/background-command-scheduling--from-asyar",
+      "to": "plugin-architecture/sandboxed-extension-system--from-asyar",
+      "type": "depends-on"
+    },
+    {
+      "from": "platform/deep-link-command-triggers--from-asyar",
+      "to": "platform/background-command-scheduling--from-asyar",
+      "type": "same-repo"
+    },
+    {
+      "from": "platform/local-backup-restore--from-asyar",
+      "to": "platform/deep-link-command-triggers--from-asyar",
+      "type": "same-repo"
+    },
+    {
+      "from": "ai-workflow/silent-ai-text-transform--from-asyar",
+      "to": "launcher/command-palette-launcher--from-asyar",
+      "type": "same-repo"
     }
   ]
 }

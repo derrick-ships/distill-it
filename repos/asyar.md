@@ -27,6 +27,12 @@ A privacy-first, open-source command launcher (Raycast alternative) built with T
 | Pattern-Based Secret Redaction | privacy | [study](../features/privacy/study/pattern-based-secret-redaction--from-asyar.md) | [build](../features/privacy/build/pattern-based-secret-redaction--from-asyar.md) |
 | MCP Sidecar Auto-Detection | agent-architecture | [study](../features/agent-architecture/study/mcp-sidecar-auto-detection--from-asyar.md) | [build](../features/agent-architecture/build/mcp-sidecar-auto-detection--from-asyar.md) |
 | Silent AI Text Transform | ai-workflow | [study](../features/ai-workflow/study/silent-ai-text-transform--from-asyar.md) | [build](../features/ai-workflow/build/silent-ai-text-transform--from-asyar.md) |
+| Command-Palette Launcher | launcher | [study](../features/launcher/study/command-palette-launcher--from-asyar.md) | [build](../features/launcher/build/command-palette-launcher--from-asyar.md) |
+| Alias System | launcher | [study](../features/launcher/study/alias-system--from-asyar.md) | [build](../features/launcher/build/alias-system--from-asyar.md) |
+| Snippets / Text Expansion | productivity | [study](../features/productivity/study/snippets-text-expansion--from-asyar.md) | [build](../features/productivity/build/snippets-text-expansion--from-asyar.md) |
+| Deep Link Command Triggers | platform | [study](../features/platform/study/deep-link-command-triggers--from-asyar.md) | [build](../features/platform/build/deep-link-command-triggers--from-asyar.md) |
+| Background Command Scheduling | platform | [study](../features/platform/study/background-command-scheduling--from-asyar.md) | [build](../features/platform/build/background-command-scheduling--from-asyar.md) |
+| Local Backup & Restore | platform | [study](../features/platform/study/local-backup-restore--from-asyar.md) | [build](../features/platform/build/local-backup-restore--from-asyar.md) |
 
 ## Key design decisions
 
