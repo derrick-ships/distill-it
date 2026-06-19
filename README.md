@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![67 nodes](https://img.shields.io/badge/nodes-67-4299e1?style=flat-square)
-![35 domains](https://img.shields.io/badge/domains-35-9f7aea?style=flat-square)
-![13 repos](https://img.shields.io/badge/repos-13-68d391?style=flat-square)
+![171 nodes](https://img.shields.io/badge/nodes-171-4299e1?style=flat-square)
+![57 domains](https://img.shields.io/badge/domains-57-9f7aea?style=flat-square)
+![33 repos](https://img.shields.io/badge/repos-33-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -44,6 +44,34 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 
 | Domain | Feature | From |
 |--------|---------|------|
+| realtime | Debounced File Watcher | [hazelnut](https://github.com/ricardodantas/hazelnut) |
+| pipeline-orchestration | File Rules Engine | [hazelnut](https://github.com/ricardodantas/hazelnut) |
+| pipeline-orchestration | File Actions Executor | [hazelnut](https://github.com/ricardodantas/hazelnut) |
+| data-structures | MBQL — Metabase Query AST | [metabase](https://github.com/metabase/metabase) |
+| pipeline-orchestration | Query Processor Middleware Pipeline | [metabase](https://github.com/metabase/metabase) |
+| plugin-architecture | Multimethod Driver Abstraction | [metabase](https://github.com/metabase/metabase) |
+| rendering | Visualization Auto-Selection | [metabase](https://github.com/metabase/metabase) |
+| pipeline-orchestration | Declarative (Low-Code) CDK | [airbyte](https://github.com/airbytehq/airbyte) |
+| data-portability | Airbyte Protocol | [airbyte](https://github.com/airbytehq/airbyte) |
+| pipeline-orchestration | Incremental Sync & State | [airbyte](https://github.com/airbytehq/airbyte) |
+| web-extraction | Declarative HTTP Stream Stack | [airbyte](https://github.com/airbytehq/airbyte) |
+| code-generation | Connector Builder Test-Read | [airbyte](https://github.com/airbytehq/airbyte) |
+| web-extraction | Site URL Map | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| web-extraction | Agentic Browser Actions | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| research-automation | Deep Research Loop | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| content-synthesis | Generate llms.txt | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| payments | Credit Billing & Concurrency | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| credential-management | Keyless & x402 Access | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| web-extraction | Scrape Engine + Fallback Pipeline | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| pipeline-orchestration | Queue-Backed Crawl | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| structured-extraction | LLM Extract (map-reduce) | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| web-extraction | Web Search (+ scrape) | [firecrawl](https://github.com/firecrawl/firecrawl) |
+| ai-integration | Citation-Grounded Chat | [openpaper](https://github.com/khoj-ai/openpaper) |
+| content-preprocessing | PDF Ingestion Pipeline | [openpaper](https://github.com/khoj-ai/openpaper) |
+| canvas-interaction | PDF Highlights & Annotations | [openpaper](https://github.com/khoj-ai/openpaper) |
+| web-extraction | Corpus & Academic Search | [openpaper](https://github.com/khoj-ai/openpaper) |
+| tts | Audio Overview (TTS) | [openpaper](https://github.com/khoj-ai/openpaper) |
+| credential-management | Multi-Path Authentication | [openpaper](https://github.com/khoj-ai/openpaper) |
 | adaptive-parsing | Adaptive Element Relocation | [Scrapling](https://github.com/D4Vinci/Scrapling) |
 | document-conversion | Converter Pipeline | [markitdown](https://github.com/microsoft/markitdown) |
 | document-conversion | PDF Conversion | [markitdown](https://github.com/microsoft/markitdown) |
@@ -105,6 +133,44 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | ai-integration | Centralized Model Registry | [open-generative-ai](https://github.com/Anil-matcha/Open-Generative-AI) |
 | credential-management | Browser→Host API Proxy + Auth Bridge | [open-generative-ai](https://github.com/Anil-matcha/Open-Generative-AI) |
 | ui-architecture | Multi-Studio Shell Architecture | [open-generative-ai](https://github.com/Anil-matcha/Open-Generative-AI) |
+| code-generation | Interview-Driven App Scaffolding | [whatsapp-agentkit](https://github.com/Hainrixz/whatsapp-agentkit) |
+| messaging | WhatsApp Provider Adapter Layer | [whatsapp-agentkit](https://github.com/Hainrixz/whatsapp-agentkit) |
+| agent-architecture | Per-Contact Conversation Memory | [whatsapp-agentkit](https://github.com/Hainrixz/whatsapp-agentkit) |
+| lead-scoring | Rule-Based Lead Scoring | [auto-crm](https://github.com/Hainrixz/auto-crm) |
+| ai-integration | AI Lead Classification (Claude) | [auto-crm](https://github.com/Hainrixz/auto-crm) |
+| lead-ingestion | Webhook Lead Ingestion | [auto-crm](https://github.com/Hainrixz/auto-crm) |
+| agent-architecture | MCP CRM Server | [auto-crm](https://github.com/Hainrixz/auto-crm) |
+| canvas-interaction | Kanban Pipeline (drag-and-drop) | [auto-crm](https://github.com/Hainrixz/auto-crm) |
+| analytics | CRM Dashboard KPIs | [auto-crm](https://github.com/Hainrixz/auto-crm) |
+| data-portability | CSV Import / Export | [auto-crm](https://github.com/Hainrixz/auto-crm) |
+| activity-tracking | Activity Tracking & Follow-up Buckets | [auto-crm](https://github.com/Hainrixz/auto-crm) |
+| agent-distribution | Self-Customizing CRM (Claude commands) | [auto-crm](https://github.com/Hainrixz/auto-crm) |
+| content-synthesis | AI Carousel Generation | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
+| rendering | DOM-to-PDF Carousel Export | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
+| design-systems | OKLCH Theme Palettes | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
+| data-portability | Zod Form Persistence & JSON Portability | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
+| infrastructure | BYOK + Rate-Limited AI Action | [carousel-generator](https://github.com/FranciscoMoretti/carousel-generator) |
+| pipeline-orchestration | Graph Execution Engine | [scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) |
+| web-extraction | SmartScraper Pipeline | [scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) |
+| web-extraction | Multi-Source Fetch Node | [scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) |
+| structured-extraction | Map-Reduce Answer Generation | [scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) |
+| ai-integration | Provider-Agnostic Model Layer | [scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) |
+| research-automation | Search-Driven Scraping | [scrapegraph-ai](https://github.com/ScrapeGraphAI/Scrapegraph-ai) |
+| state-management | Change-Based Mutation Model | [penpot](https://github.com/penpot/penpot) |
+| design-systems | Native Design Tokens | [penpot](https://github.com/penpot/penpot) |
+| rendering | WASM/Skia Render Engine | [penpot](https://github.com/penpot/penpot) |
+| macos-ui | Notch-Shaped Always-On-Top Window | [boring.notch](https://github.com/TheBoredTeam/boring.notch) |
+| media-control | Multi-Provider Media Control | [boring.notch](https://github.com/TheBoredTeam/boring.notch) |
+| macos-ui | System HUD Replacement | [boring.notch](https://github.com/TheBoredTeam/boring.notch) |
+| ai-workflow | Chat-Completion Middleware | [open-webui](https://github.com/open-webui/open-webui) |
+| permissions | Unified Permission Abstraction | [PermissionsKit](https://github.com/sparrowcode/PermissionsKit) |
+| infrastructure | Modular Per-Permission Packaging | [PermissionsKit](https://github.com/sparrowcode/PermissionsKit) |
+| infrastructure | Async-to-Sync Status Bridging | [PermissionsKit](https://github.com/sparrowcode/PermissionsKit) |
+| web-extraction | Indexed DOM Serialization | [browser-use](https://github.com/browser-use/browser-use) |
+| agent-architecture | Agent Loop & Recovery | [browser-use](https://github.com/browser-use/browser-use) |
+| agent-architecture | Action / Tool Registry | [browser-use](https://github.com/browser-use/browser-use) |
+| ai-integration | Multi-Provider LLM Abstraction | [browser-use](https://github.com/browser-use/browser-use) |
+| browser-automation | Browser Session & Stealth | [browser-use](https://github.com/browser-use/browser-use) |
 
 ---
 

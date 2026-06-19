@@ -14,6 +14,7 @@ hang off a single source of truth.
 |---------|------|-------|-------|
 | Reactive Record Store | tldraw | [study](study/reactive-record-store--from-tldraw.md) | [build](build/reactive-record-store--from-tldraw.md) |
 | Reactive Store Architecture | xyflow | [study](study/reactive-store--from-xyflow.md) | [build](build/reactive-store--from-xyflow.md) |
+| Change-Based Mutation Model | penpot | [study](study/change-based-mutation-model--from-penpot.md) | [build](build/change-based-mutation-model--from-penpot.md) |
 
 ## Mental model
 Two complementary takes on the same problem appear across the repos:
@@ -41,3 +42,11 @@ Two complementary takes on the same problem appear across the repos:
 
 The shared lesson: keep one authoritative model, let consumers read narrow slices reactively, and
 maintain an id-keyed lookup alongside the user-facing arrays for O(1) access on the hot path.
+
+**Edits as recorded, invertible instructions (penpot):** a third take that pairs with the diff-based
+write side above. Rather than mutate the document, every edit is a serializable `change` (tagged by
+`:type`) applied through a dispatch table — and each forward change is *built together with its
+inverse* (redo vs. undo tracks) while the old value is still in hand. Undo/redo, incremental
+persistence, and realtime collab all reduce to replaying the same change list forward or backward.
+It's event sourcing / the command pattern applied to a design file, and it's the connective tissue
+between this domain and realtime-collab.

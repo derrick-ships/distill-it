@@ -33,7 +33,19 @@ If `$ARGUMENTS` is empty, ask for the GitHub URL and stop.
 5. **Commit to repo-brain.** Stage the new/changed files and commit with a clear message
    (e.g. `distill: <feature(s)> from <repo>`). If working inside the repo-brain repo, commit there.
    If the repo-brain repo isn't the current working dir, ask the user for its path (or to `cd` into it)
-   before committing. Push if a remote is configured and the user wants it.
+   before committing.
+
+6. **Always push.** After committing, ALWAYS push to the repo-brain remote — do NOT ask first.
+   The canonical branch is `main`; push there (`git push origin main`). This is a standing
+   instruction: every `/distill` run ends with a push.
+
+7. **Always log in Notion.** After pushing, ALWAYS log the distill in the user's
+   **Distill-it database** Notion database (no need to ask):
+   `https://app.notion.com/p/3833935b82a6808a8433c15a5f91b804?v=3833935b82a680d0bc0c000c2f7ca9fc`
+   (data source `collection://3833935b-82a6-802c-b668-000b9ba02404`). Create ONE row per distilled
+   repo via the Notion MCP `notion-create-pages` tool, setting: **Repo** (title = repo slug),
+   **GitHub URL** (the source URL), **Domain** (multi-select of every domain touched),
+   **Stack** (multi-select of the repo's primary technologies), and **Status** = `Distilled`.
 
 ## Rules
 - Self-contained build docs: never write "see the repo" as the only reference — the repo may be

@@ -18,3 +18,5 @@ Research automation is the practice of replacing manual tab-by-tab research with
 - [[multi-source-research-engine--from-last30days-skill]] — parallel retrieval pipeline across 10+ sources
 - [[entity-resolution--from-last30days-skill]] — pre-search handle/subreddit/repo discovery
 - [[engagement-signal-ranking--from-last30days-skill]] — reciprocal-rank fusion + LLM reranking by engagement
+- [[search-driven-scraping--from-scrapegraph-ai]] — question-only research: LLM rewrites prompt → web search → scrape top-N results with the full SmartScraper pipeline → merge per-page answers into one. Composition trick: a node runs other graphs; returns `considered_urls` for citations.
+- [[deep-research-loop--from-firecrawl]] — autonomous depth-bounded research: from a topic, loop search+scrape → analyze → pick the next query until maxDepth/timeLimit, then synthesize a report. The feedback loop (analyze→next-topic) is the whole value; reuses the search+scrape path.

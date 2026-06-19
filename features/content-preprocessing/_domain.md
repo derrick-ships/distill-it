@@ -7,6 +7,7 @@ This is the upstream sibling of [[structured-extraction]]: preprocessing decides
 ## Features studied
 - [[page-format-pipeline--from-llm-scraper]] — one function, six output formats (raw_html, markdown, text, cleaned html, image, custom) from a live Playwright page.
 - [[html-cleanup--from-llm-scraper]] — the in-browser DOM scrub (drop ~30 tag types + noise attributes) that makes the `html` format cheap.
+- [[pdf-ingestion-pipeline--from-openpaper]] — a two-service, webhook-driven background pipeline that turns an uploaded PDF into clean markdown + a page→char-offset map + LLM-extracted metadata. The heavier, production-grade cousin of the llm-scraper page formatters: Celery worker, markitdown→pymupdf fallback, 4 parallel Gemini calls behind a shared context cache, and worker hardening for leaky PDF libs.
 
 ## Cross-domain links
 - Feeds [[structured-extraction]] and [[code-generation]].

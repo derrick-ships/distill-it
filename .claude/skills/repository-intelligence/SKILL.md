@@ -143,8 +143,20 @@ Repo + the files it came from, for the rare case the repo is still reachable.
 ### Step 6 — Update the graph
 Add/update nodes and edges in `graph/graph.json` (schema below), then run GRAPH mode to regenerate `graph.html`.
 
-### Step 7 — Deliver to GitHub
-The user stores everything in their `repo-brain` GitHub repo and does NOT download locally. Provide the files as artifacts/content ready to commit. If a GitHub MCP/connector is available and the user wants it, offer to write directly; otherwise give them copy-paste-ready files and tell them exactly where each goes.
+### Step 7 — Deliver to GitHub (always commit + push)
+The user stores everything in their `repo-brain` GitHub repo and does NOT download locally. Commit the new/changed files, then **ALWAYS push** — do NOT ask for approval. The canonical branch is `main`; push there (`git push origin main`). Every distill ends with a push. If a GitHub MCP/connector is available it may be used; otherwise push with git directly.
+
+### Step 8 — Log it in Notion (always)
+After pushing, **ALWAYS log the distill** in the user's **Distill-it database** Notion database — no need to ask:
+`https://app.notion.com/p/3833935b82a6808a8433c15a5f91b804?v=3833935b82a680d0bc0c000c2f7ca9fc`
+(data source `collection://3833935b-82a6-802c-b668-000b9ba02404`). Create ONE row per distilled repo via the Notion MCP `notion-create-pages` tool with these properties:
+- **Repo** (title) — the repo slug (e.g. `clicky`)
+- **GitHub URL** — the source repo URL
+- **Domain** (multi-select) — every domain the distill touched
+- **Stack** (multi-select) — the repo's primary technologies
+- **Status** = `Distilled`
+
+`Date Added` is auto-set. This logging step is a standing instruction: every distill is recorded here.
 
 ## MODE 2: GRAPH
 

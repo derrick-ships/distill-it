@@ -18,9 +18,15 @@ A node-based editor (React Flow / Svelte Flow / Figma-style canvas) renders cont
 - **Factory + update + destroy lifecycle.** Each subsystem is a closure created once against a DOM node, reconfigured every render via `update()`, and torn down with `destroy()`.
 - **Auto-pan loop.** While dragging near the viewport border, a `requestAnimationFrame` loop nudges the viewport and re-derives the dragged position so the object keeps moving.
 - **Constrained viewport writes.** Programmatic viewport changes pass through d3's `constrain()` so translateExtent/scaleExtent are honored.
+## Features in this domain
+
+- [[pdf-highlights-annotations--from-openpaper]] — anchoring user/AI highlights onto a rendered PDF using a zoom-invariant *scaled-rects* position blob (react-pdf-highlighter style) plus stored `raw_text`. A different flavour of canvas math than the node-editor nodes: the transform problem is page-normalized rects rather than a world `[x,y,zoom]`, but it's the same 'map a selection to durable coordinates' challenge.
 
 ## Features in this domain
 
 - [[pan-zoom-canvas--from-xyflow]] — the d3-zoom-wrapped infinite viewport (wheel/pinch/drag, fit-view, animated transforms)
 - [[node-dragging--from-xyflow]] — d3-drag node movement with multi-select, snap-to-grid, drag threshold, and auto-pan
 - [[minimap-navigation--from-xyflow]] — overview panel that maps clicks/drags back onto the main viewport
+- [[kanban-pipeline-dnd--from-auto-crm]] — a column/card Kanban (sales pipeline) on @dnd-kit; the contrasting "easy mode" of this domain — list/column DnD out of the box with an 8px activation threshold and optimistic-update-with-full-snapshot-rollback, vs xyflow's hand-rolled free-canvas dragging
+- [[screen-element-localization--from-clicky]] — the *physical-screen* twist on this domain: instead of a virtual-canvas transform it maps a real screenshot through Anthropic Computer Use to an element's pixel, then reconciles the resolution-scale + Retina + Y-flip coordinate spaces between Computer-Use space and AppKit's bottom-left origin.
+- [[animated-pointer-guidance--from-clicky]] — a companion cursor that springs behind the mouse and flies to a target along a quadratic Bezier arc (smoothstep easing, tangent rotation) on a transparent click-through per-display overlay; the "interaction" is guiding the *real* OS cursor's attention, not dragging objects.
