@@ -1825,6 +1825,105 @@
       "build": "features/persistence/build/chat-persistence--from-bolt-diy.md",
       "source": "https://github.com/stackblitz-labs/bolt.diy",
       "notebooklm": ""
+    },
+    {
+      "id": "web-scraping/async-web-crawler--from-crawl4ai",
+      "label": "Async Web Crawler Engine",
+      "domain": "web-scraping",
+      "repo": "crawl4ai",
+      "summary": "AsyncWebCrawler: Playwright-driven fetch with ETag-validated SQLite cache, anti-bot retry loop with proxy rotation, 8-stage HTML processing pipeline (filter→markdown→extract), and batch dispatch via arun_many() with MemoryAdaptiveDispatcher.",
+      "study": "features/web-scraping/study/async-web-crawler--from-crawl4ai.md",
+      "build": "features/web-scraping/build/async-web-crawler--from-crawl4ai.md",
+      "source": "https://github.com/unclecode/crawl4ai",
+      "notebooklm": ""
+    },
+    {
+      "id": "web-scraping/content-filtering-strategies--from-crawl4ai",
+      "label": "Content Filtering Strategies",
+      "domain": "web-scraping",
+      "repo": "crawl4ai",
+      "summary": "Three swappable noise-reduction filters: PruningContentFilter (DOM tree scoring: text density + link density + tag weight), BM25ContentFilter (auto-extracted query + Okapi BM25 + tag weights), LLMContentFilter (model-based with MD5 cache). All produce fit_markdown.",
+      "study": "features/web-scraping/study/content-filtering-strategies--from-crawl4ai.md",
+      "build": "features/web-scraping/build/content-filtering-strategies--from-crawl4ai.md",
+      "source": "https://github.com/unclecode/crawl4ai",
+      "notebooklm": ""
+    },
+    {
+      "id": "web-scraping/deep-crawl-traversal--from-crawl4ai",
+      "label": "Deep Crawl / Multi-Page Traversal",
+      "domain": "web-scraping",
+      "repo": "crawl4ai",
+      "summary": "BFS/DFS/BestFirst strategies wrapping AsyncWebCrawler via DeepCrawlDecorator. FilterChain (URLPattern/Domain/ContentType/SEO/Relevance), URLScorer composites, crash-recovery checkpointing via on_state_change callback, streaming results with async for.",
+      "study": "features/web-scraping/study/deep-crawl-traversal--from-crawl4ai.md",
+      "build": "features/web-scraping/build/deep-crawl-traversal--from-crawl4ai.md",
+      "source": "https://github.com/unclecode/crawl4ai",
+      "notebooklm": ""
+    },
+    {
+      "id": "web-scraping/adaptive-crawler--from-crawl4ai",
+      "label": "Adaptive Crawler",
+      "domain": "web-scraping",
+      "repo": "crawl4ai",
+      "summary": "Query-driven crawl that stops at confidence threshold (0.7 default) via 3 signals: coverage (term frequency across docs), consistency (pairwise Jaccard), saturation (new-term discovery rate). Links ranked by relevance+novelty+authority. Optional embedding mode for semantic gap filling.",
+      "study": "features/web-scraping/study/adaptive-crawler--from-crawl4ai.md",
+      "build": "features/web-scraping/build/adaptive-crawler--from-crawl4ai.md",
+      "source": "https://github.com/unclecode/crawl4ai",
+      "notebooklm": ""
+    },
+    {
+      "id": "browser-automation/browser-stealth-anti-detection--from-crawl4ai",
+      "label": "Browser Stealth & Anti-Detection",
+      "domain": "browser-automation",
+      "repo": "crawl4ai",
+      "summary": "7-layer bot bypass: playwright-stealth JS patching + patchright undetected Chrome (TLS-level) + fake-useragent randomization + storage_state session persistence + proxy rotation with sticky sessions + is_blocked() detection + init_scripts behavioral mimicry.",
+      "study": "features/browser-automation/study/browser-stealth-anti-detection--from-crawl4ai.md",
+      "build": "features/browser-automation/build/browser-stealth-anti-detection--from-crawl4ai.md",
+      "source": "https://github.com/unclecode/crawl4ai",
+      "notebooklm": ""
+    },
+    {
+      "id": "infrastructure/dispatcher-concurrency-control--from-crawl4ai",
+      "label": "Dispatcher & Concurrency Control",
+      "domain": "infrastructure",
+      "repo": "crawl4ai",
+      "summary": "MemoryAdaptiveDispatcher: RAM-monitored priority queue (psutil), pressure/critical/recovery thresholds, fairness timeout for starvation prevention, requeue on critical. SemaphoreDispatcher: asyncio.Semaphore fixed-count. Both support domain-level RateLimiter with jitter.",
+      "study": "features/infrastructure/study/dispatcher-concurrency-control--from-crawl4ai.md",
+      "build": "features/infrastructure/build/dispatcher-concurrency-control--from-crawl4ai.md",
+      "source": "https://github.com/unclecode/crawl4ai",
+      "notebooklm": ""
+    },
+    {
+      "id": "structured-extraction/llm-structured-extraction--from-crawl4ai",
+      "label": "LLM Structured Extraction",
+      "domain": "structured-extraction",
+      "repo": "crawl4ai",
+      "summary": "LLMExtractionStrategy: LiteLLM multi-provider (OpenAI/Anthropic/Ollama/Groq), Pydantic schema→JSON schema constraint, chunk+overlap via merge_chunks(), parallel ThreadPoolExecutor (4 workers), XML-tagged block response parsing, token usage accumulation, schema auto-generation via agenerate_schema().",
+      "study": "features/structured-extraction/study/llm-structured-extraction--from-crawl4ai.md",
+      "build": "features/structured-extraction/build/llm-structured-extraction--from-crawl4ai.md",
+      "source": "https://github.com/unclecode/crawl4ai",
+      "notebooklm": ""
+    },
+    {
+      "id": "structured-extraction/css-xpath-schema-extraction--from-crawl4ai",
+      "label": "CSS/XPath Schema Extraction",
+      "domain": "structured-extraction",
+      "repo": "crawl4ai",
+      "summary": "JsonCssExtractionStrategy (BeautifulSoup4) and JsonLxmlExtractionStrategy (lxml + selector cache + 5-strategy CSS→XPath fallback). Declarative schema: baseSelector + fields with types text/attribute/html/regex/nested/list/computed. Sibling navigation via source: '+ selector'. No LLM needed.",
+      "study": "features/structured-extraction/study/css-xpath-schema-extraction--from-crawl4ai.md",
+      "build": "features/structured-extraction/build/css-xpath-schema-extraction--from-crawl4ai.md",
+      "source": "https://github.com/unclecode/crawl4ai",
+      "notebooklm": ""
+    },
+    {
+      "id": "structured-extraction/chunking-strategies--from-crawl4ai",
+      "label": "Chunking Strategies",
+      "domain": "structured-extraction",
+      "repo": "crawl4ai",
+      "summary": "Seven text chunkers: Identity, Regex (pattern list), NlpSentence (NLTK), TopicSegmentation (TextTiling+keywords), FixedLengthWord, SlidingWindow (window+step), OverlappingWindow (window+overlap). All expose chunk(text)->List[str]. Wire into CrawlerRunConfig.chunking_strategy.",
+      "study": "features/structured-extraction/study/chunking-strategies--from-crawl4ai.md",
+      "build": "features/structured-extraction/build/chunking-strategies--from-crawl4ai.md",
+      "source": "https://github.com/unclecode/crawl4ai",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -4197,6 +4296,36 @@
       "from": "ai-integration/context-optimization--from-bolt-diy",
       "to": "ai-integration/azure-doc-intelligence--from-markitdown",
       "type": "same-domain"
-    }
+    },
+    { "from": "web-scraping/async-web-crawler--from-crawl4ai", "to": "web-scraping/content-filtering-strategies--from-crawl4ai", "type": "same-repo" },
+    { "from": "web-scraping/async-web-crawler--from-crawl4ai", "to": "web-scraping/deep-crawl-traversal--from-crawl4ai", "type": "same-repo" },
+    { "from": "web-scraping/async-web-crawler--from-crawl4ai", "to": "web-scraping/adaptive-crawler--from-crawl4ai", "type": "same-repo" },
+    { "from": "web-scraping/async-web-crawler--from-crawl4ai", "to": "browser-automation/browser-stealth-anti-detection--from-crawl4ai", "type": "same-repo" },
+    { "from": "web-scraping/async-web-crawler--from-crawl4ai", "to": "infrastructure/dispatcher-concurrency-control--from-crawl4ai", "type": "same-repo" },
+    { "from": "web-scraping/async-web-crawler--from-crawl4ai", "to": "structured-extraction/llm-structured-extraction--from-crawl4ai", "type": "same-repo" },
+    { "from": "web-scraping/async-web-crawler--from-crawl4ai", "to": "structured-extraction/css-xpath-schema-extraction--from-crawl4ai", "type": "same-repo" },
+    { "from": "web-scraping/async-web-crawler--from-crawl4ai", "to": "structured-extraction/chunking-strategies--from-crawl4ai", "type": "same-repo" },
+    { "from": "web-scraping/content-filtering-strategies--from-crawl4ai", "to": "web-scraping/deep-crawl-traversal--from-crawl4ai", "type": "same-repo" },
+    { "from": "web-scraping/content-filtering-strategies--from-crawl4ai", "to": "web-scraping/adaptive-crawler--from-crawl4ai", "type": "same-repo" },
+    { "from": "web-scraping/deep-crawl-traversal--from-crawl4ai", "to": "web-scraping/adaptive-crawler--from-crawl4ai", "type": "same-repo" },
+    { "from": "structured-extraction/llm-structured-extraction--from-crawl4ai", "to": "structured-extraction/css-xpath-schema-extraction--from-crawl4ai", "type": "same-repo" },
+    { "from": "structured-extraction/llm-structured-extraction--from-crawl4ai", "to": "structured-extraction/chunking-strategies--from-crawl4ai", "type": "same-repo" },
+    { "from": "structured-extraction/css-xpath-schema-extraction--from-crawl4ai", "to": "structured-extraction/chunking-strategies--from-crawl4ai", "type": "same-repo" },
+    { "from": "web-scraping/async-web-crawler--from-crawl4ai", "to": "browser-automation/browser-stealth-anti-detection--from-crawl4ai", "type": "depends-on" },
+    { "from": "web-scraping/async-web-crawler--from-crawl4ai", "to": "infrastructure/dispatcher-concurrency-control--from-crawl4ai", "type": "depends-on" },
+    { "from": "web-scraping/async-web-crawler--from-crawl4ai", "to": "web-scraping/content-filtering-strategies--from-crawl4ai", "type": "depends-on" },
+    { "from": "web-scraping/deep-crawl-traversal--from-crawl4ai", "to": "web-scraping/async-web-crawler--from-crawl4ai", "type": "depends-on" },
+    { "from": "web-scraping/adaptive-crawler--from-crawl4ai", "to": "web-scraping/async-web-crawler--from-crawl4ai", "type": "depends-on" },
+    { "from": "structured-extraction/llm-structured-extraction--from-crawl4ai", "to": "structured-extraction/chunking-strategies--from-crawl4ai", "type": "depends-on" },
+    { "from": "structured-extraction/llm-structured-extraction--from-crawl4ai", "to": "structured-extraction/schema-driven-extraction--from-llm-scraper", "type": "similar-pattern" },
+    { "from": "structured-extraction/llm-structured-extraction--from-crawl4ai", "to": "structured-extraction/llm-extract-map-reduce--from-firecrawl", "type": "similar-pattern" },
+    { "from": "structured-extraction/css-xpath-schema-extraction--from-crawl4ai", "to": "structured-extraction/schema-driven-extraction--from-llm-scraper", "type": "similar-pattern" },
+    { "from": "structured-extraction/chunking-strategies--from-crawl4ai", "to": "structured-extraction/map-reduce-answer-generation--from-scrapegraph-ai", "type": "similar-pattern" },
+    { "from": "structured-extraction/llm-structured-extraction--from-crawl4ai", "to": "structured-extraction/map-reduce-answer-generation--from-scrapegraph-ai", "type": "same-domain" },
+    { "from": "structured-extraction/chunking-strategies--from-crawl4ai", "to": "structured-extraction/schema-driven-extraction--from-llm-scraper", "type": "same-domain" },
+    { "from": "infrastructure/dispatcher-concurrency-control--from-crawl4ai", "to": "infrastructure/byok-proxy--from-open-design", "type": "same-domain" },
+    { "from": "infrastructure/dispatcher-concurrency-control--from-crawl4ai", "to": "infrastructure/local-first-architecture--from-open-design", "type": "same-domain" },
+    { "from": "web-scraping/content-filtering-strategies--from-crawl4ai", "to": "content-preprocessing/page-format-pipeline--from-llm-scraper", "type": "similar-pattern" },
+    { "from": "web-scraping/async-web-crawler--from-crawl4ai", "to": "web-extraction/html-web-conversion--from-markitdown", "type": "similar-pattern" }
   ]
 }
