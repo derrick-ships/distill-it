@@ -20,3 +20,6 @@ Agent architecture covers the structural decisions that determine how an AI skil
 - [[conversation-memory--from-whatsapp-agentkit]] — minimal async per-contact chat memory: one SQL table keyed on phone number, rolling last-N window returned LLM-shaped, SQLite/Postgres swap via one env var
 - [[mcp-crm-server--from-auto-crm]] — exposes a whole product (a local SQLite CRM) to an LLM as 10 stdio MCP tools shaped around the domain's nouns/verbs; read-tools pre-aggregate so the model narrates instead of computing, and the no-auth local-trust model rides on stdio being local-only
 - [[mcp-sidecar-auto-detection--from-asyar]] — scans Claude Desktop, Cursor, Cline, Continue, and Zed config files to auto-import MCP server definitions; rewrites npx→bundled bun and uvx→bundled uv so users need zero Node.js/Python; manages stdio subprocesses with exponential-backoff restart and namespaces tools as `mcp__<slug>__<name>`
+
+## From scira
+- **scira** — [[tool-and-search-mode-registry--from-scira]]: per-mode tool scoping via two parallel maps (mode->tools, mode->prompt) with silent gated-mode degradation.

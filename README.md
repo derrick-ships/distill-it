@@ -44,6 +44,12 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 
 | Domain | Feature | From |
 |--------|---------|------|
+| research-automation | Agentic Research Planning | [scira](https://github.com/zaidmukaddam/scira) |
+| structured-extraction | Grounded Retrieval + Inline Citations | [scira](https://github.com/zaidmukaddam/scira) |
+| ai-integration | Multi-Provider Model Gateway | [scira](https://github.com/zaidmukaddam/scira) |
+| agent-architecture | Tool & Search-Mode Registry | [scira](https://github.com/zaidmukaddam/scira) |
+| streaming | Resumable Streaming Search | [scira](https://github.com/zaidmukaddam/scira) |
+| pipeline-orchestration | Scheduled Monitoring Agents (Lookouts) | [scira](https://github.com/zaidmukaddam/scira) |
 | realtime | Debounced File Watcher | [hazelnut](https://github.com/ricardodantas/hazelnut) |
 | pipeline-orchestration | File Rules Engine | [hazelnut](https://github.com/ricardodantas/hazelnut) |
 | pipeline-orchestration | File Actions Executor | [hazelnut](https://github.com/ricardodantas/hazelnut) |

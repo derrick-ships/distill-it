@@ -29,3 +29,6 @@ Many LLM products are really just 3-5 deterministic steps (fetch → clean → a
 ## Cross-domain links
 - Contrast with [[agent-architecture]] — agents choose their path; these pipelines have it pre-wired.
 - The nodes built on this engine live in [[web-extraction]], [[structured-extraction]], and [[research-automation]].
+
+## From scira
+- **scira** — [[scheduled-monitoring-agents--from-scira]]: QStash cron agent; one route is both CRUD and the signed cron callback; reuses the live research pipeline per run.

@@ -1831,7 +1831,7 @@
       "label": "Semantic Symbol Tools",
       "domain": "code-intelligence",
       "repo": "serena",
-      "summary": "MCP-exposed LSP-backed toolkit for AI agents: find/navigate/edit code symbols by name-path (ClassName/method), replace bodies, insert before/after, rename across codebase, safe-delete, pull diagnostics — no line numbers needed, 40+ languages.",
+      "summary": "MCP-exposed LSP-backed toolkit for AI agents: find/navigate/edit code symbols by name-path (ClassName/method), replace bodies, insert before/after, rename across codebase, safe-delete, pull diagnostics \u2014 no line numbers needed, 40+ languages.",
       "study": "features/code-intelligence/study/semantic-symbol-tools--from-serena.md",
       "build": "features/code-intelligence/build/semantic-symbol-tools--from-serena.md",
       "source": "https://github.com/oraios/serena",
@@ -1846,6 +1846,72 @@
       "study": "features/dev-tooling/study/agent-dashboard--from-serena.md",
       "build": "features/dev-tooling/build/agent-dashboard--from-serena.md",
       "source": "https://github.com/oraios/serena",
+      "notebooklm": ""
+    },
+    {
+      "id": "research-automation/agentic-research-planning--from-scira",
+      "label": "Agentic Research Planning",
+      "domain": "research-automation",
+      "repo": "scira",
+      "summary": "Two-phase deep research: a cheap model produces a structured plan (1-5 topics x 3-5 todos), then a capable model runs an autonomous agent up to 75 steps with search/browse/code/file tools, all inside one outer tool call. Outer chat loop capped at 5 steps.",
+      "study": "features/research-automation/study/agentic-research-planning--from-scira.md",
+      "build": "features/research-automation/build/agentic-research-planning--from-scira.md",
+      "source": "https://github.com/zaidmukaddam/scira",
+      "notebooklm": ""
+    },
+    {
+      "id": "structured-extraction/grounded-retrieval-citations--from-scira",
+      "label": "Grounded Retrieval + Inline Citations",
+      "domain": "structured-extraction",
+      "repo": "scira",
+      "summary": "Inline [text](url) citations with NO post-processor: retrieval tools return {url,title,content}, the model gets them raw, and a strict system-prompt rule block makes it cite inline. Plus domain dedup, provider fallback chain, and content truncation.",
+      "study": "features/structured-extraction/study/grounded-retrieval-citations--from-scira.md",
+      "build": "features/structured-extraction/build/grounded-retrieval-citations--from-scira.md",
+      "source": "https://github.com/zaidmukaddam/scira",
+      "notebooklm": ""
+    },
+    {
+      "id": "ai-integration/multi-provider-model-gateway--from-scira",
+      "label": "Multi-Provider Model Gateway",
+      "domain": "ai-integration",
+      "repo": "scira",
+      "summary": "One scira-* alias per model; a single customProvider maps each alias to a real call (direct, retryable-with-fallback, gateway-brokered, or custom OpenAI-compatible endpoint). ~130 models / 22 providers. Client-safe metadata registry split from secret-bearing wiring.",
+      "study": "features/ai-integration/study/multi-provider-model-gateway--from-scira.md",
+      "build": "features/ai-integration/build/multi-provider-model-gateway--from-scira.md",
+      "source": "https://github.com/zaidmukaddam/scira",
+      "notebooklm": ""
+    },
+    {
+      "id": "agent-architecture/tool-and-search-mode-registry--from-scira",
+      "label": "Tool & Search-Mode Registry",
+      "domain": "agent-architecture",
+      "repo": "scira",
+      "summary": "Scope an LLM's tools per mode: two parallel maps (mode->tool-name[] and mode->systemPrompt). Resolver gates access and silently degrades gated modes to web. Tools are factories (close over runtime config); names resolved to objects at call site. 18 modes, ~30 tools.",
+      "study": "features/agent-architecture/study/tool-and-search-mode-registry--from-scira.md",
+      "build": "features/agent-architecture/build/tool-and-search-mode-registry--from-scira.md",
+      "source": "https://github.com/zaidmukaddam/scira",
+      "notebooklm": ""
+    },
+    {
+      "id": "streaming/resumable-streaming-search--from-scira",
+      "label": "Resumable Streaming Search",
+      "domain": "streaming",
+      "repo": "scira",
+      "summary": "Decouple durable generation (consumeStream + after(), buffered to Redis via ai-resumable-stream) from reconnectable delivery. GET resumes by replaying Redis chunks or returns the just-saved message within 15s; DELETE aborts via a shared AbortController. Graceful non-resumable fallback if no Redis.",
+      "study": "features/streaming/study/resumable-streaming-search--from-scira.md",
+      "build": "features/streaming/build/resumable-streaming-search--from-scira.md",
+      "source": "https://github.com/zaidmukaddam/scira",
+      "notebooklm": ""
+    },
+    {
+      "id": "pipeline-orchestration/scheduled-monitoring-agents--from-scira",
+      "label": "Scheduled Monitoring Agents (Lookouts)",
+      "domain": "pipeline-orchestration",
+      "repo": "scira",
+      "summary": "Cron-scheduled research agent on QStash. One route does CRUD + the cron callback (disambiguated by signature header). Each fire runs the existing research pipeline, persists a browsable chat, appends a runHistory JSON entry, emails the result. Cron stored UTC, timezone separate.",
+      "study": "features/pipeline-orchestration/study/scheduled-monitoring-agents--from-scira.md",
+      "build": "features/pipeline-orchestration/build/scheduled-monitoring-agents--from-scira.md",
+      "source": "https://github.com/zaidmukaddam/scira",
       "notebooklm": ""
     }
   ],
@@ -4228,6 +4294,96 @@
     {
       "from": "code-intelligence/semantic-symbol-tools--from-serena",
       "to": "diagnostics/dependency-manager--from-dyad",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "research-automation/agentic-research-planning--from-scira",
+      "to": "structured-extraction/grounded-retrieval-citations--from-scira",
+      "type": "same-repo"
+    },
+    {
+      "from": "research-automation/agentic-research-planning--from-scira",
+      "to": "ai-integration/multi-provider-model-gateway--from-scira",
+      "type": "same-repo"
+    },
+    {
+      "from": "research-automation/agentic-research-planning--from-scira",
+      "to": "agent-architecture/tool-and-search-mode-registry--from-scira",
+      "type": "same-repo"
+    },
+    {
+      "from": "research-automation/agentic-research-planning--from-scira",
+      "to": "streaming/resumable-streaming-search--from-scira",
+      "type": "same-repo"
+    },
+    {
+      "from": "research-automation/agentic-research-planning--from-scira",
+      "to": "pipeline-orchestration/scheduled-monitoring-agents--from-scira",
+      "type": "same-repo"
+    },
+    {
+      "from": "agent-architecture/tool-and-search-mode-registry--from-scira",
+      "to": "ai-integration/multi-provider-model-gateway--from-scira",
+      "type": "same-repo"
+    },
+    {
+      "from": "structured-extraction/grounded-retrieval-citations--from-scira",
+      "to": "agent-architecture/tool-and-search-mode-registry--from-scira",
+      "type": "same-repo"
+    },
+    {
+      "from": "research-automation/agentic-research-planning--from-scira",
+      "to": "research-automation/deep-research-loop--from-firecrawl",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "research-automation/agentic-research-planning--from-scira",
+      "to": "research-automation/multi-source-research-engine--from-last30days-skill",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "structured-extraction/grounded-retrieval-citations--from-scira",
+      "to": "structured-extraction/map-reduce-answer-generation--from-scrapegraph-ai",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "structured-extraction/grounded-retrieval-citations--from-scira",
+      "to": "ai-integration/citation-grounded-chat--from-openpaper",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "ai-integration/multi-provider-model-gateway--from-scira",
+      "to": "ai-integration/multi-provider-llm--from-bolt-diy",
+      "type": "alternative-to"
+    },
+    {
+      "from": "ai-integration/multi-provider-model-gateway--from-scira",
+      "to": "ai-integration/provider-agnostic-model-layer--from-scrapegraph-ai",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "agent-architecture/tool-and-search-mode-registry--from-scira",
+      "to": "agent-architecture/mcp-tool-integration--from-bolt-diy",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "streaming/resumable-streaming-search--from-scira",
+      "to": "streaming/stream-output-transcoding--from-vlc",
+      "type": "same-domain"
+    },
+    {
+      "from": "pipeline-orchestration/scheduled-monitoring-agents--from-scira",
+      "to": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "pipeline-orchestration/scheduled-monitoring-agents--from-scira",
+      "to": "pipeline-orchestration/incremental-sync-state--from-airbyte",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "agent-architecture/tool-and-search-mode-registry--from-scira",
+      "to": "ai-integration/ai-agent-tool-calling--from-asyar",
       "type": "similar-pattern"
     }
   ]

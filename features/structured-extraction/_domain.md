@@ -13,3 +13,6 @@ This is distinct from [[content-synthesis]] (which clusters/summarizes) and from
 ## Cross-domain links
 - Depends on [[content-preprocessing]] — the page must be reduced to an LLM-friendly format first.
 - Pairs with [[ai-integration]] — the model is provider-agnostic behind one interface.
+
+## From scira
+- **scira** — [[grounded-retrieval-citations--from-scira]]: inline citations with no post-processor — retrieval shape + strict prompt rule-block do the grounding.
