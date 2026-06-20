@@ -23,3 +23,6 @@ Agent architecture covers the structural decisions that determine how an AI skil
 
 ## From scira
 - **scira** — [[tool-and-search-mode-registry--from-scira]]: per-mode tool scoping via two parallel maps (mode->tools, mode->prompt) with silent gated-mode degradation.
+
+## From multica
+- **multica** — [[agents-as-teammates--from-multica]] (actor polymorphism: member|agent everywhere; blockers are emergent state) and [[autonomous-execution-lifecycle--from-multica]] (server+daemon task state machine; WS wakeup-hint + transactional HTTP claim; seq-numbered typed transcript events).

@@ -32,3 +32,6 @@ Many LLM products are really just 3-5 deterministic steps (fetch → clean → a
 
 ## From scira
 - **scira** — [[scheduled-monitoring-agents--from-scira]]: QStash cron agent; one route is both CRUD and the signed cron callback; reuses the live research pipeline per run.
+
+## From multica
+- **multica** — [[autopilot-scheduled-work--from-multica]]: scheduled/triggered agent work on a generic DB-backed distributed-lock cron scheduler (sys_cron_executions); unique (job,scope,plan_time) is lock + audit log.

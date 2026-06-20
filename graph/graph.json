@@ -1913,6 +1913,50 @@
       "build": "features/pipeline-orchestration/build/scheduled-monitoring-agents--from-scira.md",
       "source": "https://github.com/zaidmukaddam/scira",
       "notebooklm": ""
+    },
+    {
+      "id": "pipeline-orchestration/autopilot-scheduled-work--from-multica",
+      "label": "Autopilot \u2014 Scheduled Agent Work",
+      "domain": "pipeline-orchestration",
+      "repo": "multica",
+      "summary": "Recurring agent work via cron/webhook/api on a generic DB-backed distributed-lock scheduler (sys_cron_executions): unique (job,scope,plan_time) is both the lock and the audit log; N instances tick safely, one wins each plan. 3 tables: autopilot/trigger/run.",
+      "study": "features/pipeline-orchestration/study/autopilot-scheduled-work--from-multica.md",
+      "build": "features/pipeline-orchestration/build/autopilot-scheduled-work--from-multica.md",
+      "source": "https://github.com/multica-ai/multica",
+      "notebooklm": ""
+    },
+    {
+      "id": "runtime/unified-runtimes-cli-detection--from-multica",
+      "label": "Unified Runtimes + CLI Auto-Detection",
+      "domain": "runtime",
+      "repo": "multica",
+      "summary": "Local daemon auto-detects 11+ agent CLIs by PATH probe (env-overridable), registers each as a runtime, and wraps each behind a backend that normalizes its native stream (stream-json/app-server/acp/json) into uniform task events. Binary-name traps: cursor-agent, kiro-cli.",
+      "study": "features/runtime/study/unified-runtimes-cli-detection--from-multica.md",
+      "build": "features/runtime/build/unified-runtimes-cli-detection--from-multica.md",
+      "source": "https://github.com/multica-ai/multica",
+      "notebooklm": ""
+    },
+    {
+      "id": "agent-architecture/agents-as-teammates--from-multica",
+      "label": "Agents as Teammates",
+      "domain": "agent-architecture",
+      "repo": "multica",
+      "summary": "Actor polymorphism: every authored/assigned/addressed row stores (*_type member|agent, *_id) so an agent creates issues, comments, gets assigned, and hits the inbox like a human. A \"blocker\" is emergent (agent status + issue status + action_required inbox + comment), not a table.",
+      "study": "features/agent-architecture/study/agents-as-teammates--from-multica.md",
+      "build": "features/agent-architecture/build/agents-as-teammates--from-multica.md",
+      "source": "https://github.com/multica-ai/multica",
+      "notebooklm": ""
+    },
+    {
+      "id": "agent-architecture/autonomous-execution-lifecycle--from-multica",
+      "label": "Autonomous Execution Lifecycle + WS Streaming",
+      "domain": "agent-architecture",
+      "repo": "multica",
+      "summary": "agent_task_queue state machine (queued->dispatched->running->completed|failed|cancelled) across server+daemon. WS dispatch is a wakeup HINT; daemon claims via transactional HTTP. Typed, seq-numbered transcript events (text/tool_use/tool_result/error) over one multiplexed socket.",
+      "study": "features/agent-architecture/study/autonomous-execution-lifecycle--from-multica.md",
+      "build": "features/agent-architecture/build/autonomous-execution-lifecycle--from-multica.md",
+      "source": "https://github.com/multica-ai/multica",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -4384,6 +4428,81 @@
     {
       "from": "agent-architecture/tool-and-search-mode-registry--from-scira",
       "to": "ai-integration/ai-agent-tool-calling--from-asyar",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "pipeline-orchestration/autopilot-scheduled-work--from-multica",
+      "to": "runtime/unified-runtimes-cli-detection--from-multica",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/autopilot-scheduled-work--from-multica",
+      "to": "agent-architecture/agents-as-teammates--from-multica",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/autopilot-scheduled-work--from-multica",
+      "to": "agent-architecture/autonomous-execution-lifecycle--from-multica",
+      "type": "same-repo"
+    },
+    {
+      "from": "runtime/unified-runtimes-cli-detection--from-multica",
+      "to": "agent-architecture/autonomous-execution-lifecycle--from-multica",
+      "type": "same-repo"
+    },
+    {
+      "from": "agent-architecture/agents-as-teammates--from-multica",
+      "to": "agent-architecture/autonomous-execution-lifecycle--from-multica",
+      "type": "same-repo"
+    },
+    {
+      "from": "runtime/unified-runtimes-cli-detection--from-multica",
+      "to": "agent-architecture/agents-as-teammates--from-multica",
+      "type": "same-repo"
+    },
+    {
+      "from": "pipeline-orchestration/autopilot-scheduled-work--from-multica",
+      "to": "pipeline-orchestration/scheduled-monitoring-agents--from-scira",
+      "type": "alternative-to"
+    },
+    {
+      "from": "pipeline-orchestration/autopilot-scheduled-work--from-multica",
+      "to": "pipeline-orchestration/queue-backed-crawl--from-firecrawl",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "pipeline-orchestration/autopilot-scheduled-work--from-multica",
+      "to": "pipeline-orchestration/incremental-sync-state--from-airbyte",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "runtime/unified-runtimes-cli-detection--from-multica",
+      "to": "agent-architecture/mcp-sidecar-auto-detection--from-asyar",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "runtime/unified-runtimes-cli-detection--from-multica",
+      "to": "ai-integration/multi-provider-model-gateway--from-scira",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "agent-architecture/agents-as-teammates--from-multica",
+      "to": "agent-architecture/conversation-memory--from-whatsapp-agentkit",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "agent-architecture/agents-as-teammates--from-multica",
+      "to": "agent-architecture/agent-output-contract--from-last30days-skill",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "agent-architecture/autonomous-execution-lifecycle--from-multica",
+      "to": "streaming/resumable-streaming-search--from-scira",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "agent-architecture/autonomous-execution-lifecycle--from-multica",
+      "to": "streaming/stream-output-transcoding--from-vlc",
       "type": "similar-pattern"
     }
   ]

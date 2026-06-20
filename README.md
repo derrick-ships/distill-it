@@ -44,6 +44,10 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 
 | Domain | Feature | From |
 |--------|---------|------|
+| pipeline-orchestration | Autopilot — Scheduled Agent Work | [multica](https://github.com/multica-ai/multica) |
+| runtime | Unified Runtimes + CLI Auto-Detection | [multica](https://github.com/multica-ai/multica) |
+| agent-architecture | Agents as Teammates | [multica](https://github.com/multica-ai/multica) |
+| agent-architecture | Autonomous Execution Lifecycle + WS Streaming | [multica](https://github.com/multica-ai/multica) |
 | research-automation | Agentic Research Planning | [scira](https://github.com/zaidmukaddam/scira) |
 | structured-extraction | Grounded Retrieval + Inline Citations | [scira](https://github.com/zaidmukaddam/scira) |
 | ai-integration | Multi-Provider Model Gateway | [scira](https://github.com/zaidmukaddam/scira) |
