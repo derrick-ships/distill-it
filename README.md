@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![150 nodes](https://img.shields.io/badge/nodes-150-4299e1?style=flat-square)
-![51 domains](https://img.shields.io/badge/domains-51-9f7aea?style=flat-square)
-![30 repos](https://img.shields.io/badge/repos-30-68d391?style=flat-square)
+![181 nodes](https://img.shields.io/badge/nodes-181-4299e1?style=flat-square)
+![58 domains](https://img.shields.io/badge/domains-58-9f7aea?style=flat-square)
+![36 repos](https://img.shields.io/badge/repos-36-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -172,6 +172,9 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | permissions | Unified Permission Abstraction | [PermissionsKit](https://github.com/sparrowcode/PermissionsKit) |
 | infrastructure | Modular Per-Permission Packaging | [PermissionsKit](https://github.com/sparrowcode/PermissionsKit) |
 | infrastructure | Async-to-Sync Status Bridging | [PermissionsKit](https://github.com/sparrowcode/PermissionsKit) |
+| media-processing | Duration-Aware Frame Budgeting | [claude-video](https://github.com/bradautomates/claude-video) |
+| transcription | Captions-First Transcription Cascade | [claude-video](https://github.com/bradautomates/claude-video) |
+| agent-architecture | Agentic Video-Understanding Pipeline (/watch) | [claude-video](https://github.com/bradautomates/claude-video) |
 
 ---
 
