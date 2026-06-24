@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![184 nodes](https://img.shields.io/badge/nodes-184-4299e1?style=flat-square)
-![61 domains](https://img.shields.io/badge/domains-61-9f7aea?style=flat-square)
-![37 repos](https://img.shields.io/badge/repos-37-68d391?style=flat-square)
+![187 nodes](https://img.shields.io/badge/nodes-187-4299e1?style=flat-square)
+![64 domains](https://img.shields.io/badge/domains-64-9f7aea?style=flat-square)
+![38 repos](https://img.shields.io/badge/repos-38-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -178,6 +178,9 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | storage-engine | In-Memory MVCC Storage Engine | [memgraph](https://github.com/memgraph/memgraph) |
 | durability | WAL + Snapshot Durability | [memgraph](https://github.com/memgraph/memgraph) |
 | vector-search | USearch Vector Index | [memgraph](https://github.com/memgraph/memgraph) |
+| power-management | Power-Assertion Wake Lock | [open-caffeine](https://github.com/sapsaldog/open-caffeine) |
+| app-distribution | Sparkle EdDSA Auto-Update | [open-caffeine](https://github.com/sapsaldog/open-caffeine) |
+| testing-discipline | Coverage-Gated Testable Core | [open-caffeine](https://github.com/sapsaldog/open-caffeine) |
 
 ---
 

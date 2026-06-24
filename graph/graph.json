@@ -2023,6 +2023,39 @@
       "build": "features/vector-search/build/usearch-vector-index--from-memgraph.md",
       "source": "https://github.com/memgraph/memgraph",
       "notebooklm": ""
+    },
+    {
+      "id": "power-management/power-assertion-wake-lock--from-open-caffeine",
+      "label": "Power-Assertion Wake Lock",
+      "domain": "power-management",
+      "repo": "open-caffeine",
+      "summary": "Prevent macOS idle sleep via IOKit power assertions behind a testable PowerAssertionAPI seam. displayAndSystem vs systemOnly assertion types; a timed session (Timer) auto-releases on expiry; a battery-threshold monitor (IOPS power sources) ends the session on low battery; deinit always releases.",
+      "study": "features/power-management/study/power-assertion-wake-lock--from-open-caffeine.md",
+      "build": "features/power-management/build/power-assertion-wake-lock--from-open-caffeine.md",
+      "source": "https://github.com/sapsaldog/open-caffeine",
+      "notebooklm": ""
+    },
+    {
+      "id": "app-distribution/sparkle-eddsa-autoupdate--from-open-caffeine",
+      "label": "Sparkle EdDSA Auto-Update",
+      "domain": "app-distribution",
+      "repo": "open-caffeine",
+      "summary": "Self-updating macOS app via Sparkle with EdDSA-signed releases. SPUStandardUpdaterController + Info.plist (SUFeedURL to a raw-GitHub appcast.xml, SUPublicEDKey). A release script builds, zips with ditto, and runs generate_appcast to EdDSA-sign; the pushed appcast.xml is the feed and binaries live on GitHub Releases. Zero update server.",
+      "study": "features/app-distribution/study/sparkle-eddsa-autoupdate--from-open-caffeine.md",
+      "build": "features/app-distribution/build/sparkle-eddsa-autoupdate--from-open-caffeine.md",
+      "source": "https://github.com/sapsaldog/open-caffeine",
+      "notebooklm": ""
+    },
+    {
+      "id": "testing-discipline/coverage-gated-testable-core--from-open-caffeine",
+      "label": "Coverage-Gated Testable Core",
+      "domain": "testing-discipline",
+      "repo": "open-caffeine",
+      "summary": "100% line-coverage gate over a curated logic core. Decision logic is extracted out of UI/system shells into pure types + protocol seams; thin OS-touching impls go in a justified, self-policing EXCLUDE list; a pre-push hook runs xccov and fails the push if any non-excluded file is below 100%. New files are not exempt by default.",
+      "study": "features/testing-discipline/study/coverage-gated-testable-core--from-open-caffeine.md",
+      "build": "features/testing-discipline/build/coverage-gated-testable-core--from-open-caffeine.md",
+      "source": "https://github.com/sapsaldog/open-caffeine",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -4640,6 +4673,36 @@
       "from": "durability/wal-snapshot-durability--from-memgraph",
       "to": "vector-search/usearch-vector-index--from-memgraph",
       "type": "same-repo"
+    },
+    {
+      "from": "testing-discipline/coverage-gated-testable-core--from-open-caffeine",
+      "to": "power-management/power-assertion-wake-lock--from-open-caffeine",
+      "type": "same-repo"
+    },
+    {
+      "from": "testing-discipline/coverage-gated-testable-core--from-open-caffeine",
+      "to": "app-distribution/sparkle-eddsa-autoupdate--from-open-caffeine",
+      "type": "same-repo"
+    },
+    {
+      "from": "app-distribution/sparkle-eddsa-autoupdate--from-open-caffeine",
+      "to": "power-management/power-assertion-wake-lock--from-open-caffeine",
+      "type": "same-repo"
+    },
+    {
+      "from": "power-management/power-assertion-wake-lock--from-open-caffeine",
+      "to": "ai-integration/provider-agnostic-llm--from-llm-scraper",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "testing-discipline/coverage-gated-testable-core--from-open-caffeine",
+      "to": "email-platform/email-provider-abstraction--from-inbox-zero",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "testing-discipline/coverage-gated-testable-core--from-open-caffeine",
+      "to": "ai-integration/provider-agnostic-llm--from-llm-scraper",
+      "type": "similar-pattern"
     }
   ]
 }
