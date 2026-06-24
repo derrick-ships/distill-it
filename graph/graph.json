@@ -2056,6 +2056,39 @@
       "build": "features/testing-discipline/build/coverage-gated-testable-core--from-open-caffeine.md",
       "source": "https://github.com/sapsaldog/open-caffeine",
       "notebooklm": ""
+    },
+    {
+      "id": "search-relevance/ranking-rules-bucket-sort--from-meilisearch",
+      "label": "Ranking-Rules Bucket Sort",
+      "domain": "search-relevance",
+      "repo": "meilisearch",
+      "summary": "Order search results by a fixed, reorderable cascade of ranking rules (words, typo, proximity, attribute, sort, exactness) applied as a bucket sort over RoaringBitmap candidate sets. Each rule breaks ties left by the previous and only sorts as deep as the requested page; typo/proximity are cheapest-path costs over a query-term graph.",
+      "study": "features/search-relevance/study/ranking-rules-bucket-sort--from-meilisearch.md",
+      "build": "features/search-relevance/build/ranking-rules-bucket-sort--from-meilisearch.md",
+      "source": "https://github.com/meilisearch/meilisearch",
+      "notebooklm": ""
+    },
+    {
+      "id": "fuzzy-search/length-gated-typo-tolerance--from-meilisearch",
+      "label": "Length-Gated Typo Tolerance",
+      "domain": "fuzzy-search",
+      "repo": "meilisearch",
+      "summary": "Typo tolerance with the typo budget gated by word length (0 typos for short words, then 1 then 2 as words lengthen; thresholds are index settings), an exact-words FST override, and last-word prefix expansion for search-as-you-type. A query word becomes a set of derivations looked up in the inverted index, each carrying its typo cost so exact matches still rank first.",
+      "study": "features/fuzzy-search/study/length-gated-typo-tolerance--from-meilisearch.md",
+      "build": "features/fuzzy-search/build/length-gated-typo-tolerance--from-meilisearch.md",
+      "source": "https://github.com/meilisearch/meilisearch",
+      "notebooklm": ""
+    },
+    {
+      "id": "task-scheduling/auto-batching-write-scheduler--from-meilisearch",
+      "label": "Auto-Batching Write Scheduler",
+      "domain": "task-scheduling",
+      "repo": "meilisearch",
+      "summary": "Coalesce a stream of write tasks into efficient batches: classify each by kind, greedily merge the longest compatible prefix of consecutive same-index tasks into one batch (a compatibility matrix, not a timer), process atomically in one transaction, and keep durable per-task status. Structural ops like index delete/swap break the batch.",
+      "study": "features/task-scheduling/study/auto-batching-write-scheduler--from-meilisearch.md",
+      "build": "features/task-scheduling/build/auto-batching-write-scheduler--from-meilisearch.md",
+      "source": "https://github.com/meilisearch/meilisearch",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -4702,6 +4735,36 @@
     {
       "from": "testing-discipline/coverage-gated-testable-core--from-open-caffeine",
       "to": "ai-integration/provider-agnostic-llm--from-llm-scraper",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "search-relevance/ranking-rules-bucket-sort--from-meilisearch",
+      "to": "fuzzy-search/length-gated-typo-tolerance--from-meilisearch",
+      "type": "same-repo"
+    },
+    {
+      "from": "search-relevance/ranking-rules-bucket-sort--from-meilisearch",
+      "to": "task-scheduling/auto-batching-write-scheduler--from-meilisearch",
+      "type": "same-repo"
+    },
+    {
+      "from": "fuzzy-search/length-gated-typo-tolerance--from-meilisearch",
+      "to": "task-scheduling/auto-batching-write-scheduler--from-meilisearch",
+      "type": "same-repo"
+    },
+    {
+      "from": "search-relevance/ranking-rules-bucket-sort--from-meilisearch",
+      "to": "research-automation/engagement-signal-ranking--from-last30days-skill",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "fuzzy-search/length-gated-typo-tolerance--from-meilisearch",
+      "to": "adaptive-parsing/adaptive-element-relocation--from-scrapling",
+      "type": "similar-pattern"
+    },
+    {
+      "from": "task-scheduling/auto-batching-write-scheduler--from-meilisearch",
+      "to": "research-automation/multi-source-research-engine--from-last30days-skill",
       "type": "similar-pattern"
     }
   ]

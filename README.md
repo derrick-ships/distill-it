@@ -9,9 +9,9 @@
 
 > **Point Claude at any GitHub repo. Get back structured knowledge you can actually reuse.**
 
-![187 nodes](https://img.shields.io/badge/nodes-187-4299e1?style=flat-square)
-![64 domains](https://img.shields.io/badge/domains-64-9f7aea?style=flat-square)
-![38 repos](https://img.shields.io/badge/repos-38-68d391?style=flat-square)
+![190 nodes](https://img.shields.io/badge/nodes-190-4299e1?style=flat-square)
+![67 domains](https://img.shields.io/badge/domains-67-9f7aea?style=flat-square)
+![39 repos](https://img.shields.io/badge/repos-39-68d391?style=flat-square)
 ![built by Claude](https://img.shields.io/badge/built%20by-Claude-f6ad55?style=flat-square)
 
 ---
@@ -181,6 +181,9 @@ Click any node → see the summary, links to the study doc, build spec, and orig
 | power-management | Power-Assertion Wake Lock | [open-caffeine](https://github.com/sapsaldog/open-caffeine) |
 | app-distribution | Sparkle EdDSA Auto-Update | [open-caffeine](https://github.com/sapsaldog/open-caffeine) |
 | testing-discipline | Coverage-Gated Testable Core | [open-caffeine](https://github.com/sapsaldog/open-caffeine) |
+| search-relevance | Ranking-Rules Bucket Sort | [meilisearch](https://github.com/meilisearch/meilisearch) |
+| fuzzy-search | Length-Gated Typo Tolerance | [meilisearch](https://github.com/meilisearch/meilisearch) |
+| task-scheduling | Auto-Batching Write Scheduler | [meilisearch](https://github.com/meilisearch/meilisearch) |
 
 ---
 
