@@ -1,6 +1,6 @@
 ---
 name: repository-intelligence
-description: Use this skill to reverse-engineer any GitHub repository feature-by-feature over the web (no cloning), store the results in one organized "repo-brain" GitHub repo, build a navigable knowledge graph of every feature studied, and later pull any distilled feature into a new build in Claude Code. Triggers on GitHub URLs, "distill this repo", "study this codebase", "add this to my repo-brain", "implement feature X from repo Y", "use this repo as a reference", feature extraction, knowledge-graph requests, or NotebookLM study-prep from a codebase.
+description: Use this skill to reverse-engineer any GitHub repository feature-by-feature over the web (no cloning), store the results in one organized "distill-it" GitHub repo, build a navigable knowledge graph of every feature studied, and later pull any distilled feature into a new build in Claude Code. Triggers on GitHub URLs, "distill this repo", "study this codebase", "add this to my distill-it", "implement feature X from repo Y", "use this repo as a reference", feature extraction, knowledge-graph requests, or NotebookLM study-prep from a codebase.
 ---
 
 # Repository Intelligence
@@ -16,7 +16,7 @@ This skill has **four modes**. Figure out which one the user wants from their re
 | **DISTILL** | "distill / study / break down this repo", a GitHub URL | Read a repo over the web, reverse-engineer it feature by feature, write the study + build layers, update the graph |
 | **GRAPH** | "update the graph", "rebuild the map", after any distill | Regenerate the interactive `graph.html` from `graph.json` |
 | **APPLY** | "implement feature X from repo Y", "use this as a reference", "what do I have that fits what I am building?" | Recommend or pull distilled features into the user's current build, reading `/llms.txt` first as the index |
-| **ORGANIZE** | "clean up repo-brain", "reorganize", "what do I have" | Audit/maintain the mother repo's structure |
+| **ORGANIZE** | "clean up distill-it", "reorganize", "what do I have" | Audit/maintain the mother repo's structure |
 
 ## Core philosophy (applies to every mode)
 
@@ -30,12 +30,12 @@ This skill has **four modes**. Figure out which one the user wants from their re
 
 **Web-native by default.** The user does not clone or download. Read repos over the web (raw.githubusercontent.com, the GitHub web UI, web_fetch). If running in Claude Code with a disposable sandbox and graph/MCP tools, those *may* be used — but they are an optional accelerator, never a requirement.
 
-## The Mother Repo: `repo-brain`
+## The Mother Repo: `distill-it`
 
 Everything lives in ONE GitHub repo the user owns, organized **feature-first**. Never create per-repo scattered repos. Structure:
 
 ```
-repo-brain/
+distill-it/
 ├── README.md                 # navigation guide + how to upload to NotebookLM
 ├── graph/
 │   ├── graph.json            # SINGLE SOURCE OF TRUTH — all nodes + edges
@@ -60,6 +60,23 @@ repo-brain/
 
 Goal: read a repo over the web and produce the study layer, the build layer, the origin index, and updated graph nodes.
 
+### Step 0 — Locate the canonical knowledge base (do this FIRST, before writing anything)
+The user may point you at a path that is NOT where the active structure actually lives (e.g. a
+`repo-brain-starter/` seed subfolder while every prior distill went into the repo root). Writing
+into the wrong place strands your work — the files exist but never show up in the index the user
+browses. So **find where the living structure is, don't assume**:
+
+1. **Clone/refresh the user's `distill-it` repo and `git pull` first** (or read it over the web).
+   Never write from a stale local copy — other sessions may have pushed since.
+2. **Detect the canonical base**: search the repo for the directory that already contains a
+   populated `graph/graph.json` + `repos/` + `features/`. If several candidates exist (root AND a
+   subfolder), the canonical one is the **most-populated / most-recently-committed** — that's where
+   the other repos live. Write there.
+3. If the user named a subfolder but the canonical base is elsewhere, **say so in one line and use
+   the canonical base** ("Your active distill-it lives at the repo root — writing there, not in
+   `repo-brain-starter/`, so it shows up with everything else"). Only ask if it's genuinely ambiguous.
+4. Note the base path once; every write in Steps 3–8 is relative to it.
+
 ### What URL to use
 Ask for (or accept) the **plain repo web URL**: `https://github.com/<owner>/<repo>`. That is all that's needed to read over the web. Explicitly do NOT require:
 - the `.git` HTTPS URL (that's for `git clone` — downloading) ❌
@@ -83,6 +100,18 @@ Produce a quick internal fingerprint: what is this product, what is the stack, w
 Follow the feature trajectory: **entry point (route/UI) → handler/service → data model → external calls/side effects → result**. Read only the files on that path. This is the unit of understanding — not the file, the feature.
 
 Capture as you go: what the user gets, the actual data shapes, the dependencies, the non-obvious decisions ("ghost PRs" — why is it built this way?), edge cases, and what would be hard to rebuild.
+
+**Choose serial vs. parallel by repo size (gate — keep it automatic, never a new question to the user):**
+
+- **Simple** (single confirmed feature, or a small repo): trace it yourself here in one pass. No subagents. This is the default — lean toward it.
+- **Complex** (the confirmed feature list spans several features, or one feature is a deep multi-slice subsystem): **fan out**. Spawn one read-only explorer per slice — *one explorer per feature* for a multi-feature list, or *one per slice* (entry/UI · data model · external calls & side-effects) for a single deep feature. Up to 4. They gather facts in parallel; you synthesize.
+
+**Fan-out procedure (complex only):**
+1. Spawn all explorers in a single message. Use `subagent_type: Explore` (read-only, web-capable), `model: sonnet` for breadth/cost. Each gets the base prompt from `references/explorer-prompt.md` plus its assigned slice. The explorers are **web-native** — they read over the web (raw.githubusercontent.com, GitHub web UI, web_fetch), never clone. They return *facts only*: components, flow, data shapes, boundaries, non-obvious decisions, and — critically — **what they could not trace**.
+2. Synthesize the returned findings yourself (or, for a large reconciliation, spawn one `subagent_type: general-purpose`, `model: opus` using `references/synthesizer-prompt.md`). Reconcile overlaps and contradictions by re-fetching the specific file if needed.
+3. Feed the synthesized facts into the Step 3 study layer **and** the Step 4 build layer — explore once, write both.
+
+**Gap-honesty (both paths; non-negotiable for the build layer):** if a data contract, control-flow branch, or dependency can't be confirmed from the source, say so explicitly in the build file ("could not confirm the retry policy — verify before relying on it"). A hand-waved or invented spec in a transplant-grade build file is worse than an acknowledged gap — someone rebuilds from it after the repo is gone.
 
 ### Step 3 — Write the STUDY layer (for the human + NotebookLM)
 `features/<domain>/study/<feature>--from-<repo>.md`. Write for a smart non-expert who wants to *understand*, then teach NotebookLM. Plain language. Structure:
@@ -144,23 +173,43 @@ Repo + the files it came from, for the rare case the repo is still reachable.
 ### Step 5 — Write/update the origin index
 `repos/<repo>.md`: source URL, one-line product description, date distilled, and a list of every feature extracted with links to both its study and build files.
 
-### Step 6 — Update the graph
-Add/update nodes and edges in `graph/graph.json` (schema below), then run GRAPH mode to regenerate `graph.html`.
+### Step 6 — Update the indexes (APPEND, never regenerate)
+Two indexes must learn about every new feature: the machine index (`graph/graph.json`) and the
+human index (the README feature table, if the repo keeps one — most do). **Both are shared files
+other sessions also edit, so treat them append-only:**
 
-### Step 7 — Deliver to GitHub (always commit + push)
-The user stores everything in their `repo-brain` GitHub repo and does NOT download locally. Commit the new/changed files, then **ALWAYS push** — do NOT ask for approval. The canonical branch is `main`; push there (`git push origin main`). Every distill ends with a push. If a GitHub MCP/connector is available it may be used; otherwise push with git directly.
+1. **Re-read the live file immediately before editing** (`git pull` first). Never write a
+   `graph.json`/README you cached earlier in the session — it's probably already stale.
+2. **`graph/graph.json`** — parse it, **append your new node objects and edge objects** to the
+   existing arrays, and write it back. Do NOT rebuild the file from only your nodes — that is the
+   exact bug that erases every other repo's nodes. After writing, **validate it parses**
+   (`python3 -c "import json;json.load(open(...))"`) and confirm the node count went *up* by exactly
+   what you added, not down.
+3. **README feature table** — if the base has a `README.md` with a "what's inside" feature/domain
+   table, add one row per new feature (match the existing column format exactly). This is the index
+   the user actually browses; skipping it is why a distill can be "pushed" yet invisible.
+   **Insert new rows INSIDE the table** (immediately before the `---` that closes it) with a proper
+   in-place edit, never `cat >>` / `echo >>` (appended rows land after the footer and never render).
+   Then **update the three badges** at the top (`![N nodes]`, `![N domains]`, `![N repos]`) to the
+   real totals counted from `graph.json`.
+4. Regenerate `graph.html` only if the repo's `graph.html` does NOT already fetch `graph.json` at
+   runtime. If it fetches on load (the standard build), leave it — it refreshes automatically.
 
-### Step 8 — Log it in Notion (always)
-After pushing, **ALWAYS log the distill** in the user's **Distill-it database** Notion database — no need to ask:
-`https://app.notion.com/p/3833935b82a6808a8433c15a5f91b804?v=3833935b82a680d0bc0c000c2f7ca9fc`
-(data source `collection://3833935b-82a6-802c-b668-000b9ba02404`). Create ONE row per distilled repo via the Notion MCP `notion-create-pages` tool with these properties:
-- **Repo** (title) — the repo slug (e.g. `clicky`)
-- **GitHub URL** — the source repo URL
-- **Domain** (multi-select) — every domain the distill touched
-- **Stack** (multi-select) — the repo's primary technologies
-- **Status** = `Distilled`
+### Step 7 — Commit, push, and VERIFY (don't make the user check)
+The user stores everything in their `distill-it` GitHub repo. If you have a local clone / GitHub
+MCP, write directly; otherwise hand over copy-paste-ready files with exact paths.
 
-`Date Added` is auto-set. This logging step is a standing instruction: every distill is recorded here.
+When you commit:
+1. **`git pull --rebase` right before pushing.** Concurrent distill sessions push constantly; a
+   stale push either fails or, after a careless merge, drops their work or yours.
+2. Stage **only your feature's files + the two index files**. Commit, then push.
+3. If the push races (non-fast-forward), pull --rebase again and re-append your nodes/rows if a
+   merge dropped them — then re-validate `graph.json` parses before pushing again.
+4. **Verify on the pushed ref, not your local copy.** Confirm, on `origin/main`: the feature's
+   study+build files exist at the canonical base path, the `graph.json` there contains your new
+   node ids, and the README table there shows your new rows. State the verified result in one line
+   ("Live on main: 3 tts nodes in graph.json, 3 README rows, files under `features/tts/`"). If any
+   check fails, fix it before telling the user you're done.
 
 ### Step 8 — Update distill-graph too (the published face) — REQUIRED
 distill-it is the source of truth; **distill-graph (the live PWA, `/stats`, and `/llms.txt`) must
@@ -228,7 +277,7 @@ file to discover what exists. APPLY takes two shapes:
 - **Precise ("apply the PDF parsing from markitdown")** find that exact pattern in `/llms.txt`, open
   its build spec, apply it. No recommendation needed, go straight to porting.
 
-1. **Locate the feature.** If the user names it ("the Supabase auth from productX"), fetch its build file from `repo-brain` over the web. If vague, read `graph.json` (or grep `features/*/build/`) and present matches.
+1. **Locate the feature.** If the user names it ("the Supabase auth from productX"), fetch its build file from `distill-it` over the web. If vague, read `graph.json` (or grep `features/*/build/`) and present matches.
 2. **Read the build spec** — the transplant-grade file. This is self-contained by design.
 3. **Inspect the target.** Look at the current project's conventions: framework, folder structure, naming, existing patterns, auth/db already present. The feature must match the destination, not the origin.
 4. **Adapt, don't paste.** Reimplement the feature in the target's idioms. Map the data contracts onto what exists. Reuse the target's libraries where they cover a dependency.
@@ -260,9 +309,17 @@ These make the strongest NotebookLM study material and the most useful graph con
 ## Anti-patterns (avoid)
 
 - Writing build-layer files that point into the repo instead of inlining the logic — the repo won't be there later.
-- Repo sprawl: one repo per product. NO. One mother `repo-brain`, feature-first.
+- Repo sprawl: one repo per product. NO. One mother `distill-it`, feature-first.
 - Collapsing study and build into one doc — they serve different readers and one pollutes the other.
 - Hand-editing `graph.html` — edit `graph.json` and regenerate.
 - Code tours in the study layer — explain what the code *achieves*, in plain language.
 - Distilling an entire large repo without confirming the feature list with the user first.
 - Assuming a local clone or graph MCP exists — they're optional accelerators, not the spine.
+- **Writing into the path the user pointed at without checking it's the canonical base.** A seed
+  subfolder (`repo-brain-starter/`) is not where the living structure necessarily is. Run Step 0
+  first; a "successful push" into the wrong folder is invisible and wastes a re-investigation.
+- **Regenerating `graph.json` (or the README table) from only your own nodes.** These are shared,
+  multi-writer files — append to them, validate the count went up, never overwrite. Overwriting
+  silently deletes every other repo's nodes.
+- **Calling a distill "done/pushed" without verifying on `origin/main`.** Files on disk ≠ indexed ≠
+  visible. Confirm the nodes + README rows are live on the pushed ref, then report it (Step 7).
