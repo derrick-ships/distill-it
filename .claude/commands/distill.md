@@ -19,7 +19,7 @@ If `$ARGUMENTS` is empty, ask for the GitHub URL and stop.
 
 2. **Recommend the best features — do NOT enumerate or auto-distill everything.**
    First read `https://distill-graph.vercel.app/llms.txt` to see what is already in the brain.
-   Then lead with a single pick: **"Take X, Y, or Z"** plus one short paragraph on why, judged by
+   Then lead with a single pick: **"Take 1, 2, or 3"** (numbered, not lettered) plus one short paragraph on why, judged by
    what the user is building, what fills a real gap (do not re-distill what is already there), and
    what is most distinctive here. No catalog, no over-justifying. Wait for their answer (accept,
    pick others, or "all") unless they named a specific feature.
@@ -42,6 +42,12 @@ If `$ARGUMENTS` is empty, ask for the GitHub URL and stop.
    pushing distill-it, sync distill-graph: use the `distill-graph-sync` skill, or run
    `DISTILL_IT=/path/to/distill-it ./scripts/update-from-distill-it.sh --deploy` in the distill-graph
    repo. A distill is not done until BOTH repos are live.
+
+7. **Log the repo in the Notion Distill-it database (REQUIRED).** Add or update a row for this repo
+   in the user's Notion Distill-it database (data source `collection://3833935b-82a6-802c-b668-000b9ba02404`)
+   via the Notion MCP: fetch the schema, find any existing row by GitHub URL (update, don't duplicate),
+   set Repo / GitHub URL / Domain / Stack / Status = "Distilled", and a blurb in the body. A distill is
+   complete only when distill-it, distill-graph, and Notion are all updated.
 
 ## Rules
 - Self-contained build docs: never write "see the repo" as the only reference — the repo may be

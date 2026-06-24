@@ -9,7 +9,7 @@ A web-native system for turning any GitHub repository into durable, reusable kno
 
 This skill has **four modes**. Figure out which one the user wants from their request, then jump to that section. When unsure, ask one short question rather than guessing.
 
-**Two homes, one brain.** `distill-it` is the knowledge base (markdown + `graph/graph.json`). **`distill-graph` (https://distill-graph.vercel.app) is its published, navigable face**: an interactive star map, a `/stats` analysis page, and **`/llms.txt`, one machine-readable file listing every distilled pattern with its summary and study/build links.** Read `https://distill-graph.vercel.app/llms.txt` to learn what is already in the brain in a single fetch, instead of walking `features/*/` file by file. The skill runs in **two directions**: pull a repo IN (DISTILL, then update distill-graph) and pull knowledge OUT (APPLY into what the user is building). Every DISTILL must update distill-graph too.
+**Two homes, one brain.** `distill-it` is the knowledge base (markdown + `graph/graph.json`). **`distill-graph` (https://distill-graph.vercel.app) is its published, navigable face**: an interactive star map, a `/stats` analysis page, and **`/llms.txt`, one machine-readable file listing every distilled pattern with its summary and study/build links.** Read `https://distill-graph.vercel.app/llms.txt` to learn what is already in the brain in a single fetch, instead of walking `features/*/` file by file. The skill runs in **two directions**: pull a repo IN (DISTILL, then update distill-graph) and pull knowledge OUT (APPLY into what the user is building). A third surface is the user's Notion **"Distill-it database"** (data source `collection://3833935b-82a6-802c-b668-000b9ba02404`, under /Personal in Derrick-OS): one row per source repo with its link, domains, stack, status, and a blurb. Every DISTILL must update distill-graph AND log the repo in Notion.
 
 | Mode | Trigger | What it does |
 |------|---------|--------------|
@@ -94,7 +94,7 @@ Fetch over the web, in this order, stopping when you understand the product:
 
 Produce a quick internal fingerprint: what is this product, what is the stack, what are the candidate features.
 
-**Recommend, do not enumerate.** Before going deep, read `https://distill-graph.vercel.app/llms.txt` to see what is already distilled, then judge this repo against three things: (a) what the user is building or cares about right now (use what you know about them), (b) what genuinely fills a gap or adds a strong alternative to the existing brain, do not re-distill something already there, (c) what is most distinctive and reusable in this repo. Then lead with a single pick: **"Take X, Y, or Z."** followed by one short paragraph on why. No feature-by-feature catalog, no over-justifying. The user can accept, choose others, or say "all"; wait for their answer unless they already named a specific feature. Distilling an entire large repo is expensive, the recommendation is how you keep it cheap.
+**Recommend, do not enumerate.** Before going deep, read `https://distill-graph.vercel.app/llms.txt` to see what is already distilled, then judge this repo against three things: (a) what the user is building or cares about right now (use what you know about them), (b) what genuinely fills a gap or adds a strong alternative to the existing brain, do not re-distill something already there, (c) what is most distinctive and reusable in this repo. Then lead with a single pick: **"Take 1, 2, or 3."** (numbered, not lettered) followed by one short paragraph on why. No feature-by-feature catalog, no over-justifying. The user can accept, choose others, or say "all"; wait for their answer unless they already named a specific feature. Distilling an entire large repo is expensive, the recommendation is how you keep it cheap.
 
 ### Step 2 — For each feature, trace it end to end
 Follow the feature trajectory: **entry point (route/UI) → handler/service → data model → external calls/side effects → result**. Read only the files on that path. This is the unit of understanding — not the file, the feature.
@@ -226,6 +226,21 @@ contract, and deploys to Vercel. Confirm the new pattern total shows on
 `https://distill-graph.vercel.app/stats` and in `/llms.txt`. **A distill is not done until BOTH repos
 are live.**
 
+### Step 9 — Log the repo in the Notion Distill-it database — REQUIRED
+After both repos are live, add or update a row for this source repo in the user's Notion
+**Distill-it database** (data source `collection://3833935b-82a6-802c-b668-000b9ba02404`). Use the
+Notion MCP:
+1. **Fetch the data source first** to read the live schema/options, they change.
+2. **Query for an existing row** matching this repo's GitHub URL. If one exists (e.g. it was
+   "Queued"), UPDATE it, do not create a duplicate.
+3. Create/update with properties: **Repo** (title), **GitHub URL**, **Domain** (multi-select; pick
+   the closest existing options to the repo's distilled domains), **Stack** (multi-select:
+   TypeScript / Python / Go / Rust / JavaScript / React / Node.js / Next.js / LLM AI / API / Swift /
+   Astro / C C++), **Status** = "Distilled". Put a one-paragraph blurb (what the repo is + what you
+   distilled) in the page body.
+
+**A distill is complete only when all three are updated: distill-it, distill-graph, and the Notion row.**
+
 ## MODE 2: GRAPH
 
 Goal: turn `graph.json` into a navigable visual map.
@@ -272,7 +287,7 @@ fetch lists every pattern with its summary and study/build links. Never walk `fe
 file to discover what exists. APPLY takes two shapes:
 
 - **Open ("here is what I am building, what fits?")** from `/llms.txt`, recommend the patterns whose
-  problem matches what the user is building. Lead with **"Use X, Y, or Z"** and one short paragraph
+  problem matches what the user is building. Lead with **"Use 1, 2, or 3"** (numbered) and one short paragraph
   why; then, on their pick, apply it.
 - **Precise ("apply the PDF parsing from markitdown")** find that exact pattern in `/llms.txt`, open
   its build spec, apply it. No recommendation needed, go straight to porting.
