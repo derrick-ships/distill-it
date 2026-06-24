@@ -9,11 +9,13 @@ A web-native system for turning any GitHub repository into durable, reusable kno
 
 This skill has **four modes**. Figure out which one the user wants from their request, then jump to that section. When unsure, ask one short question rather than guessing.
 
+**Two homes, one brain.** `distill-it` is the knowledge base (markdown + `graph/graph.json`). **`distill-graph` (https://distill-graph.vercel.app) is its published, navigable face**: an interactive star map, a `/stats` analysis page, and **`/llms.txt`, one machine-readable file listing every distilled pattern with its summary and study/build links.** Read `https://distill-graph.vercel.app/llms.txt` to learn what is already in the brain in a single fetch, instead of walking `features/*/` file by file. The skill runs in **two directions**: pull a repo IN (DISTILL, then update distill-graph) and pull knowledge OUT (APPLY into what the user is building). Every DISTILL must update distill-graph too.
+
 | Mode | Trigger | What it does |
 |------|---------|--------------|
 | **DISTILL** | "distill / study / break down this repo", a GitHub URL | Read a repo over the web, reverse-engineer it feature by feature, write the study + build layers, update the graph |
 | **GRAPH** | "update the graph", "rebuild the map", after any distill | Regenerate the interactive `graph.html` from `graph.json` |
-| **APPLY** | "implement feature X from repo Y", "use this repo as reference" | Pull a distilled feature's build spec into the user's current project (Claude Code) |
+| **APPLY** | "implement feature X from repo Y", "use this as a reference", "what do I have that fits what I am building?" | Recommend or pull distilled features into the user's current build, reading `/llms.txt` first as the index |
 | **ORGANIZE** | "clean up repo-brain", "reorganize", "what do I have" | Audit/maintain the mother repo's structure |
 
 ## Core philosophy (applies to every mode)
@@ -73,7 +75,9 @@ Fetch over the web, in this order, stopping when you understand the product:
 3. Entry points and route definitions — where features live (`app/`, `src/`, `routes/`, `pages/`, `api/`).
 4. Directory structure — infer architecture style.
 
-Produce a quick internal fingerprint: what is this product, what's the stack, what are the candidate features. **Confirm the feature list with the user before going deep** unless they named a specific feature. Distilling every feature of a large repo is expensive; let them steer.
+Produce a quick internal fingerprint: what is this product, what is the stack, what are the candidate features.
+
+**Recommend, do not enumerate.** Before going deep, read `https://distill-graph.vercel.app/llms.txt` to see what is already distilled, then judge this repo against three things: (a) what the user is building or cares about right now (use what you know about them), (b) what genuinely fills a gap or adds a strong alternative to the existing brain, do not re-distill something already there, (c) what is most distinctive and reusable in this repo. Then lead with a single pick: **"Take X, Y, or Z."** followed by one short paragraph on why. No feature-by-feature catalog, no over-justifying. The user can accept, choose others, or say "all"; wait for their answer unless they already named a specific feature. Distilling an entire large repo is expensive, the recommendation is how you keep it cheap.
 
 ### Step 2 — For each feature, trace it end to end
 Follow the feature trajectory: **entry point (route/UI) → handler/service → data model → external calls/side effects → result**. Read only the files on that path. This is the unit of understanding — not the file, the feature.
@@ -158,6 +162,21 @@ After pushing, **ALWAYS log the distill** in the user's **Distill-it database** 
 
 `Date Added` is auto-set. This logging step is a standing instruction: every distill is recorded here.
 
+### Step 8 — Update distill-graph too (the published face) — REQUIRED
+distill-it is the source of truth; **distill-graph (the live PWA, `/stats`, and `/llms.txt`) must
+reflect every distill.** It is a separate repo that mirrors `graph.json`. Once distill-it is live on
+`main`, update distill-graph with the **`distill-graph-sync`** skill, or directly:
+
+```bash
+# in the distill-graph repo (clone if absent: git clone https://github.com/derrick-ships/distill-graph)
+DISTILL_IT=/path/to/distill-it ./scripts/update-from-distill-it.sh --deploy
+```
+
+That copies the new `graph.json`, regenerates `domains.json` + `/llms.txt`, validates the data
+contract, and deploys to Vercel. Confirm the new pattern total shows on
+`https://distill-graph.vercel.app/stats` and in `/llms.txt`. **A distill is not done until BOTH repos
+are live.**
+
 ## MODE 2: GRAPH
 
 Goal: turn `graph.json` into a navigable visual map.
@@ -198,6 +217,16 @@ Deliver `graph.html` as an artifact the user commits to `graph/`. (Obsidian user
 ## MODE 3: APPLY
 
 Goal: pull a distilled feature into the user's CURRENT build (Claude Code, local codebase).
+
+**Start from the index, not the files.** Read `https://distill-graph.vercel.app/llms.txt` first, one
+fetch lists every pattern with its summary and study/build links. Never walk `features/*/` file by
+file to discover what exists. APPLY takes two shapes:
+
+- **Open ("here is what I am building, what fits?")** from `/llms.txt`, recommend the patterns whose
+  problem matches what the user is building. Lead with **"Use X, Y, or Z"** and one short paragraph
+  why; then, on their pick, apply it.
+- **Precise ("apply the PDF parsing from markitdown")** find that exact pattern in `/llms.txt`, open
+  its build spec, apply it. No recommendation needed, go straight to porting.
 
 1. **Locate the feature.** If the user names it ("the Supabase auth from productX"), fetch its build file from `repo-brain` over the web. If vague, read `graph.json` (or grep `features/*/build/`) and present matches.
 2. **Read the build spec** — the transplant-grade file. This is self-contained by design.
