@@ -1990,6 +1990,39 @@
       "build": "features/agent-architecture/build/agentic-video-understanding-pipeline--from-claude-video.md",
       "source": "https://github.com/bradautomates/claude-video",
       "notebooklm": ""
+    },
+    {
+      "id": "storage-engine/mvcc-inmemory-storage-engine--from-memgraph",
+      "label": "In-Memory MVCC Storage Engine",
+      "domain": "storage-engine",
+      "repo": "memgraph",
+      "summary": "In-memory vertex/edge store: per-object delta chains walked backward by timestamp for 3 isolation levels; 56-byte trivially-destructible Delta; pointer-tagging packs type+flags free; non-sequential edge deltas relax MVCC for fast bulk import; lock-free reads, per-object lock only for chain mutation; commit = one atomic timestamp store.",
+      "study": "features/storage-engine/study/mvcc-inmemory-storage-engine--from-memgraph.md",
+      "build": "features/storage-engine/build/mvcc-inmemory-storage-engine--from-memgraph.md",
+      "source": "https://github.com/memgraph/memgraph",
+      "notebooklm": ""
+    },
+    {
+      "id": "durability/wal-snapshot-durability--from-memgraph",
+      "label": "WAL + Snapshot Durability",
+      "domain": "durability",
+      "repo": "memgraph",
+      "summary": "Crash-safety for an in-memory store: append-only WAL of 40+ delta variants framed per-transaction with a deferred commit-flag patch for atomicity + per-txn CRC; sectioned snapshots with an offset table for seek-based load; recovery = newest snapshot then replay later WALs; versioned format (kVersion 36) with composable version-dependent decoders; retention keeps N snapshots + bridging WALs.",
+      "study": "features/durability/study/wal-snapshot-durability--from-memgraph.md",
+      "build": "features/durability/build/wal-snapshot-durability--from-memgraph.md",
+      "source": "https://github.com/memgraph/memgraph",
+      "notebooklm": ""
+    },
+    {
+      "id": "vector-search/usearch-vector-index--from-memgraph",
+      "label": "USearch Vector Index",
+      "domain": "vector-search",
+      "repo": "memgraph",
+      "summary": "Embedded HNSW ANN index (USearch) over node/edge embeddings, key = vertex pointer; per-index metric/dimension/scalar-kind/capacity; SINGLE/WILDCARD/ANY_OF/ALL_OF membership filter; copy-on-write index registry for snapshot-stable reads; READ_UNCOMMITTED safe under UNIQUE host access; undo-able OOM-protected drop; serialized into snapshots + WAL create/drop recovery.",
+      "study": "features/vector-search/study/usearch-vector-index--from-memgraph.md",
+      "build": "features/vector-search/build/usearch-vector-index--from-memgraph.md",
+      "source": "https://github.com/memgraph/memgraph",
+      "notebooklm": ""
     }
   ],
   "edges": [
@@ -4577,6 +4610,36 @@
       "from": "agent-architecture/agentic-video-understanding-pipeline--from-claude-video",
       "to": "agent-architecture/agents-as-teammates--from-multica",
       "type": "same-domain"
+    },
+    {
+      "from": "durability/wal-snapshot-durability--from-memgraph",
+      "to": "storage-engine/mvcc-inmemory-storage-engine--from-memgraph",
+      "type": "depends-on"
+    },
+    {
+      "from": "vector-search/usearch-vector-index--from-memgraph",
+      "to": "storage-engine/mvcc-inmemory-storage-engine--from-memgraph",
+      "type": "depends-on"
+    },
+    {
+      "from": "vector-search/usearch-vector-index--from-memgraph",
+      "to": "durability/wal-snapshot-durability--from-memgraph",
+      "type": "depends-on"
+    },
+    {
+      "from": "storage-engine/mvcc-inmemory-storage-engine--from-memgraph",
+      "to": "durability/wal-snapshot-durability--from-memgraph",
+      "type": "same-repo"
+    },
+    {
+      "from": "storage-engine/mvcc-inmemory-storage-engine--from-memgraph",
+      "to": "vector-search/usearch-vector-index--from-memgraph",
+      "type": "same-repo"
+    },
+    {
+      "from": "durability/wal-snapshot-durability--from-memgraph",
+      "to": "vector-search/usearch-vector-index--from-memgraph",
+      "type": "same-repo"
     }
   ]
 }
